@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="30" android:compileSdkVersionCodename="11" package="com.pozitron.iscep" platformBuildVersionCode="30" platformBuildVersionName="11">
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE"/>
+        </intent>
+        <package android:name="com.softtech.parakod"/>
+        <package android:name="com.softtech.is_portfoy"/>
+        <package android:name="com.isbank.isyerim"/>
+        <package android:name="com.isvarant.android"/>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService"/>
+        </intent>
+        <intent>
+            <action android:name="com.huawei.hms.core.aidlservice"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent>
+        <package android:name="com.google.android.apps.maps"/>
+    </queries>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:maxSdkVersion="28" android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" android:required="false"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:required="false"/>
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false"/>
+    <uses-feature android:name="android.hardware.nfc" android:required="false"/>
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
+    <permission android:description="@string/permission_description" android:label="@string/permission_label" android:name="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.LOCATION_HARDWARE"/>
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.location" android:required="false"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.front" android:required="false"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"/>
+    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
+    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_APP_BADGE"/>
+    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ"/>
+    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE"/>
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false"/>
+    <uses-feature android:name="android.hardware.screen.landscape" android:required="false"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="false" android:icon="@mipmap/ic_launcher" android:isSplitRequired="true" android:label="@string/app_label" android:largeHeap="true" android:name="com.pozitron.iscep.core.IsCep" android:supportsRtl="true" android:theme="@style/IsCepMaterialTheme">
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.splash.SplashActivity" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Sparkle.Light.FullScreen.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:label=" " android:name="com.pozitron.iscep.features.authentication.login.LoginActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:label=" " android:name="com.pozitron.iscep.features.authentication.mobilekey.MobileKeyMenuActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:label=" " android:name="com.pozitron.iscep.features.authentication.mobilekey.activation.MobileKeyActivationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="true" android:launchMode="singleTop" android:name="com.pozitron.iscep.features.prelogin.locator.nearestbank.NearestBankActivity" android:screenOrientation="nosensor" android:windowSoftInputMode="adjustPan">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="www.isbank.com.tr"/>
+                <data android:pathPrefix="/sube-ve-bankamatikler"/>
+                <data android:pathPrefix="/en/branches-and-atms"/>
+                <data android:pathPrefix="/EN/branches-and-atms"/>
+            </intent-filter>
+            <meta-data android:name="default-url" android:value="https://www.isbank.com.tr/sube-ve-bankamatikler"/>
+        </activity>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.features.prelogin.locator.nearestbank.search.NearestBankFinderActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:windowSoftInputMode="adjustPan"/>
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDlhf40HT73tjh65Cs_lQKgsxbdyjrJHrE"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.landing.aboutus.AboutUsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:label=" " android:name="com.pozitron.iscep.features.prelogin.landing.LandingActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.landing.onboarding.OnboardingActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.landing.marketplace.MarketPlaceListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.landing.qroperations.softtech.QROperationsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.landing.bottomsheet.accountinfo.list.AccountInfoListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.appointment.softtech.book.BookAppointmentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.appointment.softtech.my.MyAppointmentsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.appointment.softtech.branchfinder.BranchFinderActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.appointment.softtech.qr.QRScannerActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <service android:name="com.foreks.android.is.library.checkstatus.ISECheckStatusService"/>
+        <provider android:authorities="com.pozitron.iscep" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/iscep_filepaths"/>
+        </provider>
+        <receiver android:label="@string/widget_atm_label" android:name="com.pozitron.iscep.widget.atm.AtmAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.pozitron.iscep.intent.ATM_WIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/atm_widget"/>
+        </receiver>
+        <service android:exported="true" android:name="com.pozitron.iscep.widget.atm.AtmWidgetDataService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.pozitron.iscep.blesh.BleshTemplateResultReceiver">
+            <intent-filter>
+                <action android:name="com.blesh.sdk.templateresultaction"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.base.dependencyprotocols.cloudmessaging.DummyNotificationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.transfers.digitalcoinbox.tutorial.TutorialActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Fullscreen"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.customs.SearchBranchCodeActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.web.AgreementsWebViewActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.addorder.AddEFTOrderActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.addorder.AddMoneyTransferOrderActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.confirmationoperations.ConfirmationOperationsFileActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.confirmationoperations.operation.ConfirmationOperationsOperationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.confirmationoperations.operationdetail.ConfirmationOperationsOpDetailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.confirmationoperations.filter.ConfirmationOperationsFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.confirmationoperations.operation.ConfirmationOperationsFilteredOperationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.moneygeneralorder.MoneyTransferEftOrderListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.moneygeneralorder.MoneyTransferMoneyOrderListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.pfm.addasset.PfmAddAssetActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.pfm.addasset.PfmAddAssetAgreementActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.dashboard.tutorial.DashboardTutorialActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Sparkle.Light.FullScreen"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.dashboard.DashboardActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterial"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.settings.dashboard.cardpager.DashboardCardPagerReorderActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.mystatus.personal.PersonalStatusActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.mystatus.commercial.CommercialStatusActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.myshortcuts.preferences.ShortcutPreferencesActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.myshortcuts.newshortcut.NewShortcutActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.upcoming.UpcomingPaymentsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.dashboard.announcement.AnnouncementsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.receipts.receiptfilter.ReceiptsFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.SendExtractActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accountsindividual.IndividualAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accountsindividual.CommercialAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.mtv.MtvPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.trafficfine.TrafficFinePaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.customstax.CustomsTaxPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.customstax.CustomsTaxListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.customstax.CustomTaxSendEmailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.credit.CreditPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.creditload.TurkTelekomPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.creditload.TurkcellPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.creditload.VodafonePaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.chancegames.BilyonerPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.chancegames.MisliPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.chancegames.NesinePaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.chancegames.NimetAblaPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.chancegames.OleyPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.chancegames.TJKPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.chancegames.TutturPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.payments.chancegames.BirebinPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.applications.isbankmemberpassword.IsbankMemberPasswordChangeActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.stocks.ShowPriceActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.cashoperations.withdrawal.WithdrawalMainActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.credits.pendingcredits.PendingCreditsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.credits.creditinformation.CreditInformationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.contractsandforms.credit.ContractsAndFormsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.contractsandforms.loans.ContractsAndFormsLoanActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.contractsandforms.overdraft.OverdraftContractsAndFormsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.contractsandforms.pdf.ContractsAndFormsPdfActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.applications.instantcommercialloan.InstantCommercialLoanActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.overdraft.application.OverdraftApplicationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.overdraft.limit.decrease.OverdraftLimitDecreaseActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.overdraft.limit.increase.OverdraftLimitIncreaseActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.overdraft.close.OverdraftCloseActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.memberbusinesses.postransactions.POSTransactionsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.memberbusinesses.postransactions.filter.POSTransactionsListFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.memberbusinesses.financialprovision.FinancialProvisionActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.bill.instant.InstantBillPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.bill.instant.InstantTuitionPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.bill.instant.RegisterBillPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.bill.instant.OrderedBillPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.bill.instant.CancelOrderedBillPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.hgsogs.HgsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.hgsogs.OgsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.sgk.SGKPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.hgsogs.transactions.filter.HgsOgsTransactionFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.hgsogs.transactions.HgsOgsTransactionSendMailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.riskreport.CreditRiskReportActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.commercialoverdraftaccounts.CommercialOverdraftAccountsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.cashcredits.CashCreditForeignCurrencyActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.cashcredits.CashCreditTlCurrencyActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.cashcredits.filter.CashCreditFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.credits.cashcredits.loanactivity.filter.CashCreditActivityListFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.eft.RegisteredEFTTransferActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.eft.UnregisteredEFTTransferActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.eft.RegisterEFTAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.eft.UnregisterEFTAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.moneyorder.MoneyOrderToRegisteredAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.moneyorder.MoneyOrderToUnregisteredAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.moneyorder.MoneyOrderToMobileActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.moneyorder.RegisterMoneyOrderTransferAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.moneyorder.UnregisterMoneyOrderTransferAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.digitalcoinbox.DigitalCoinboxActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.digitalcoinbox.settings.DigitalCoinboxSettingsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.transfers.nydo.NydoFilesActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.nydo.filter.NydoFilesFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.nydo.NydoFileDetailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.nydo.filter.NydoFileDetailFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.nydo.approval.NydoApprovalActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.toownaccounts.TransferToOwnAccountsCurrentTlActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.toownaccounts.TransferToOwnAccountsToInvestmentAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.toownaccounts.TransferToOwnAccountsFromInvestmentAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.toownaccounts.TransferToOwnAccountsToDepositTLActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.toownaccounts.TransferToOwnAccountsFromDepositTLActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.toownaccounts.TransferToOwnAccountsCurrentFXActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.toownaccounts.TransferToOwnAccountsToDepositFXActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.toownaccounts.TransferToOwnAccountsFromDepositFXActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.foreignexchange.FXTransferRegisteredAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.foreignexchange.FXTransferUnregisteredAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.foreignexchange.FXRegisterMoneyOrderTransferAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.westernunion.sendmoney.WesternUnionSendMoneyActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.westernunion.receivemoney.WesternUnionReceiveMoneyActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.westernunion.registeredrecipients.WesternUnionRegisteredRecipientsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.westernunion.transactions.WesternUnionTransactionsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.transfers.westernunion.transactions.WesternUnionTranscationFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.open.deposit.OpenTimeDepositExchangeAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.open.deposit.OpenTimeDepositTLAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.open.current.OpenCurrentExchangeAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.open.current.OpenCurrentGoldAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.receipts.receiptlist.AccountReceiptActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.open.deposit.DepositTLRatioActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.stocks.BuyStockActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.stocks.SellStockActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.stocks.WatchModifyStockOrdersActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.warrants.BuyWarrantActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.warrants.SellWarrantActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.warrants.WatchModifyWarrantOrdersActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.publicoffer.offerdemandentry.OfferDemandEntryActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.publicoffer.offerdemandlist.OfferDemandListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.investmentfund.BuyInvestmentFundIndividualActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Sparkle.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.investmentfund.BuyInvestmentFundCommercialActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Sparkle.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.investmentfund.SellInvestmentFundActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.investmentfund.fundorder.FundOrderActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.investmentfund.tefas.InvestmentFundTefasBuyOperationsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.gold.BuyGoldToInvestmentAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.gold.SellGoldFromGoldAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.gold.BuyGoldToGoldAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.gold.SellGoldToInvestmentAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.foreignexchange.ForeignExchangeActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.bond.BuyBondActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.bond.SellBondActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.foreignmarkets.withdrawal.ForeignMarketsWithdrawalActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.foreignmarkets.deposit.ForeignMarketsDepositActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.foreignmarkets.maketransaction.ForeignMarketsMakeTransactionActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.foreignmarkets.close.ForeignMarketsCloseAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.foreignmarkets.agreement.ForeignMarketsAgreementActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.agreementsandsuitabilitytest.suitabilitytest.SuitabilityTestActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.agreementsandsuitabilitytest.suitabilitytest.SuitabilityTestPreviousInvestmentsQuestionsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.agreementsandsuitabilitytest.view.ViewAgreementActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.agreementsandsuitabilitytest.view.pdf.ViewAgreementPdfViewerActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.agreementsandsuitabilitytest.view.email.ViewAgreementSendMailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.agreementsandsuitabilitytest.approve.ApproveAgreementActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.main.PreLoginLiveStockMarketActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.investments.livestockmarket.ui.main.LiveStockMarketActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.socialaccount.SocialAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.settings.contact.SearchableContactListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.settings.contact.SocialAccountContactSettingsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.settings.notification.SocialAccountNotificationSettingsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.settings.contact.SocialAccountUpdateContactActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.settings.SocialAccountSettingsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.organizationwizard.OrganizationWizardActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.organizationwizard.contact.ContactListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.organizationwizard.calculator.PartialAmountCalculatorActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.organizationwizard.contact.AddContactActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.organizationwizard.photopicker.PhotoPickerActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.organizationdetail.OrganizationDetailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.myparticipations.MyParticipationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.organizationdetail.participants.AddNewParticipantActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.socialaccount.ParticipationListFastPaymentConfirmationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.utils.pdf.PdfViewerActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.utils.pdf.PdfViewerWithConfirmationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.CreditCardsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.debtpayment.CardsDebtPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.ExpendituresActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.transactions.installmentexpiration.InstallmentExpirationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.transactions.installmentexpiration.installment.paymentplan.InstallmentPaymentPlanActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.virtualcards.VirtualCardDetailsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.virtualcards.VirtualCardLimitTransactionsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.virtualcards.VirtualCardLimitTransferActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.virtualcards.VirtualCardResetLimitActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.virtualcards.VirtualCardCancelCardActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.virtualcards.VirtualCardApplyCardActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.cashadvance.CardsCashAdvanceActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.installmentcashadvance.CardsInstallmentCashAdvanceActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.installmentcashadvance.InstallmentCashAdvancePaymentPlanActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.increaselimit.CardsLimitIncreaseActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.loststolen.CardsLostStolenActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.settings.CreditCardUsagePreferencesActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.settings.shipment.CreditCardShipmentApprovalActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.settings.activation.CardActivationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.settings.activation.CardActivationBranchSelectionActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.cards.settings.authorisation.CardAuthorisationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.applications.fastcredit.FastCreditApplicationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.applications.proposalloan.ProposalLoanActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.applications.creditcard.CreditCardApplicationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.priceandrates.personalloan.PersonalLoanActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.priceandrates.fundsgold.InvestmentFundsGoldActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.supportline.SupportLineActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.fdsmok.FdsMokApprovalActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.campaigns.CampaignsMainActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.pozitron.iscep.cashoperations.deposit.DepositMainActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.login.registereddevicemanagement.RegisteredDevicesManagementActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.symbolsearch.ISESymbolSearchActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.mypageandmarket.ISEMyPageEditActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.symboldetail.ISESymbolDetailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.symboldepth.ISESymbolDepthActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.priceanalysis.ISEPriceAnalysisActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.companyprofile.ISECompanyProfileActivitiy" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:name="com.pozitron.iscep.investments.livestockmarket.ui.settlement.ISESettlementActivity" android:screenOrientation="landscape" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.technicalanalysis.ISETechnicalAnalysisActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="landscape" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.heatmap.ISEHeatmapActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.news.ISENewsDetailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.news.ISENewsSymbolSearchActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.news.ISENewsSearchResultActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.alarm.ISEAlarmsListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.balanceandincome.BalanceAndIncomeActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.news.ISECalendarChildActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.analysis.LiveStockSignalListDetailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.analysis.info.LiveStockMarketInfoActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.livestockmarket.ui.analysis.ISESignalDetailSelectActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.base.activity.ICSubItemSelectorActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.base.activity.ICSubItemKeyValueSelectorActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.receipts.receiptdetail.ReceiptContentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation" android:exported="false" android:name="com.pozitron.iscep.accounts.receipts.receiptsendmailcontent.ReceiptSendMailContentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.inbox.InboxActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.inbox.settings.InboxSettingsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.chequesbonds.chequesforcollection.ChequesForCollectionActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.chequesbonds.collateralcheques.CollateralChequesActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.chequesbonds.chequesowed.ChequesOwedActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.chequesbonds.notesforcollection.NotesForCollectionActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.chequesbonds.collateralpromissorynotes.CollateralPromissoryNotesActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.imageslider.ImageSliderActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.memberbusinesses.blockedmerchants.BlockedMerchantsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.memberbusinesses.blockedmerchants.filter.BlockedMerchantTransactionsFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.payments.taxpayment.TaxPaymentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.commercialapplications.packagetariff.application.PackageApplicationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.commercialapplications.packagetariff.view.PackageViewActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.pfm.PfmFeedActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.pfm.feed.detail.flow.PfmFeedDetailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.pfm.feed.filter.flow.PfmFeedFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.qrsettings.QrAccountSettingsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.rendering.RenderingActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.rendering.RenderingSimulatorActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.rendering.RenderingOnboardingActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.stoppage.StoppageReportActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="true" android:launchMode="singleTask" android:name="com.pozitron.iscep.externaldeeplink.ExternalDeepLinkNavigatorActivity" android:screenOrientation="nosensor">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="@string/deeplink_host"/>
+                <data android:pathPrefix="@string/deeplink_path"/>
+                <data android:pathPrefix="@string/applink_instant_loan"/>
+                <data android:pathPrefix="@string/applink_exchange_transaction"/>
+                <data android:pathPrefix="@string/applink_credit_card"/>
+                <data android:pathPrefix="@string/applink_live_stock_market"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="@string/deeplink_host"/>
+                <data android:pathPattern="/.*iscepnavid.*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="iscep"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="@string/dynamiclink_host"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.realpersonmerchantapplication.RealPersonMerchantApplicationActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.contracts.list.ContractListActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.contracts.filter.ContractFilterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.contracts.approval.ContractApprovalActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.customs.info.SimpleHtmlTextActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.investments.roboadvisor.RoboAdvisorActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.featureInfo.FeatureInfoActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.FeatureInfo"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.document.AttachDocumentActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.PobAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.customs.completestate.campaign.detail.CompleteStateCampaignDetailActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.marketplace.MarketPlaceMenuActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.marketplace.hub.MarketPlaceHubActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.portfolio.MyPortfolioIndividualActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Sparkle.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.accounts.portfolio.MyPortfolioCommercialAccountActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Sparkle.Light"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.bankmagazine.BankMagazineActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.softtech.sso.SSOActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.securitytransactions.softtech.SecurityTransactionsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.instantpassword.InstantPasswordActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor">
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.priceandrates.PriceAndRatesActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.priceandrates.currencyconverter.CurrencyConverterActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.priceandrates.bankrates.BankRatesActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.priceandrates.timedepositinterest.TimeDepositInterestActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.phonemanagement.PhoneManagementActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.applications.ApplicationsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.walkthrough.WalkthroughActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.phonepermission.PhonePermissionActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.prelogin.inbox.PreloginInboxActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <receiver android:label="@string/widget_currency_label" android:name="com.pozitron.iscep.features.widgets.currency.CurrencyAppWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/currency_widget"/>
+        </receiver>
+        <service android:exported="true" android:name="com.pozitron.iscep.features.widgets.currency.CurrencyWidgetDataService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="false" android:name="com.pozitron.iscep.cloudmessaging.IsCepFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="com.pozitron.iscep.cloudmessaging.IsCepHuaweiMessagingService">
+            <intent-filter>
+                <action android:name="com.huawei.push.action.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.pega.SurveyActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Transparent"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.pega.PegaSurveyActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Sparkle.Light.FullScreen" android:windowSoftInputMode="adjustPan"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.singlesignon.base.SingleSignOnActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.singlesignon.AheSingleSignOnActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.singlesignon.AsSingleSignOnActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:name="com.pozitron.iscep.features.stories.StoriesActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/StoriesActivityTheme"/>
+        <meta-data android:name="com.huawei.hms.client.appid" android:value="@string/huawei_app_id"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.features.orman.ui.OrmanActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.SparkleCompat.Light.PostLogin"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_token"/>
+        <provider android:authorities="com.pozitron.iscep.dependencyprovider" android:exported="false" android:initOrder="2147483647" android:name="com.pozitron.iscep.core.DependencyInitProvider"/>
+        <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled" android:value="false"/>
+        <service android:exported="false" android:name="com.pozitron.iscep.session.SessionTimerService"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="true" android:launchMode="singleTop" android:name="com.pozitron.iscep.session.SessionWarningDialogActivity" android:screenOrientation="nosensor" android:theme="@style/IsCepMaterialTheme.Transparent" android:windowSoftInputMode="adjustPan"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.web.WebViewActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:windowSoftInputMode="adjustPan"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|uiMode" android:exported="false" android:name="com.pozitron.iscep.settings.display.DisplaySettingsActivity" android:permission="com.pozitron.iscep.ISBANK_SPECIAL_PERMISSION" android:screenOrientation="nosensor" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/maxi_activity_accesibility_label" android:name="com.commencis.maxi.view.activity.MaxiActivity" android:screenOrientation="nosensor" android:theme="@style/MaxiTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <provider android:authorities="com.pozitron.iscep.lifecycle-process" android:exported="false" android:multiprocess="true" android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"/>
+        <activity android:exported="false" android:launchMode="singleTask" android:name="com.blesh.sdk.ui.activity.BleshMainActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.blesh.template.normal"/>
+                <action android:name="com.blesh.template.push"/>
+            </intent-filter>
+        </activity>
+        <activity android:autoRemoveFromRecents="true" android:exported="false" android:name="com.blesh.sdk.ui.activity.ExitAppActivity" android:theme="@android:style/Theme.NoDisplay"/>
+        <service android:exported="false" android:name="com.blesh.sdk.service.Blesh"/>
+        <receiver android:exported="false" android:name="com.blesh.sdk.broadcastreceiver.HostAppRunningStatusReceiver">
+            <intent-filter>
+                <action android:name="com.blesh.sdk.hostapp"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="com.blesh.sdk.service.GeofenceTransitionsIntentService"/>
+        <service android:exported="false" android:name="com.blesh.sdk.coinbox.dfu.DfuService">
+            <intent-filter>
+                <action android:name="no.nordicsemi.android.action.DFU_UPLOAD"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:name="com.facebook.FacebookActivity" android:theme="@style/com_facebook_activity_theme"/>
+        <activity android:name="com.facebook.CustomTabMainActivity"/>
+        <activity android:name="com.facebook.CustomTabActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.map.MapPickerActivity" android:theme="@style/MainActivityTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="im.diyalog.map.pickLocation_com.pozitron.iscep"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.map.MapActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="im.diyalog.map.locationPreview_com.pozitron.iscep"/>
+            </intent-filter>
+        </activity>
+        <service android:name="im.diyalog.push.DiyalogFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.auth.AuthActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.auth.PickCountryActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:launchMode="singleTop" android:name="im.diyalog.sdk.controllers.activity.DiyalogMainActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="diyalog.cc" android:pathPrefix="/join/" android:scheme="https"/>
+                <data android:host="diyalog.email" android:pathPrefix="/join/" android:scheme="https"/>
+                <data android:scheme="diyalog"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="diyalog"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="app.diyalog.im" android:scheme="https"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="*/*"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.conversation.ChatActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.conversation.OnlineHelpChatActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.profile.ProfileActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.group.GroupInfoActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.settings.MyProfileActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.compose.ComposeActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.group.AddMemberActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.group.InviteLinkActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.compose.CreateGroupActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize|stateVisible"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.settings.NotificationsActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.settings.ChatSettingsActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.settings.OutOfOfficeActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.fragment.help.HelpActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.settings.SecuritySettingsActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.accounts.AccountActivity" android:theme="@style/MainActivityTheme"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.accounts.SelectAccountActivity" android:theme="@style/MainActivityTheme"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.fragment.preview.ViewAvatarActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustNothing|stateAlwaysHidden"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.fragment.preview.PictureActivity" android:theme="@style/PictureFullscreenTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.fragment.preview.CodePreviewActivity" android:theme="@style/CommonActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.fragment.media.DocumentsActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.settings.EditNameActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.settings.PickWallpaperActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.settings.EditAboutActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.activity.AddContactActivity" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.activity.TakePhotoActivity" android:theme="@style/Theme.Transparent"/>
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
+        <activity android:label="@string/picker_file_activity_title" android:name="im.diyalog.sdk.controllers.pickers.file.FilePickerActivity" android:theme="@style/PickerTheme.FilePicker"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.core.DirectReplyActivity" android:theme="@style/Theme.Transparent1" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.core.FullScreenNotificationActivity" android:theme="@style/Theme.Transparent1" android:windowSoftInputMode="adjustResize"/>
+        <activity android:launchMode="singleInstance" android:name="im.diyalog.sdk.controllers.activity.ShortcutActivity" android:theme="@style/AppcompatNoDisplay">
+            <intent-filter>
+                <action android:name="im.diyalog.action.botMessageShortcut"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:name="im.diyalog.sdk.controllers.calls.CallActivity" android:resizeableActivity="true" android:screenOrientation="portrait" android:showOnLockScreen="true" android:supportsPictureInPicture="true" android:taskAffinity="" android:theme="@style/MainActivityTheme"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:name="im.diyalog.sdk.controllers.calls.CallNotificationActivity" android:resizeableActivity="true" android:screenOrientation="portrait" android:showOnLockScreen="true" android:supportsPictureInPicture="true" android:taskAffinity="" android:theme="@style/MainActivityTheme"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:name="im.diyalog.sdk.controllers.onlinehelp.WaitForOnlineHelpActivity" android:screenOrientation="portrait" android:theme="@style/MainActivityTheme" android:windowSoftInputMode="adjustResize"/>
+        <receiver android:enabled="true" android:name="im.diyalog.sdk.receivers.ChromeCustomTabReceiver"/>
+        <provider android:authorities="com.pozitron.iscep.diyalog.provider" android:exported="false" android:grantUriPermissions="true" android:name="im.diyalog.sdk.util.DiyalogFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/diyalog_provider_paths"/>
+        </provider>
+        <service android:name="im.diyalog.sdk.core.NotificationActionService"/>
+        <service android:name="im.diyalog.sdk.core.AndroidNotifications$NotificationService"/>
+        <service android:name="im.diyalog.sdk.core.AudioTypeNotification$AudioNotificationActionService"/>
+        <provider android:authorities="com.pozitron.iscep.fishbunfileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.sangcomz.fishbun.FishBunFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:label="@string/album" android:name="com.sangcomz.fishbun.ui.album.ui.AlbumActivity" android:theme="@style/FishBunTheme"/>
+        <activity android:name="com.sangcomz.fishbun.ui.picker.PickerActivity" android:theme="@style/FishBunTheme"/>
+        <activity android:name="com.sangcomz.fishbun.ui.detail.ui.DetailImageActivity" android:theme="@style/DetailViewTheme"/>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.ml.vision.VisionRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.ml.common.CommonComponentRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.dynamiclinks.internal.FirebaseDynamicLinkRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.iid.Registrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <service android:exported="true" android:name="com.google.android.gms.auth.api.signin.RevocationBoundService" android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" android:visibleToInstantApps="true"/>
+        <provider android:authorities="com.pozitron.iscep.mlkitinitprovider" android:exported="false" android:initOrder="99" android:name="com.google.mlkit.common.internal.MlKitInitProvider"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <meta-data android:name="com.google.gms.fitness.sdk.version" android:value="20.0.0"/>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.messaging.FirebaseMessagingService">
+            <intent-filter android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <receiver android:exported="true" android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <provider android:authorities="com.pozitron.iscep.firebaseinitprovider" android:directBootAware="true" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule" android:value="GlideModule"/>
+        <provider android:authorities="com.pozitron.iscep.foreksfileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.foreks.android.is.library.ForeksFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/foreks_file_paths"/>
+        </provider>
+        <activity android:name="com.foreks.android.core.urlmodeselection.URLModeSelectionActivity" android:screenOrientation="portrait"/>
+        <service android:name="com.foreks.android.core.modulesportal.checkstatus.service.CheckStatusService"/>
+        <receiver android:name="com.foreks.android.core.modulesportal.checkstatus.service.LogoutReceiver"/>
+        <meta-data android:name="com.google.firebase.ml.vision.DEPENDENCIES" android:value="face"/>
+        <meta-data android:name="firebase_messaging_auto_init_enabled" android:value="false"/>
+        <receiver android:exported="true" android:name="com.commencis.appconnect.sdk.location.AppConnectLocationChangeBroadcastReceiver">
+            <intent-filter>
+                <action android:name="AppConnect.Location.PROCESS_UPDATES"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.commencis.appconnect.sdk.location.AppConnectGeofenceBroadcastReceiver"/>
+        <receiver android:exported="true" android:name="com.commencis.appconnect.sdk.boot.BootCompleteReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.commencis.appconnect.sdk.notifications.AppConnectNotificationReceiver">
+            <intent-filter>
+                <action android:name="appconnect.intent.notification.OPEN"/>
+                <action android:name="appconnect.intent.notification.DELETE"/>
+                <action android:name="appconnect.intent.notification.BUTTON_CLICK"/>
+            </intent-filter>
+        </receiver>
+        <activity android:name="com.commencis.appconnect.sdk.iamessaging.InAppMessageActivity" android:theme="@style/AppConnect.InAppMessage"/>
+        <activity android:name="com.commencis.appconnect.sdk.iamessaging.InAppMessageCustomActivity" android:theme="@style/AppConnect.InAppMessage.Custom"/>
+        <provider android:authorities="com.pozitron.iscep.workmanager-init" android:directBootAware="false" android:exported="false" android:multiprocess="true" android:name="androidx.work.impl.WorkManagerInitializer"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.pozitron.iscep.MarketingInitProvider" android:exported="false" android:name="com.facebook.marketing.internal.MarketingInitProvider"/>
+        <provider android:authorities="com.pozitron.iscep.FacebookInitProvider" android:exported="false" android:name="com.facebook.internal.FacebookInitProvider"/>
+        <receiver android:exported="false" android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+            <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+        </service>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+        <service android:name="com.monitise.mea.android.debugscreen.screenrecorder.RecordingService"/>
+        <receiver android:name="com.monitise.mea.android.debugscreen.screenrecorder.RecordingSession$DeleteRecordingBroadcastReceiver"/>
+        <meta-data android:name="aia-compat-api-min-version" android:value="1"/>
+        <activity android:clearTaskOnLaunch="true" android:name="com.journeyapps.barcodescanner.CaptureActivity" android:screenOrientation="sensorLandscape" android:stateNotNeeded="true" android:theme="@style/zxing_CaptureTheme" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <receiver android:name="org.altbeacon.beacon.startup.StartupBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <service android:enabled="true" android:exported="false" android:isolatedProcess="false" android:label="beacon" android:name="org.altbeacon.beacon.service.BeaconService"/>
+        <service android:enabled="true" android:exported="false" android:name="org.altbeacon.beacon.BeaconIntentProcessor"/>
+        <service android:name="org.altbeacon.beacon.service.ScanJob" android:permission="android.permission.BIND_JOB_SERVICE">
+            <meta-data android:name="immediateScanJobId" android:value="208352939"/>
+            <meta-data android:name="periodicScanJobId" android:value="208352940"/>
+        </service>
+        <service android:name="org.altbeacon.bluetooth.BluetoothTestJob" android:permission="android.permission.BIND_JOB_SERVICE">
+            <meta-data android:name="jobId" android:value="1799803768"/>
+        </service>
+        <activity android:enabled="false" android:exported="false" android:launchMode="singleInstance" android:name="com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity" android:process=":playcore_missing_splits_activity" android:stateNotNeeded="true"/>
+        <activity android:enabled="false" android:exported="false" android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity" android:stateNotNeeded="true" android:theme="@style/Theme.PlayCore.Transparent"/>
+        <service android:enabled="false" android:exported="true" android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService">
+            <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11000"/>
+        </service>
+        <service android:enabled="false" android:exported="false" android:name="com.google.android.play.core.assetpacks.ExtractionForegroundService"/>
+        <meta-data android:name="com.android.vending.splits.required" android:value="true"/>
+        <meta-data android:name="com.android.stamp.source" android:value="https://play.google.com/store"/>
+        <meta-data android:name="com.android.stamp.type" android:value="STAMP_TYPE_DISTRIBUTION_APK"/>
+        <meta-data android:name="com.android.vending.splits" android:value="@xml/splits0"/>
+        <meta-data android:name="com.android.vending.derived.apk.id" android:value="3"/>
+    </application>
+</manifest>

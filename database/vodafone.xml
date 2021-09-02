@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8"?><manifest versionCode="226" versionName="15.1" compileSdkVersion="30" compileSdkVersionCodename="11" package="com.vodafone.selfservis" platformBuildVersionCode="30" platformBuildVersionName="11">
+  <uses-sdk minSdkVersion="21" targetSdkVersion="30"/>
+  <uses-feature name="android.hardware.telephony" required="false"/>
+  <uses-feature name="android.hardware.location" required="false"/>
+  <uses-feature name="android.hardware.location.gps" required="false"/>
+  <uses-feature name="android.hardware.location.network" required="false"/>
+  <uses-feature glEsVersion="0x20000" required="true"/>
+  <uses-feature name="android.hardware.camera" required="true"/>
+  <uses-feature name="android.hardware.bluetooth" required="false"/>
+  <uses-feature name="android.hardware.bluetooth_le" required="false"/>
+  <uses-feature name="android.hardware.nfc" required="false"/>
+  <uses-permission name="android.permission.RECORD_AUDIO"/>
+  <uses-permission name="android.permission.NFC"/>
+  <uses-permission name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission name="android.permission.CALL_PHONE"/>
+  <uses-permission name="android.permission.ACCESS_FINE_LOCATION"/>
+  <uses-permission name="android.permission.ACCESS_COARSE_LOCATION"/>
+  <uses-permission name="android.permission.INTERNET"/>
+  <uses-permission name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission name="android.permission.ACCESS_WIFI_STATE"/>
+  <uses-permission name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission name="android.permission.READ_CONTACTS"/>
+  <uses-permission name="android.permission.READ_PHONE_STATE"/>
+  <uses-permission name="android.permission.VIBRATE"/>
+  <uses-permission name="android.permission.CAMERA"/>
+  <uses-permission name="android.permission.WAKE_LOCK"/>
+  <uses-permission name="android.permission.ACTIVITY_RECOGNITION"/>
+  <permission name="com.vodafone.selfservis.permission.WIDGET" protectionLevel="0x2"/>
+  <permission name="com.vodafone.selfservis.permission.ALLOW_BROADCAST" protectionLevel="0x2"/>
+  <uses-permission name="com.vodafone.selfservis.permission.WIDGET"/>
+  <uses-permission name="com.vodafone.selfservis.permission.ALLOW_BROADCAST"/>
+  <uses-permission name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <uses-permission name="android.permission.READ_CALL_LOG"/>
+  <uses-permission name="android.permission.GET_TASKS"/>
+  <uses-permission name="android.permission.PACKAGE_USAGE_STATS"/>
+  <uses-permission name="android.permission.READ_NETWORK_USAGE_HISTORY"/>
+  <queries>
+    <intent>
+      <action name="com.google.android.youtube.api.service.START"/>
+    </intent>
+    <package name="com.google.android.apps.maps"/>
+    <intent>
+      <action name="android.intent.action.MAIN"/>
+      <category name="android.intent.category.LAUNCHER"/>
+    </intent>
+  </queries>
+  <uses-feature name="android.hardware.camera.autofocus" required="false"/>
+  <uses-feature name="android.hardware.camera.flash" required="false"/>
+  <uses-feature name="android.hardware.microphone" required="false"/>
+  <uses-permission name="android.permission.CHANGE_WIFI_STATE"/>
+  <uses-permission name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+  <permission label="Custom Netmera permission for receivers" name="com.vodafone.selfservis.permission.BOOT" protectionLevel="0x2"/>
+  <permission label="Custom Netmera permission for receivers" name="com.vodafone.selfservis.permission.GEOFENCE" protectionLevel="0x2"/>
+  <permission name="com.vodafone.selfservis.permission.PROCESS_PUSH_MSG" protectionLevel="0x3"/>
+  <permission name="com.vodafone.selfservis.permission.PUSH_PROVIDER" protectionLevel="0x3"/>
+  <permission name="com.vodafone.selfservis.permission.PUSH_WRITE_PROVIDER" protectionLevel="0x3"/>
+  <uses-permission name="com.vodafone.selfservis.permission.PROCESS_PUSH_MSG"/>
+  <uses-permission name="com.vodafone.selfservis.permission.PUSH_PROVIDER"/>
+  <uses-permission name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+  <uses-permission name="com.huawei.appmarket.service.commondata.permission.GET_COMMON_DATA"/>
+  <uses-permission name="com.google.android.c2dm.permission.RECEIVE"/>
+  <uses-permission name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+  <uses-permission name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+  <uses-permission name="android.permission.READ_EXTERNAL_STORAGE"/>
+  <application theme="AppTheme" label="Yanımda" icon="res/CGK.png" name="com.vodafone.selfservis.app.GlobalApplication" allowBackup="true" hardwareAccelerated="true" largeHeap="true" supportsRtl="false" fullBackupOnly="false" fullBackupContent="res/xvH.xml" usesCleartextTraffic="true" resizeableActivity="true" networkSecurityConfig="res/4uC.xml" appComponentFactory="androidx.core.app.CoreComponentFactory" requestLegacyExternalStorage="true">
+    <activity name="com.vodafone.selfservis.modules.login.activities.VfLoginSuperNetMultiAccountActivity"/>
+    <activity name="com.vodafone.selfservis.modules.splash.activities.LandingPageActivity" finishOnTaskLaunch="true" launchMode="2" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22">
+      <intent-filter>
+        <data scheme="nmyanimda-2"/>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <category name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <intent-filter>
+        <data scheme="yanimda"/>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <category name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <intent-filter autoVerify="true">
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="http" host="selfservisappyukle.vodafone.com.tr"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="http" host="app"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss" host="selfservisappyukle.vodafone.com.tr"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss" host="app"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="http" host="vfselfservis.com"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="https" host="vfselfservis.com"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="https" host="online.vodafone.com.tr" path="/oss/"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="https" host="m.vodafone.com.tr" path="/touch/deeplink/"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="https" host="efes.vodafone.com.tr" path="/touch/deeplink/"/>
+      </intent-filter>
+    </activity>
+    <activity name="com.vodafone.selfservis.modules.splash.activities.SplashActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22">
+      <intent-filter>
+        <action name="android.intent.action.MAIN"/>
+        <category name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity theme="MVA10AppTheme" name="com.vodafone.selfservis.modules.billing.greenjourney.BillingActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="MVA10AppTheme" name="com.vodafone.selfservis.modules.eshop.EShopActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.Base.Home" name="com.vodafone.selfservis.modules.dashboard.activities.HomeActivity" finishOnTaskLaunch="true" launchMode="2" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.Base.Home" name="com.vodafone.selfservis.modules.dashboard.postpaid.PostPaidHomeActivity" finishOnTaskLaunch="true" launchMode="2" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.Base.Home" name="com.vodafone.selfservis.modules.dashboard.prepaid.PrePaidHomeActivity" finishOnTaskLaunch="true" launchMode="2" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.Base.Home" name="com.vodafone.selfservis.modules.dashboard.activities.HomeSupernetActivity" finishOnTaskLaunch="true" launchMode="2" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.AbroadBuyPackageActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.AbroadBuyPackageCorporateActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.AbroadGuideActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.profile.activities.AccountDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.AccountDetailSupernetInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.AccountDetailSupernetActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.ModemSetupSupernetActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.activities.AddAccountActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.activities.AddSupernetAccountActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.AmbulatoriesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.core.appbrowser.AppBrowserActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.AppSettingsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.login.activities.AutoLoginInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CorporateAvailableTariffsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.BalanceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.activities.CampaignLegalActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.activities.CampaignDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.activities.CampaignsPontisDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.activities.CampaignsSuperNetActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.activities.CampaignsSuperNetDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.CDRCorporateActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.CDREmployeeListActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.CDRPostPaidActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.CDRPrePaidActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.profile.activities.ChangePasswordActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.ChooserFavoritesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.ChooserLinkedAccountsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CompanyInformationActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.ConsularActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.digitalservices.activities.ContentServicesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.digitalservices.activities.ContentServicesSubscribedActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.CreditCardSettingsFormActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.CreditCardSettingsInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.CuisineActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CustomerConsultantActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqAllGsmDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqCampaignOffersActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqDetailTextActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqDigitalAssistantAutoSettingsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqDigitalAssistantInfoSettingsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqDigitalAssistantSettingsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqDigitalAssistantSettingsChoiceInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqDigitalAssistantSettingsDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqDigitalAssistantActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqExtraAddonOffersActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.fourgReadiness.EiqFourGReadinessActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqFourGTariffOpsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqLinesGeneralViewActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqProductOffersActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqSmpOfferActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqSummaryActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqSpecialTariffOffersActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqTariffOpsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqTariffSuggestionsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqTariffsCanPassActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.HybridProductDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.HybridProductPaymentWithCardActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.EmployeeCurrentBillActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.EmployeeCurrentBillListActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.EmployeeInvoiceDataRoamingLimitActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.EmployeeInvoiceDataRoamingLimitListActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.EmployeeInvoiceInfoLimitListActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.EmployeeInvoiceInfoLimitActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.EmployeeInvoicesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.EmployeeOptionsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.EmployeePackagesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.EmployeePackagesDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.EmployeeServicesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.dashboard.activities.EnjoyPageActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.activities.FormerCampaignsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.FreeUsageInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.FutureEnterpriseActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.FutureEnterpriseDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.FutureEnterprisePaymentActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.RedBusinessWebViewActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.FutureEnterprisePaymentWithCardActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoiceAddressActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoiceDataRoamingLimitActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CorporateInvoiceDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoiceDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoiceInfoLimitActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoicePaymentActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoicePaymentWithCardActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoicePaymentSupernetWithCardActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.invoicepayment.InvoicePaymentWithMasterPassActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoicePaymentSupernetActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CorporateInvoicesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.invoices.activities.InvoiceSettingsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.login.activities.LegalActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.tltopup.activities.LiratopupActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity name="com.vodafone.selfservis.modules.payment.tltopup.activities.LiratopupWithMasterPassActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity name="com.vodafone.selfservis.modules.payment.tltransfer.LiraTransferActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.activities.LocalAccountsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.login.activities.LoginExtrasActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.maraton.MaratonActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.addon.activities.MobileOptionsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.addon.activities.MobileOptionsActivityV2" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.addon.activities.MobileOptionsPackagesListActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.addon.activities.MobileOptionStandAloneActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.addon.activities.MobileOptionsDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.addon.activities.MobileOptionsTermsAndConditionsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.InsuranceTermsAndConditionsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.MobileOptionsUserActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.MobileOptionsUserDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CorporateTariffAndPackagesDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.MyopTariffDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.netmerabrowser.NetmeraBrowserActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.PackagesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.billing.activities.PaperlessInvoiceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CorporatePastInvoicesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.PaymentBrowserActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.activities.PersonalMailOrderFormActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.PersonalMailOrderInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.PinPukActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.activities.PushInboxActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.activities.PushInboxDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.core.qualtrics.QualtricsSurveyActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.dashboard.activities.RateUsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.ServicesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.ServicesDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.Base.TransperantPage" name="com.vodafone.selfservis.modules.profile.activities.ServiceSwitcherActivity" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.SettingsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.StandardChargesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetActivationStepsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.SupernetInvoiceDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.SupernetInvoicesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetMailOrderFormActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetMailOrderInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.SupernetPastInvoicesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetSendCredentialActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetUsageDetailsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetUserPlanActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.TariffDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.login.activities.TermsAndConditionsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.TransactionHistoryActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.TransformActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.UnbilledInvoiceAmountActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.dashboard.activities.UpdateInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CorporateTariffAndPackagesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.YouthCampaignBuyPackageActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.YouthCampaignDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.mgm.activities.MemberGetMemberActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.mgm.activities.MemberGetNewMemberActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.mgm.activities.MemberGetMemberTermsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="Base.Theme.AppCompat" name="com.theartofdev.edmodo.cropper.CropImageActivity"/>
+    <activity theme="Theme.Translucent.NoTitleBar" name="com.adobe.mobile.MessageFullScreenActivity" windowSoftInputMode="0x2"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.eiq.activities.EiqSmpOfferDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetWifiSettingsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetUserPlanAddonDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.login.activities.AppLanguageActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.AppLanguageSettingsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetOptionsDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetOptionsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.TravelInsuranceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.insurance.InsuranceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.marketplace.ui.stories.MarketplaceStoriesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.PersonalTariffAndPackagesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.marketplace.ui.homelist.MarketplaceHomeListActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.MyotTariffAndPackagesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.MyotTariffDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.marketplace.ui.search.MarketplaceSearchActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.MyotTariffChangeAddonActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.PersonalTariffAndPackagesDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.AvailableMobileOptionsDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.activities.ExistingContractsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.MasterPassBrowserActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.ReloadTariffDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.srtracking.activities.SrTrackingActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.srtracking.activities.SrTrackingDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.stories.activities.StoriesActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.stories.activities.CategorizedStoryActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.digitalservices.activities.ContentServicesDetailInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.CommitmentDetailInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.fixloyalty.activities.FixLoyaltyCampaignsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.fixloyalty.activities.FixLoyaltyCampaignsDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.TravelPlanActivity" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.abroad.activities.CreateTravelPlanActivity" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.kolaypacks.activities.KolayPacksActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.TransparentMaterialDesign" name="com.vodafone.selfservis.modules.payment.kolaypacks.activities.KolayPackWithMasterPassActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity name="com.vodafone.selfservis.modules.payment.kolaypacks.activities.SalesContractDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity name="com.vodafone.selfservis.modules.payment.paymenttools.activities.MyPaymentToolsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.payment.paymenttools.activities.MasterpassSaveCardActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tobi.ChatBotActivity" screenOrientation="1" windowSoftInputMode="0x12"/>
+    <activity theme="AppTheme.Base.TransperantPage" name="com.vodafone.selfservis.modules.tobi.RateChatBotActivity" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.fixedc2d.activities.FixedC2dActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.fixedc2d.activities.FixedC2dStepsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.lottery.activities.LotteryGameActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.lottery.activities.LotteryGameNewGuessChanceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.lottery.activities.LotteryGameGuessSuccessActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.lottery.activities.LotteryGameNoAvailableDeviceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.TariffOptionsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.TariffOptionsSelectionActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.AvailableTariffsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.AvailableTariffsAllActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.TariffChangeSummaryActivity" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.DMagsEInvoiceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CorporateDmagsEInvoiceActivity" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vbu.corporate.activities.CorporateDmagsEInvoiceDetailActivity" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.MyotTariffAddonSummaryActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.MetlifeRegisterActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.MetlifeBrowserActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="Theme.AppCompat.Light.NoActionBar.FullScreen" name="com.vodafone.selfservis.common.utility.receivers.SmartUsageStatsActivity" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.SupernetChangePasswordActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.squat.activities.SquatWheelActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.squat.activities.SquatGiftActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.squat.activities.SquatGiftDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.squat.activities.SquatPermissionActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.help.HelpActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.supernet.activities.FixChangeTariffActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.prelogin.activities.DashboardActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.TransparentMaterialDesign" name="com.vodafone.selfservis.modules.login.activities.NonVfLoginActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.TransparentMaterialDesign" name="com.vodafone.selfservis.modules.prelogin.activities.NonVfDashboardActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.lottery.activities.NonVfLotteryGameActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.lottery.activities.NonVfLotteryGameNewGuessChanceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.c2d.activities.main.C2dActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.c2d.activities.main.C2dNotReadInfoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.mgm.activities.NonVfGetMemberActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.squat.activities.nonvf.NonVfSquatWheelActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.squat.activities.nonvf.NonVfSquatGiftActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.squat.activities.nonvf.NonVfSquatGiftDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.c2d.activities.main.C2dFilterActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.c2d.activities.main.C2dSuccessActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.c2d.activities.main.C2dWelcomeActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.ambeent.activities.AmbeentActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.ambeent.activities.PreAmbeentActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.prepaidcampaign.PrepaidCampaignActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.login.activities.TwoFALoginActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.c2d.activities.simactivation.SimActivationActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.c2d.activities.simactivation.SimContractActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.c2d.activities.simactivation.SuccessSimActivationActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.tariff.activities.Myot2TariffChangeAddonActivity"/>
+    <activity name="com.vodafone.selfservis.modules.marketplace.ui.home.MarketplaceHomeActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.core.masterpassbrowser.MasterPassBrowserActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vfmarket.ui.onboarding.VfMarketOnboardingActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vfmarket.ui.browser.VfMarketBrowserActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.vfmarket.ui.root.VfMarketRootActivity" launchMode="2" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.vfmarket.ui.orderdetail.VfMarketOrderDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.vfmarket.ui.map.VfMarketMapActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vfmarket.ui.basket.VfMarketBasketActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.vfmarket.ui.subcategory.VfMarketSubCategoryActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.vfmarket.ui.checkout.VfMarketCheckoutActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.payment.paymentorders.common.activities.RecurringPaymentMyOrdersActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.payment.paymentorders.common.activities.RecurringOrderDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.payment.paymentorders.autotopup.myorders.activities.ATUAddNewTopUpActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.payment.paymentorders.autokolaypack.newkolaypack.AutoKolayPackAddNewOrderActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.payment.paymentorders.autokolaypack.kolaypackslist.activities.AutoKolayPackListActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x12"/>
+    <activity name="com.vodafone.selfservis.modules.billing.activities.UnbilledInvoiceAmountActivityNew" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.dashboard.activities.SpecialDayActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.dashboard.activities.SpecialDayDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.dashboard.activities.SpecialDayVideoActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.profile.settings.activities.SimCardActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.payment.invoices.activities.VFTVInvoiceActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.Zebro" name="com.vodafone.selfservis.modules.vfsimple.ui.home.VfSimpleActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22">
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/MNPPAYMENT"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ADDCREDITCARD"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROTRANSATIONS"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYPAYMENTS"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROTARIFFANDPACKAGE"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROREMAININGUSAGE"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROUSAGEDETAIL"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROCHOOSETARIFF"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROCHANGETARIFF"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROADDON"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYACCOUNT"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYACCOUNT/ACCOUNTINFO"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYACCOUNT/ZEBROSETTING/ZEBROACCOUNTSETTINGS"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYACCOUNT/ZEBROSETTING/ZEBROLINESETTINGS"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYACCOUNT/ZEBROSETTING/ZEBROAPPSETTINGS"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYACCOUNT/ZEBROSETTING/ZEBROPUK"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYCOMPLAINTS"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMESSAGE"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBRONOTIFICATION"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="vfss"/>
+        <data host="app"/>
+        <data path="/ZEBROMYACCOUNT/ZEBROHELP"/>
+      </intent-filter>
+    </activity>
+    <activity theme="AppTheme.Zebro" name="com.vodafone.selfservis.modules.vfsimple.ui.onboarding.DigitalOnBoardingActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.Zebro" name="com.vodafone.selfservis.modules.vfsimple.ui.simactivation.SimActivationActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.Zebro" name="com.vodafone.selfservis.modules.vfsimple.ui.onboarding.readchip.MCReadChip" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.newdesign.activities.CampaignsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.newdesign.activities.CampaignsDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.newdesign.activities.MCCMCampaignDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="AppTheme.MaterialDesign" name="com.vodafone.selfservis.modules.vfmall.home.VfMallHomeActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <receiver name="com.adjust.sdk.AdjustReferrerReceiver" permission="android.permission.INSTALL_PACKAGES" exported="true">
+      <intent-filter>
+        <action name="com.android.vending.INSTALL_REFERRER"/>
+      </intent-filter>
+    </receiver>
+    <receiver label="Vodafone Yanımda Widget" name="com.vodafone.selfservis.widgets.SelfServiceWidget" permission="com.vodafone.selfservis.permission.WIDGET" process=":SelfServiceWidget">
+      <intent-filter>
+        <action name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data name="android.appwidget.provider" resource="vfss_widget"/>
+    </receiver>
+    <service name="com.vodafone.selfservis.widgets.SelfServiceWidget$UpdateService_" permission="android.permission.BIND_JOB_SERVICE"/>
+    <receiver label="Vodafone Yanımda Mini Widget 1x1" name="com.vodafone.selfservis.widgets.SelfServisMiniWidget" permission="com.vodafone.selfservis.permission.WIDGET">
+      <intent-filter>
+        <action name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data name="android.appwidget.provider" resource="vfss_mini_widget"/>
+    </receiver>
+    <receiver label="Vodafone Yanımda Mini Widget 2x1" name="com.vodafone.selfservis.widgets.SelfServisMiniWidget2x1" permission="com.vodafone.selfservis.permission.WIDGET">
+      <intent-filter>
+        <action name="android.appwidget.action.APPWIDGET_UPDATE"/>
+      </intent-filter>
+      <meta-data name="android.appwidget.provider" resource="vfss_mini_widget_2x1"/>
+    </receiver>
+    <activity theme="AppTheme.Preference" label="Vodafone Yanımda" name="com.vodafone.selfservis.widgets.SelfServisMiniWidgetConfiguration" excludeFromRecents="true">
+      <intent-filter>
+        <action name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+      </intent-filter>
+    </activity>
+    <activity name="com.vodafone.selfservis.modules.payment.PaymentMailOrderWebViewActivity"/>
+    <activity name="com.vodafone.selfservis.modules.squat.activities.SquatLegalActivity"/>
+    <activity theme="AppTheme.Base.Home" name="com.vodafone.selfservis.modules.vbu.dashboard.VbuHomeActivity" finishOnTaskLaunch="true" launchMode="2" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.help.HelpDetailActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.help.HelpSearchActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.login.activities.WelcomeJourneyActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity theme="MVA10AppTheme" name="com.vodafone.selfservis.modules.login.green.LoginHolderActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <activity name="com.vodafone.selfservis.modules.campaigns.newdesign.activities.CampaignsTermsActivity" screenOrientation="1" configChanges="0xfb0" windowSoftInputMode="0x22"/>
+    <receiver name="com.vodafone.selfservis.common.utility.receivers.NetmeraWebBroadcastReceiver" exported="false">
+      <intent-filter>
+        <action name="com.netmera.web.content.SHOW"/>
+        <action name="com.netmera.web.content.CLOSE"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="com.vodafone.selfservis.common.utility.receivers.NetmeraCustomBroadcastReceiver" exported="false">
+      <intent-filter priority="999">
+        <action name="com.netmera.push.intent.REGISTER"/>
+        <action name="com.netmera.push.intent.RECEIVE"/>
+        <action name="com.netmera.push.intent.OPEN"/>
+        <action name="com.netmera.push.intent.DISMISS"/>
+        <action name="com.netmera.push.intent.BUTTON"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="com.adobe.mobile.MessageNotificationHandler"/>
+    <meta-data name="com.samsung.android.icon_container.has_icon_container" value="true"/>
+    <meta-data name="com.google.android.gms.version" value="12451000"/>
+    <meta-data name="com.google.android.geo.API_KEY" value="AIzaSyAOf5vSYq7vM5H2lC3NiL7JOPt6d9jz2aA"/>
+    <meta-data name="notification_icon" value="ic_launcher"/>
+    <provider name="androidx.core.content.FileProvider" exported="false" authorities="com.vodafone.selfservis.provider" grantUriPermissions="true">
+      <meta-data name="android.support.FILE_PROVIDER_PATHS" resource="provider_paths"/>
+    </provider>
+    <provider name="com.sodecapps.samobilecapture.content.SAFileProvider" exported="false" authorities="com.vodafone.selfservis.com.sodecapps.samobilecapture.fileprovider" grantUriPermissions="true">
+      <meta-data name="android.support.FILE_PROVIDER_PATHS" resource="sa_file_provider_paths"/>
+    </provider>
+    <meta-data name="android.max_aspect" value="2.1"/>
+    <service name="com.vodafone.lib.seclibng.comms.EntryPointHandling" permission="android.permission.BIND_JOB_SERVICE"/>
+    <service name="com.vodafone.lib.seclibng.internal.EventsIntentService" permission="android.permission.BIND_JOB_SERVICE"/>
+    <receiver name="com.vodafone.lib.seclibng.internal.AlarmReceiver"/>
+    <receiver name="com.vodafone.selfservis.modules.mgm.activities.ShareInfoReceiver">
+      <intent-filter>
+        <action name="android.intent.action.EXTRA_CHOSEN_COMPONENT"/>
+      </intent-filter>
+    </receiver>
+    <activity name="com.vfg.foundation.ui.webview.BrowserActivity"/>
+    <meta-data name="com.google.android.gms.vision.DEPENDENCIES" value="ocr,face,barcode"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SACaptureDocument" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SAProcessDocument" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SAVerifyDocument" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SAReadDocument" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SASinglePage" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SAFolioPage" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SAViewDocument" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SACaptureSelfie" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SACaptureVideo" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SAViewPdf" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SASignPdf" screenOrientation="0" configChanges="0x500" hardwareAccelerated="true"/>
+    <activity theme="SAThemeStyle" name="com.sodecapps.samobilecapture.activity.SAScanBarcode" screenOrientation="1" configChanges="0x500" hardwareAccelerated="true"/>
+    <service name="com.sodecapps.samobilecapture.activity.SAScreenRecordService" enabled="true" exported="true" foregroundServiceType="0x20"/>
+    <receiver name="com.sodecapps.samobilecapture.activity.SAScreenRecordBroadcastReceiver"/>
+    <service name="com.netmera.NetmeraFirebaseService" exported="false">
+      <intent-filter>
+        <action name="com.google.firebase.MESSAGING_EVENT"/>
+      </intent-filter>
+    </service>
+    <service name="com.netmera.NMHMService" exported="false">
+      <intent-filter>
+        <action name="com.huawei.push.action.MESSAGING_EVENT"/>
+      </intent-filter>
+    </service>
+    <receiver name="com.netmera.NetmeraPushBroadcastReceiver" enabled="true" exported="false">
+      <intent-filter>
+        <action name="com.netmera.push.intent.REGISTER"/>
+        <action name="com.netmera.push.intent.RECEIVE"/>
+        <action name="com.netmera.push.intent.OPEN"/>
+        <action name="com.netmera.push.intent.DISMISS"/>
+        <action name="com.netmera.push.intent.BUTTON"/>
+        <action name="com.netmera.push.intent.carousel.OPEN"/>
+        <action name="com.netmera.push.intent.carousel.PREV"/>
+        <action name="com.netmera.push.intent.carousel.NEXT"/>
+        <action name="com.netmera.push.intent.carousel.ITEM"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="com.netmera.NetmeraInAppMessageBroadcastReceiver" enabled="true" exported="false">
+      <intent-filter>
+        <action name="com.netmera.inapp.intent.SHOWN"/>
+        <action name="com.netmera.inapp.intent.OPENED"/>
+        <action name="com.netmera.inapp.intent.DISMISSED"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="com.netmera.NetmeraBootReceiver" permission="com.vodafone.selfservis.permission.BOOT" enabled="true" exported="false">
+      <intent-filter>
+        <action name="android.intent.action.BOOT_COMPLETED"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="com.netmera.NetmeraGeofenceReceiver" permission="com.vodafone.selfservis.permission.GEOFENCE" enabled="true" exported="false"/>
+    <activity theme="Netmera.Theme.Transparent" name="com.netmera.NetmeraActivityPush"/>
+    <activity theme="Netmera.Theme.Transparent.Dim.Dialog" name="com.netmera.NetmeraActivityWebViewPopup" taskAffinity="" excludeFromRecents="true" launchMode="3" configChanges="0x480">
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity name="com.netmera.NetmeraActivityWebViewFullScreen" configChanges="0x480"/>
+    <activity theme="Netmera.Theme.Transparent" name="com.netmera.NetmeraActivityPermission"/>
+    <activity theme="Netmera.Theme.Transparent" name="com.netmera.NetmeraActivityAddTestDevice" noHistory="true">
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="nmtp" host="com.vodafone.selfservis"/>
+      </intent-filter>
+    </activity>
+    <activity theme="EasyPermissions.Transparent" label="" name="pub.devrel.easypermissions.AppSettingsDialogHolderActivity" exported="false"/>
+    <service name="androidx.work.impl.background.systemalarm.SystemAlarmService" enabled="false" exported="false" directBootAware="false"/>
+    <service name="androidx.work.impl.background.systemjob.SystemJobService" permission="android.permission.BIND_JOB_SERVICE" enabled="true" exported="true" directBootAware="false"/>
+    <service name="androidx.work.impl.foreground.SystemForegroundService" enabled="true" exported="false" directBootAware="false"/>
+    <receiver name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver" enabled="true" exported="false" directBootAware="false"/>
+    <receiver name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy" enabled="false" exported="false" directBootAware="false">
+      <intent-filter>
+        <action name="android.intent.action.ACTION_POWER_CONNECTED"/>
+        <action name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy" enabled="false" exported="false" directBootAware="false">
+      <intent-filter>
+        <action name="android.intent.action.BATTERY_OKAY"/>
+        <action name="android.intent.action.BATTERY_LOW"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy" enabled="false" exported="false" directBootAware="false">
+      <intent-filter>
+        <action name="android.intent.action.DEVICE_STORAGE_LOW"/>
+        <action name="android.intent.action.DEVICE_STORAGE_OK"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy" enabled="false" exported="false" directBootAware="false">
+      <intent-filter>
+        <action name="android.net.conn.CONNECTIVITY_CHANGE"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="androidx.work.impl.background.systemalarm.RescheduleReceiver" enabled="false" exported="false" directBootAware="false">
+      <intent-filter>
+        <action name="android.intent.action.BOOT_COMPLETED"/>
+        <action name="android.intent.action.TIME_SET"/>
+        <action name="android.intent.action.TIMEZONE_CHANGED"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver" enabled="false" exported="false" directBootAware="false">
+      <intent-filter>
+        <action name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="androidx.work.impl.diagnostics.DiagnosticsReceiver" permission="android.permission.DUMP" enabled="true" exported="true" directBootAware="false">
+      <intent-filter>
+        <action name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+      </intent-filter>
+    </receiver>
+    <uses-library name="org.apache.http.legacy" required="false"/>
+    <receiver name="com.google.android.gms.analytics.AnalyticsReceiver" enabled="true" exported="false"/>
+    <service name="com.google.android.gms.analytics.AnalyticsService" enabled="true" exported="false"/>
+    <service name="com.google.android.gms.analytics.AnalyticsJobService" permission="android.permission.BIND_JOB_SERVICE" enabled="true" exported="false"/>
+    <activity name="com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity" enabled="false" exported="false" process=":playcore_missing_splits_activity" stateNotNeeded="true" launchMode="3"/>
+    <activity theme="Theme.PlayCore.Transparent" name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity" enabled="false" exported="false" stateNotNeeded="true"/>
+    <service name="com.google.android.play.core.assetpacks.AssetPackExtractionService" enabled="false" exported="true">
+      <meta-data name="com.google.android.play.core.assetpacks.versionCode" value="11000"/>
+    </service>
+    <service name="com.google.android.play.core.assetpacks.ExtractionForegroundService" enabled="false" exported="false"/>
+    <activity theme="Theme.Translucent.NoTitleBar" name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity" exported="false" excludeFromRecents="true"/>
+    <service name="com.google.android.gms.auth.api.signin.RevocationBoundService" permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" exported="true" visibleToInstantApps="true"/>
+    <meta-data name="com.huawei.hms.map.version" value="4.0.2.300"/>
+    <meta-data name="com.huawei.hms.client.service.name:maps" value="maps:5.0.5.301"/>
+    <meta-data name="com.huawei.hms.min_api_level:maps:huawei_module_maps" value="5"/>
+    <meta-data name="com.huawei.hms.min_api_level:maps:huawei_module_huaweimaps" value="5"/>
+    <meta-data name="com.huawei.hms.client.service.name:location" value="location:SDK-VERSION"/>
+    <meta-data name="com.huawei.hms.min_api_level:location:location" value="1"/>
+    <meta-data name="com.huawei.hms.client.bi.setting" value="true"/>
+    <meta-data name="com.huawei.hms.client.service.name:agconnect-agclinking" value="agconnect-agclinking:1.3.1.300"/>
+    <meta-data name="com.huawei.hms.min_api_level:agconnect-agclinking:AGCLink" value="2"/>
+    <service name="com.huawei.agconnect.core.ServiceDiscovery" exported="false">
+      <meta-data name="com.huawei.agconnect.applinking.AppLinkingRegistrar" value="com.huawei.agconnect.core.ServiceRegistrar"/>
+      <meta-data name="com.huawei.agconnect.credential.CredentialServiceRegistrar:500" value="com.huawei.agconnect.core.ServiceRegistrar"/>
+    </service>
+    <receiver name="com.huawei.hms.support.api.push.PushMsgReceiver" permission="com.vodafone.selfservis.permission.PROCESS_PUSH_MSG" directBootAware="true">
+      <intent-filter>
+        <action name="com.huawei.intent.action.PUSH_DELAY_NOTIFY"/>
+        <action name="com.huawei.intent.action.PUSH"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="com.huawei.hms.support.api.push.PushReceiver" permission="com.vodafone.selfservis.permission.PROCESS_PUSH_MSG" directBootAware="true">
+      <intent-filter>
+        <action name="com.huawei.android.push.intent.REGISTRATION"/>
+        <action name="com.huawei.android.push.intent.RECEIVE"/>
+      </intent-filter>
+    </receiver>
+    <service name="com.huawei.hms.support.api.push.service.HmsMsgService" enabled="true" exported="true" process=":pushservice" directBootAware="true">
+      <intent-filter>
+        <action name="com.huawei.push.msg.NOTIFY_MSG"/>
+        <action name="com.huawei.push.msg.PASSBY_MSG"/>
+      </intent-filter>
+    </service>
+    <provider name="com.huawei.hms.support.api.push.PushProvider" permission="com.vodafone.selfservis.permission.PUSH_PROVIDER" readPermission="com.vodafone.selfservis.permission.PUSH_PROVIDER" writePermission="com.vodafone.selfservis.permission.PUSH_WRITE_PROVIDER" exported="true" authorities="com.vodafone.selfservis.huawei.push.provider"/>
+    <meta-data name="com.huawei.hms.client.service.name:push" value="push:5.0.4.302"/>
+    <meta-data name="com.huawei.hms.min_api_level:push:push" value="1"/>
+    <service label="NPService" name="com.vodafone.netperform.runtime.NetPerformService" permission="android.permission.BIND_CARRIER_SERVICES">
+      <intent-filter>
+        <action name="android.service.carrier.CarrierService"/>
+      </intent-filter>
+      <meta-data name="android.service.carrier.LONG_LIVED_BINDING" value="true"/>
+    </service>
+    <service label="NPJobService" name="com.vodafone.netperform.runtime.NetPerformJobService" permission="android.permission.BIND_JOB_SERVICE"/>
+    <receiver name="com.vodafone.netperform.runtime.RebootIntentReceiver">
+      <intent-filter>
+        <action name="android.intent.action.BOOT_COMPLETED"/>
+        <category name="android.intent.category.HOME"/>
+      </intent-filter>
+    </receiver>
+    <meta-data name="netperform.version" value="7.0.3"/>
+    <meta-data name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule" value="GlideModule"/>
+    <meta-data name="com.huawei.hms.client.service.name:hianalytics" value="hianalytics:4.0.3.300"/>
+    <meta-data name="com.huawei.hms.min_api_level:hianalytics:hianalytics" value="1"/>
+    <receiver name="com.huawei.hms.analytics.receiver.HiAnalyticsSvcEvtReceiver" exported="false">
+      <intent-filter>
+        <action name="com.huawei.hms.analytics.pps.event"/>
+      </intent-filter>
+    </receiver>
+    <provider name="com.squareup.picasso.PicassoProvider" exported="false" authorities="com.vodafone.selfservis.com.squareup.picasso"/>
+    <receiver name="com.google.firebase.iid.FirebaseInstanceIdReceiver" permission="com.google.android.c2dm.permission.SEND" exported="true">
+      <intent-filter>
+        <action name="com.google.android.c2dm.intent.RECEIVE"/>
+      </intent-filter>
+    </receiver>
+    <service name="com.google.firebase.messaging.FirebaseMessagingService" exported="false" directBootAware="true">
+      <intent-filter priority="-500">
+        <action name="com.google.firebase.MESSAGING_EVENT"/>
+      </intent-filter>
+    </service>
+    <service name="com.google.firebase.components.ComponentDiscoveryService" exported="false" directBootAware="true">
+      <meta-data name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" value="com.google.firebase.components.ComponentRegistrar"/>
+      <meta-data name="com.google.firebase.components:com.google.firebase.dynamiclinks.internal.FirebaseDynamicLinkRegistrar" value="com.google.firebase.components.ComponentRegistrar"/>
+      <meta-data name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar" value="com.google.firebase.components.ComponentRegistrar"/>
+      <meta-data name="com.google.firebase.components:com.google.firebase.iid.Registrar" value="com.google.firebase.components.ComponentRegistrar"/>
+      <meta-data name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" value="com.google.firebase.components.ComponentRegistrar"/>
+      <meta-data name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" value="com.google.firebase.components.ComponentRegistrar"/>
+      <meta-data name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" value="com.google.firebase.components.ComponentRegistrar"/>
+    </service>
+    <activity theme="Theme.Translucent.NoTitleBar" name="com.google.android.gms.common.api.GoogleApiActivity" exported="false"/>
+    <receiver name="com.google.android.gms.measurement.AppMeasurementReceiver" enabled="true" exported="false"/>
+    <service name="com.google.android.gms.measurement.AppMeasurementService" enabled="true" exported="false"/>
+    <service name="com.google.android.gms.measurement.AppMeasurementJobService" permission="android.permission.BIND_JOB_SERVICE" enabled="true" exported="false"/>
+    <provider name="com.google.firebase.provider.FirebaseInitProvider" exported="false" authorities="com.vodafone.selfservis.firebaseinitprovider" initOrder="100" directBootAware="true"/>
+    <provider name="androidx.lifecycle.ProcessLifecycleOwnerInitializer" exported="false" multiprocess="true" authorities="com.vodafone.selfservis.lifecycle-process"/>
+    <service name="androidx.room.MultiInstanceInvalidationService" exported="false" directBootAware="true"/>
+    <service name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery" exported="false">
+      <meta-data name="backend:com.google.android.datatransport.cct.CctBackendFactory" value="cct"/>
+    </service>
+    <service name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" permission="android.permission.BIND_JOB_SERVICE" exported="false"/>
+    <receiver name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver" exported="false"/>
+    <provider name="com.huawei.hms.aaid.InitProvider" exported="false" authorities="com.vodafone.selfservis.aaidinitprovider" initOrder="500"/>
+    <meta-data name="com.huawei.hms.client.service.name:opendevice" value="opendevice:5.0.4.300"/>
+    <meta-data name="com.huawei.hms.min_api_level:opendevice:push" value="1"/>
+    <meta-data name="com.huawei.hms.client.service.name:base" value="base:5.0.5.300"/>
+    <meta-data name="com.huawei.hms.min_api_level:base:hmscore" value="1"/>
+    <meta-data name="com.huawei.hms.client.service.name:dynamic-api" value="dynamic-api:1.0.13.303"/>
+    <meta-data name="com.huawei.hms.min_api_level:dynamic-api:huawei_module_dynamicloader" value="2"/>
+    <meta-data name="availableLoaded" value="yes"/>
+    <provider name="com.huawei.hms.update.provider.UpdateProvider" exported="false" authorities="com.vodafone.selfservis.hms.update.provider" grantUriPermissions="true"/>
+    <provider name="com.huawei.agconnect.core.provider.AGConnectInitializeProvider" exported="false" authorities="com.vodafone.selfservis.AGCInitializeProvider"/>
+    <meta-data name="com.huawei.hms.client.service.name:ads-identifier" value="ads-identifier:3.4.30.307"/>
+    <meta-data name="com.huawei.hms.client.service.name:ads-installreferrer" value="ads-installreferrer:3.4.30.307"/>
+    <activity theme="Theme.Translucent" name="com.huawei.hms.activity.BridgeActivity" exported="false" excludeFromRecents="true" screenOrientation="3" configChanges="0x40002f84" hardwareAccelerated="true">
+      <meta-data name="hwc-theme" value="androidhwext:style/Theme.Emui.Translucent"/>
+    </activity>
+    <activity name="com.huawei.hms.activity.EnableServiceActivity" exported="false" configChanges="0xda0"/>
+    <activity theme="Theme.Translucent.NoTitleBar" name="com.huawei.updatesdk.service.otaupdate.AppUpdateActivity" exported="false" configChanges="0x480">
+      <meta-data name="hwc-theme" value="androidhwext:style/Theme.Emui.Translucent.NoTitleBar"/>
+    </activity>
+    <activity theme="Theme.Translucent.NoTitleBar" name="com.huawei.updatesdk.support.pm.PackageInstallerActivity" exported="false" configChanges="0x4a0">
+      <meta-data name="hwc-theme" value="androidhwext:style/Theme.Emui.Translucent"/>
+    </activity>
+    <provider name="com.huawei.updatesdk.fileprovider.UpdateSdkFileProvider" exported="false" authorities="com.vodafone.selfservis.updateSdk.fileProvider" grantUriPermissions="true"/>
+    <meta-data name="com.huawei.hms.client.appid" value="appid=101105073"/>
+    <meta-data name="com.android.vending.derived.apk.id" value="1"/>
+  </application>
+</manifest>
+

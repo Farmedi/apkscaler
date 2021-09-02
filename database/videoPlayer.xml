@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?><manifest versionCode="13030405" versionName="3.3.4" installLocation="0" compileSdkVersion="29" compileSdkVersionCodename="10" package="org.videolan.vlc" platformBuildVersionCode="29" platformBuildVersionName="10">
+  <uses-sdk minSdkVersion="17" targetSdkVersion="29"/>
+  <permission name="org.videolan.vlc.permission.READ_EXTENSION_DATA" protectionLevel="0x0"/>
+  <permission name="org.videolan.vlc.permission.BIND_DATA_CONSUMER" protectionLevel="0x0"/>
+  <uses-permission name="org.videolan.vlc.permission.READ_EXTENSION_DATA"/>
+  <uses-permission name="org.videolan.vlc.permission.BIND_DATA_CONSUMER"/>
+  <uses-permission name="android.permission.VIBRATE"/>
+  <uses-permission name="android.permission.WRITE_SETTINGS"/>
+  <uses-permission name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission name="android.permission.INTERNET"/>
+  <uses-permission name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <uses-permission name="android.permission.RECORD_AUDIO"/>
+  <uses-permission name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission name="android.permission.WAKE_LOCK"/>
+  <uses-permission name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+  <uses-permission name="android.permission.BLUETOOTH"/>
+  <uses-permission name="android.permission.SYSTEM_ALERT_WINDOW"/>
+  <uses-permission name="com.android.providers.tv.permission.READ_EPG_DATA"/>
+  <uses-permission name="com.android.providers.tv.permission.WRITE_EPG_DATA"/>
+  <permission name="org.videolan.vlc.MEDIA" protectionLevel="0x2"/>
+  <uses-permission name="org.videolan.vlc.MEDIA"/>
+  <uses-feature name="android.software.leanback" required="false"/>
+  <uses-feature name="android.hardware.touchscreen" required="false"/>
+  <uses-feature name="android.hardware.microphone" required="false"/>
+  <uses-feature name="android.hardware.bluetooth" required="false"/>
+  <uses-permission name="com.android.vending.BILLING"/>
+  <application theme="Theme.VLC.Transparent" label="VLC" icon="res/mipmap-xxhdpi-v4/ic_launcher.png" name="org.videolan.mobile.app.VLCApplication" allowBackup="true" logo="res/drawable-xxxhdpi-v4/icon.png" hardwareAccelerated="true" largeHeap="true" supportsRtl="true" banner="res/drawable-xhdpi-v4/banner.png" fullBackupContent="res/xml/backup_rules.xml" usesCleartextTraffic="true" roundIcon="res/mipmap-xxhdpi-v4/ic_launcher.png" appCategory="2" appComponentFactory="androidx.core.app.CoreComponentFactory" requestLegacyExternalStorage="true">
+    <activity theme="Theme.VLC" name="org.videolan.vlc.gui.DebugLogActivity" launchMode="1"/>
+    <service name="org.videolan.vlc.DebugLogService" process=":logger"/>
+    <activity theme="Theme.VLC.TV" label="VLC" name="org.videolan.television.ui.MainTvActivity" launchMode="2" screenOrientation="0"/>
+    <activity theme="Theme.VLC.TV" name="org.videolan.television.ui.dialogs.ConfirmationTvActivity" screenOrientation="0"/>
+    <activity theme="Theme.Leanback.Details" name="org.videolan.television.ui.DetailsActivity" exported="true" screenOrientation="0"/>
+    <activity theme="Theme.Leanback.Details" name="org.videolan.television.ui.MediaScrapingTvshowDetailsActivity" exported="true" screenOrientation="0"/>
+    <activity theme="Theme.VLC.TV" name="org.videolan.television.ui.browser.VerticalGridActivity" exported="true" screenOrientation="0"/>
+    <activity theme="Theme.VLC.TV" name="org.videolan.television.ui.details.MediaListActivity" exported="true" screenOrientation="0"/>
+    <activity theme="Theme.VLC.Black" name="org.videolan.television.ui.browser.TVActivity" exported="true" screenOrientation="0"/>
+    <activity theme="Theme.VLC.TV" name="org.videolan.television.ui.MediaScrapingTvActivity" exported="true" screenOrientation="0"/>
+    <activity theme="Theme.VLC.TV" name="org.videolan.television.ui.SearchActivity" exported="true" screenOrientation="0"/>
+    <activity theme="Theme.VLC.TV" name="org.videolan.television.ui.audioplayer.AudioPlayerActivity" exported="true" launchMode="2" screenOrientation="0" allowTaskReparenting="true"/>
+    <activity theme="Theme.VLC.Leanback.Preferences" name="org.videolan.television.ui.preferences.PreferencesActivity" screenOrientation="0"/>
+    <activity theme="Theme.VLC.TV" name="org.videolan.television.ui.AboutActivity" screenOrientation="0"/>
+    <activity theme="Theme.VLC.TV" name="org.videolan.television.ui.LicenceActivity" screenOrientation="0"/>
+    <provider name="org.videolan.television.util.TVSearchProvider" exported="true" authorities="org.videolan.vlc.tv">
+      <path-permission readPermission="android.permission.GLOBAL_SEARCH" pathPrefix="/search"/>
+    </provider>
+    <activity theme="Theme.VLC" name="org.videolan.moviepedia.ui.MediaScrapingActivity"/>
+    <meta-data name="com.samsung.android.sdk.multiwindow.enable" value="true"/>
+    <meta-data name="com.lge.support.SPLIT_WINDOW" value="true"/>
+    <meta-data name="com.google.android.gms.car.application" resource="automotive_app_desc"/>
+    <meta-data name="com.google.android.gms.car.notification.SmallIcon" resource="icon"/>
+    <meta-data name="android.max_aspect" value="3.0"/>
+    <meta-data name="android.allow_multiple_resumed_activities" value="true"/>
+    <activity theme="Theme.VLC.Transparent.NoUI" name="org.videolan.vlc.StartActivity">
+      <intent-filter>
+        <action name="android.intent.action.MAIN"/>
+        <category name="android.intent.category.LAUNCHER"/>
+        <category name="android.intent.category.LEANBACK_LAUNCHER"/>
+      </intent-filter>
+      <meta-data name="android.app.shortcuts" resource="shortcuts"/>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <data scheme="vlclauncher" host="org.videolan.vlc"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme="rtmp"/>
+        <data scheme="rtmpe"/>
+        <data scheme="rtmps"/>
+        <data scheme="rtp"/>
+        <data scheme="rtsp"/>
+        <data scheme="mms"/>
+        <data scheme="mmsh"/>
+        <data scheme="icyx"/>
+        <data scheme="httplive"/>
+        <data scheme="udp"/>
+        <data scheme="vlc"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data mimeType="video/*"/>
+        <data mimeType="audio/*"/>
+        <data scheme="rtmp"/>
+        <data scheme="rtmpe"/>
+        <data scheme="rtmps"/>
+        <data scheme="rtp"/>
+        <data scheme="rtsp"/>
+        <data scheme="mms"/>
+        <data scheme="mmsh"/>
+        <data scheme="icyx"/>
+        <data scheme="httplive"/>
+        <data scheme="udp"/>
+        <data scheme="vlc"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme=""/>
+        <data scheme="file"/>
+        <data scheme="ftp"/>
+        <data scheme="ftps"/>
+        <data scheme="sftp"/>
+        <data scheme="content"/>
+        <data scheme="http"/>
+        <data scheme="https"/>
+        <data scheme="smb"/>
+        <data mimeType="video/*"/>
+        <data mimeType="audio/*"/>
+        <data mimeType="*/rmvb"/>
+        <data mimeType="*/avi"/>
+        <data mimeType="*/mkv"/>
+        <data mimeType="application/3gpp*"/>
+        <data mimeType="application/mp4"/>
+        <data mimeType="application/mpeg*"/>
+        <data mimeType="application/ogg"/>
+        <data mimeType="application/sdp"/>
+        <data mimeType="application/vnd.3gp*"/>
+        <data mimeType="application/vnd.apple.mpegurl"/>
+        <data mimeType="application/vnd.dvd*"/>
+        <data mimeType="application/vnd.dolby*"/>
+        <data mimeType="application/vnd.rn-realmedia*"/>
+        <data mimeType="application/x-iso9660-image"/>
+        <data mimeType="application/x-extension-mp4"/>
+        <data mimeType="application/x-flac"/>
+        <data mimeType="application/x-matroska"/>
+        <data mimeType="application/x-mpegURL"/>
+        <data mimeType="application/x-ogg"/>
+        <data mimeType="application/x-quicktimeplayer"/>
+        <data mimeType="application/x-shockwave-flash"/>
+        <data mimeType="application/xspf+xml"/>
+        <data mimeType="misc/ultravox"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.VIEW"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <category name="android.intent.category.BROWSABLE"/>
+        <data scheme=""/>
+        <data scheme="file"/>
+        <data scheme="ftp"/>
+        <data scheme="content"/>
+        <data scheme="http"/>
+        <data scheme="https"/>
+        <data host="*"/>
+        <data pathPattern=".*.3g2"/>
+        <data pathPattern=".*.3gp"/>
+        <data pathPattern=".*.3gp2"/>
+        <data pathPattern=".*.3gpp"/>
+        <data pathPattern=".*.amv"/>
+        <data pathPattern=".*.asf"/>
+        <data pathPattern=".*.avi"/>
+        <data pathPattern=".*.divx"/>
+        <data pathPattern=".*.drc"/>
+        <data pathPattern=".*.dv"/>
+        <data pathPattern=".*.f4v"/>
+        <data pathPattern=".*.flv"/>
+        <data pathPattern=".*.gvi"/>
+        <data pathPattern=".*.gxf"/>
+        <data pathPattern=".*.ismv"/>
+        <data pathPattern=".*.iso"/>
+        <data pathPattern=".*.m1v"/>
+        <data pathPattern=".*.m2v"/>
+        <data pathPattern=".*.m2t"/>
+        <data pathPattern=".*.m2ts"/>
+        <data pathPattern=".*.m3u8"/>
+        <data pathPattern=".*.mkv"/>
+        <data pathPattern=".*.mov"/>
+        <data pathPattern=".*.mp2"/>
+        <data pathPattern=".*.mp2v"/>
+        <data pathPattern=".*.mp4"/>
+        <data pathPattern=".*.mp4v"/>
+        <data pathPattern=".*.m4v"/>
+        <data pathPattern=".*.mpe"/>
+        <data pathPattern=".*.mpeg"/>
+        <data pathPattern=".*.mpeg1"/>
+        <data pathPattern=".*.mpeg2"/>
+        <data pathPattern=".*.mpeg4"/>
+        <data pathPattern=".*.mpg"/>
+        <data pathPattern=".*.mpv2"/>
+        <data pathPattern=".*.mts"/>
+        <data pathPattern=".*.mtv"/>
+        <data pathPattern=".*.mxf"/>
+        <data pathPattern=".*.mxg"/>
+        <data pathPattern=".*.nsv"/>
+        <data pathPattern=".*.nut"/>
+        <data pathPattern=".*.nuv"/>
+        <data pathPattern=".*.ogm"/>
+        <data pathPattern=".*.ogv"/>
+        <data pathPattern=".*.ogx"/>
+        <data pathPattern=".*.ps"/>
+        <data pathPattern=".*.rec"/>
+        <data pathPattern=".*.rm"/>
+        <data pathPattern=".*.rmvb"/>
+        <data pathPattern=".*.tod"/>
+        <data pathPattern=".*.trp"/>
+        <data pathPattern=".*.ts"/>
+        <data pathPattern=".*.tts"/>
+        <data pathPattern=".*.vob"/>
+        <data pathPattern=".*.vro"/>
+        <data pathPattern=".*.webm"/>
+        <data pathPattern=".*.wm"/>
+        <data pathPattern=".*.wmv"/>
+        <data pathPattern=".*.wtv"/>
+        <data pathPattern=".*.xesc"/>
+        <data pathPattern=".*.3G2"/>
+        <data pathPattern=".*.3GP"/>
+        <data pathPattern=".*.3GP2"/>
+        <data pathPattern=".*.3GPP"/>
+        <data pathPattern=".*.AMV"/>
+        <data pathPattern=".*.ASF"/>
+        <data pathPattern=".*.AVI"/>
+        <data pathPattern=".*.DIVX"/>
+        <data pathPattern=".*.DRC"/>
+        <data pathPattern=".*.DV"/>
+        <data pathPattern=".*.F4V"/>
+        <data pathPattern=".*.FLV"/>
+        <data pathPattern=".*.GVI"/>
+        <data pathPattern=".*.GXF"/>
+        <data pathPattern=".*.ISMV"/>
+        <data pathPattern=".*.ISO"/>
+        <data pathPattern=".*.M1V"/>
+        <data pathPattern=".*.M2V"/>
+        <data pathPattern=".*.M2T"/>
+        <data pathPattern=".*.M2TS"/>
+        <data pathPattern=".*.M3U8"/>
+        <data pathPattern=".*.MKV"/>
+        <data pathPattern=".*.MOV"/>
+        <data pathPattern=".*.MP2"/>
+        <data pathPattern=".*.MP2V"/>
+        <data pathPattern=".*.MP4"/>
+        <data pathPattern=".*.MP4V"/>
+        <data pathPattern=".*.M4V"/>
+        <data pathPattern=".*.MPE"/>
+        <data pathPattern=".*.MPEG"/>
+        <data pathPattern=".*.MPEG1"/>
+        <data pathPattern=".*.MPEG2"/>
+        <data pathPattern=".*.MPEG4"/>
+        <data pathPattern=".*.MPG"/>
+        <data pathPattern=".*.MPV2"/>
+        <data pathPattern=".*.MTS"/>
+        <data pathPattern=".*.MTV"/>
+        <data pathPattern=".*.MXF"/>
+        <data pathPattern=".*.MXG"/>
+        <data pathPattern=".*.NSV"/>
+        <data pathPattern=".*.NUT"/>
+        <data pathPattern=".*.NUV"/>
+        <data pathPattern=".*.OGM"/>
+        <data pathPattern=".*.OGV"/>
+        <data pathPattern=".*.OGX"/>
+        <data pathPattern=".*.PS"/>
+        <data pathPattern=".*.REC"/>
+        <data pathPattern=".*.RM"/>
+        <data pathPattern=".*.RMVB"/>
+        <data pathPattern=".*.TOD"/>
+        <data pathPattern=".*.TRP"/>
+        <data pathPattern=".*.TS"/>
+        <data pathPattern=".*.TTS"/>
+        <data pathPattern=".*.VOB"/>
+        <data pathPattern=".*.VRO"/>
+        <data pathPattern=".*.WEBM"/>
+        <data pathPattern=".*.WM"/>
+        <data pathPattern=".*.WMV"/>
+        <data pathPattern=".*.WTV"/>
+        <data pathPattern=".*.XESC"/>
+        <data pathPattern=".*.3ga"/>
+        <data pathPattern=".*.a52"/>
+        <data pathPattern=".*.aac"/>
+        <data pathPattern=".*.ac3"/>
+        <data pathPattern=".*.adt"/>
+        <data pathPattern=".*.adts"/>
+        <data pathPattern=".*.aif"/>
+        <data pathPattern=".*.aifc"/>
+        <data pathPattern=".*.aiff"/>
+        <data pathPattern=".*.amr"/>
+        <data pathPattern=".*.aob"/>
+        <data pathPattern=".*.ape"/>
+        <data pathPattern=".*.awb"/>
+        <data pathPattern=".*.caf"/>
+        <data pathPattern=".*.dts"/>
+        <data pathPattern=".*.flac"/>
+        <data pathPattern=".*.it"/>
+        <data pathPattern=".*.m4a"/>
+        <data pathPattern=".*.m4b"/>
+        <data pathPattern=".*.m4p"/>
+        <data pathPattern=".*.mid"/>
+        <data pathPattern=".*.mka"/>
+        <data pathPattern=".*.mlp"/>
+        <data pathPattern=".*.mod"/>
+        <data pathPattern=".*.mpa"/>
+        <data pathPattern=".*.mp1"/>
+        <data pathPattern=".*.mp2"/>
+        <data pathPattern=".*.mp3"/>
+        <data pathPattern=".*.mpc"/>
+        <data pathPattern=".*.mpga"/>
+        <data pathPattern=".*.oga"/>
+        <data pathPattern=".*.ogg"/>
+        <data pathPattern=".*.oma"/>
+        <data pathPattern=".*.opus"/>
+        <data pathPattern=".*.ra"/>
+        <data pathPattern=".*.rmi"/>
+        <data pathPattern=".*.s3m"/>
+        <data pathPattern=".*.spx"/>
+        <data pathPattern=".*.tta"/>
+        <data pathPattern=".*.voc"/>
+        <data pathPattern=".*.vqf"/>
+        <data pathPattern=".*.w64"/>
+        <data pathPattern=".*.wav"/>
+        <data pathPattern=".*.wma"/>
+        <data pathPattern=".*.wv"/>
+        <data pathPattern=".*.xa"/>
+        <data pathPattern=".*.xm"/>
+        <data pathPattern=".*.3GA"/>
+        <data pathPattern=".*.A52"/>
+        <data pathPattern=".*.AAC"/>
+        <data pathPattern=".*.AC3"/>
+        <data pathPattern=".*.ADT"/>
+        <data pathPattern=".*.ADTS"/>
+        <data pathPattern=".*.AIF"/>
+        <data pathPattern=".*.AIFC"/>
+        <data pathPattern=".*.AIFF"/>
+        <data pathPattern=".*.AMR"/>
+        <data pathPattern=".*.AOB"/>
+        <data pathPattern=".*.APE"/>
+        <data pathPattern=".*.AWB"/>
+        <data pathPattern=".*.CAF"/>
+        <data pathPattern=".*.DTS"/>
+        <data pathPattern=".*.FLAC"/>
+        <data pathPattern=".*.IT"/>
+        <data pathPattern=".*.M4A"/>
+        <data pathPattern=".*.M4B"/>
+        <data pathPattern=".*.M4P"/>
+        <data pathPattern=".*.MID"/>
+        <data pathPattern=".*.MKA"/>
+        <data pathPattern=".*.MLP"/>
+        <data pathPattern=".*.MOD"/>
+        <data pathPattern=".*.MPA"/>
+        <data pathPattern=".*.MP1"/>
+        <data pathPattern=".*.MP2"/>
+        <data pathPattern=".*.MP3"/>
+        <data pathPattern=".*.MPC"/>
+        <data pathPattern=".*.MPGA"/>
+        <data pathPattern=".*.OGA"/>
+        <data pathPattern=".*.OGG"/>
+        <data pathPattern=".*.OMA"/>
+        <data pathPattern=".*.OPUS"/>
+        <data pathPattern=".*.RA"/>
+        <data pathPattern=".*.RMI"/>
+        <data pathPattern=".*.S3M"/>
+        <data pathPattern=".*.SPX"/>
+        <data pathPattern=".*.TTA"/>
+        <data pathPattern=".*.VOC"/>
+        <data pathPattern=".*.VQF"/>
+        <data pathPattern=".*.W64"/>
+        <data pathPattern=".*.WAV"/>
+        <data pathPattern=".*.WMA"/>
+        <data pathPattern=".*.WV"/>
+        <data pathPattern=".*.XA"/>
+        <data pathPattern=".*.XM"/>
+        <data pathPattern=".*.asx"/>
+        <data pathPattern=".*.ASX"/>
+        <data pathPattern=".*.m3u"/>
+        <data pathPattern=".*.M3U"/>
+        <data pathPattern=".*.pls"/>
+        <data pathPattern=".*.PLS"/>
+        <data pathPattern=".*.ram"/>
+        <data pathPattern=".*.RAM"/>
+        <data pathPattern=".*.xspf"/>
+        <data pathPattern=".*.XSPF"/>
+      </intent-filter>
+      <intent-filter label="Play with VLC">
+        <action name="android.intent.action.SEND"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <data mimeType="*/*"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="android.intent.action.SEARCH"/>
+      </intent-filter>
+      <intent-filter>
+        <action name="com.google.android.gms.actions.SEARCH_ACTION"/>
+        <category name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+      <meta-data name="android.app.searchable" resource="searchable"/>
+      <intent-filter>
+        <action name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
+        <category name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </activity>
+    <activity theme="Theme.VLC" label="VLC" icon="res/drawable-xxxhdpi-v4/icon.png" name="org.videolan.vlc.gui.MainActivity" launchMode="2" windowSoftInputMode="0x20">
+      <meta-data name="android.app.searchable" resource="searchable"/>
+    </activity>
+    <activity theme="Theme.VLC.Onboarding" name="org.videolan.vlc.gui.onboarding.OnboardingActivity"/>
+    <activity theme="Theme.VLC" name="org.videolan.vlc.gui.SecondaryActivity" windowSoftInputMode="0x20"/>
+    <activity theme="Theme.VLC" name="org.videolan.vlc.gui.PlaylistActivity"/>
+    <activity theme="Theme.VLC" name="org.videolan.vlc.gui.InfoActivity"/>
+    <activity theme="Theme.VLC" name="org.videolan.vlc.gui.SearchActivity"/>
+    <activity theme="Theme.VLC.SendCrashDialog" label="VLC reporter" icon="res/mipmap-xxxhdpi-v4/ic_launcher_reporter.png" name="org.videolan.vlc.gui.SendCrashActivity" enabled="false" excludeFromRecents="true" launchMode="2">
+      <intent-filter>
+        <action name="android.intent.action.MAIN"/>
+        <category name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity theme="Theme.VLC.SendCrashDialog" name="org.videolan.vlc.gui.BetaWelcomeActivity"/>
+    <activity theme="Theme.VLC.PickerDialog" name="org.videolan.vlc.gui.browser.FilePickerActivity"/>
+    <activity theme="Theme.VLC" name="org.videolan.vlc.gui.preferences.PreferencesActivity"/>
+    <activity theme="Theme.VLC.Player" name="org.videolan.vlc.gui.video.VideoPlayerActivity" exported="true" finishOnTaskLaunch="true" launchMode="2" configChanges="0xff0" resizeableActivity="true" supportsPictureInPicture="true">
+      <intent-filter>
+        <action name="com.samsung.android.support.REMOTE_ACTION"/>
+      </intent-filter>
+      <meta-data name="com.samsung.android.support.REMOTE_ACTION" resource="air_actions"/>
+    </activity>
+    <activity theme="VLCTransparentTheme" label="" name="org.videolan.vlc.gui.DialogActivity" configChanges="0x480"/>
+    <service name="org.videolan.vlc.extensions.ExtensionManagerService"/>
+    <service name="org.videolan.vlc.PlaybackService">
+      <intent-filter>
+        <action name="android.media.browse.MediaBrowserService"/>
+      </intent-filter>
+    </service>
+    <service name="org.videolan.vlc.MediaParsingService"/>
+    <receiver label="VLC White Widget" name="org.videolan.vlc.widget.VLCAppWidgetProviderWhite" exported="false">
+      <intent-filter>
+        <action name="android.appwidget.action.APPWIDGET_UPDATE"/>
+        <action name="org.videolan.vlc.widget.INIT"/>
+        <action name="org.videolan.vlc.widget.UPDATE"/>
+        <action name="org.videolan.vlc.widget.UPDATE_COVER"/>
+        <action name="org.videolan.vlc.widget.UPDATE_POSITION"/>
+      </intent-filter>
+      <meta-data name="android.appwidget.provider" resource="widget_provider_w"/>
+    </receiver>
+    <receiver label="VLC Dark Widget" name="org.videolan.vlc.widget.VLCAppWidgetProviderBlack" exported="false">
+      <intent-filter>
+        <action name="android.appwidget.action.APPWIDGET_UPDATE"/>
+        <action name="org.videolan.vlc.widget.INIT"/>
+        <action name="org.videolan.vlc.widget.UPDATE"/>
+        <action name="org.videolan.vlc.widget.UPDATE_COVER"/>
+        <action name="org.videolan.vlc.widget.UPDATE_POSITION"/>
+      </intent-filter>
+      <meta-data name="android.appwidget.provider" resource="widget_provider_b"/>
+    </receiver>
+    <receiver name="androidx.media.session.MediaButtonReceiver">
+      <intent-filter>
+        <action name="android.intent.action.MEDIA_BUTTON"/>
+      </intent-filter>
+    </receiver>
+    <activity theme="Theme.VLC.Player" name="org.videolan.vlc.gui.video.benchmark.BenchActivity" exported="true" launchMode="3" screenOrientation="0" configChanges="0xd80"/>
+    <service name="org.videolan.vlc.RecommendationsService" exported="false"/>
+    <receiver name="org.videolan.vlc.TvReceiver" enabled="true" exported="true">
+      <intent-filter>
+        <action name="android.intent.action.BOOT_COMPLETED"/>
+        <action name="android.media.tv.action.PREVIEW_PROGRAM_ADDED_TO_WATCH_NEXT"/>
+        <action name="android.media.tv.ACTION_WATCH_NEXT_PROGRAM_BROWSABLE_DISABLED"/>
+        <action name="android.media.tv.action.PREVIEW_PROGRAM_BROWSABLE_DISABLED"/>
+        <action name="android.media.tv.action.INITIALIZE_PROGRAMS"/>
+        <category name="android.intent.category.DEFAULT"/>
+      </intent-filter>
+    </receiver>
+    <receiver name="org.videolan.vlc.StoragesMonitor" enabled="false" exported="true">
+      <intent-filter>
+        <action name="android.intent.action.MEDIA_MOUNTED"/>
+        <action name="android.intent.action.MEDIA_REMOVED"/>
+        <category name="android.intent.category.DEFAULT"/>
+        <data scheme="file"/>
+      </intent-filter>
+    </receiver>
+    <provider name="org.videolan.vlc.FileProvider" exported="true" authorities="org.videolan.vlc.thumbprovider"/>
+    <provider name="androidx.core.content.FileProvider" exported="false" authorities="org.videolan.vlc.provider" grantUriPermissions="true">
+      <meta-data name="android.support.FILE_PROVIDER_PATHS" resource="provider_paths"/>
+    </provider>
+    <service name="org.videolan.vlc.PreviewVideoInputService" permission="android.permission.BIND_TV_INPUT">
+      <intent-filter>
+        <action name="android.media.tv.TvInputService"/>
+      </intent-filter>
+      <meta-data name="android.media.tv.input" resource="previewinputservice"/>
+    </service>
+    <activity theme="TransparentTheme" name="org.videolan.vlc.extensions.api.WarningActivity"/>
+    <provider name="androidx.lifecycle.ProcessLifecycleOwnerInitializer" exported="false" multiprocess="true" authorities="org.videolan.vlc.lifecycle-process"/>
+    <service name="androidx.room.MultiInstanceInvalidationService" exported="false" directBootAware="true"/>
+  </application>
+</manifest>
+
