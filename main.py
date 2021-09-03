@@ -1,61 +1,69 @@
 #! /usr/bin/env python
-import glob
-import os
-import re
-from bs4 import BeautifulSoup
-import sys
-from xml.dom.minidom import parseString
-
-def decompileAndDispose(directory):
-    cmd = "apktool d -f  "+directory+" -o temp"
-    os.system(cmd)                                #temp içerisine decompile edildi
-
-    cmd = "mv temp/AndroidManifest.xml ./fake.xml && rm -r temp" #Android manifest ayıklandı ve kalan dosyalara ihtiyaç olmadığı için silindi.
-    os.system(cmd)
-
-def cleanUp():
-    cmd = " rm fake.xml"
-    os.system(cmd)
-
-def check_db_exists():
-    if not os.path.isdir("temp"):
-        print("Couldnt locate database folder. Make sure you have cloned all the files from our repository!")
+import functions as fnc
 
 
-directory = sys.argv[1] #python main.py directory
-decompileAndDispose(directory)
-check_db_exists()
+class manifest:
+    def __init__(self):
+        self.permissionList = []
+        self.intentFilterList = []
+        self.isBackupAllowed = ""
+        self.isDebuggable = ""
+
+    def set_permission_list(self, _list):
+        self.permissionList = _list
+
+    def get_permission_list(self):
+        return self.permissionList
+
+    def set_intent_filter_list(self, _list):
+        self.intentFilterList = _list
+
+    def get_intent_filter_list(self):
+        return self.intentFilterList
+
+    def set_is_backup_allowed(self, flag):
+        self.isBackupAllowed = flag
+
+    def get_is_backup_allowed(self):
+        return self.isBackupAllowed
+
+    def set_is_debuggable(self, flag):
+        self.isDebuggable = flag
+
+    def get_is_debuggable(self):
+        return self.isDebuggable
+
+
+users_mnf = manifest()
+compared_mnf = manifest()  # Objeler oluşturuldu
+
+fnc.start_up()  # Basit kontroller
+fnc.check_db_exists()  # DB klasörü var mı
+
+toBeCompared = fnc.select_compared_from_db()  # Kıyaslanacak dosyayı aldık.
+fnc.decompile_and_dispose()  # Parametre olarak verilen APK'nın manifest'inin elde edilip kalan dosyaların silinmesi
+
+users_mnf.set_permission_list(fnc.parse_users_permissions())  # Elde edilen manifestteki izinler parse'landı
+compared_mnf.set_permission_list( fnc.parse_permissions_to_compare(toBeCompared))  # Kıyaslanacak manifestteki izinler parse'landı
+
+users_mnf.set_intent_filter_list(fnc.parse_users_intent_filters())  #Elde edilen manifestteki intent'ler parse'landı
+compared_mnf.set_intent_filter_list(fnc.parse_intents_to_compare(toBeCompared)) #Kıyaslanacak olan manifestteki intent'ler parse'landı
+
+
+debuggable,allowedBackup=fnc.parse_users_debuggable_allowedbackup()
+users_mnf.set_is_debuggable(debuggable)
+users_mnf.set_is_backup_allowed(allowedBackup)                  #debuggable ve allowedbackup attribute larını aldık
+
+debuggable,allowedBackup=fnc.parse_compared_debuggable_allowedbackup(toBeCompared)
+compared_mnf.set_is_debuggable(debuggable)
+compared_mnf.set_is_backup_allowed(allowedBackup)
+
+print(compared_mnf.get_is_debuggable(),compared_mnf.get_is_backup_allowed())
 
 
 
-data = ''
-with open('fake.xml','r') as f:
-    data = f.read()
-dom = parseString(data)
-permissions = dom.getElementsByTagName('uses-permission')
-permissions+= dom.getElementsByTagName('android:uses-permission')
-# Iterate over all the uses-permission nodes
-#for node in permissions:
-    #print(node.getAttribute("android:name"))
 
-
-features = dom.getElementsByTagName('uses-feature')
-#for node in features:
-      #print(node)
-
-cleanUp()
-
-
-
-
-
-
-
-
-
-
-
-
+fnc.clean_up()
 
 # with open('fake.xml', 'r') as f:
 #     data = f.read()

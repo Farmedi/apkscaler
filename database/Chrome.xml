@@ -98,16 +98,18 @@ by a child template that "extends" this file.
         android:largeHeap="false"
         android:manageSpaceActivity="@string/manage_space_activity"
         android:supportsRtl="true"
-        {% if backup_key is defined %}
-        android:allowBackup="true"
+        
+        
+         android:allowBackup="true" 
+       
         android:backupAgent="org.chromium.chrome.browser.ChromeBackupAgent"
         android:fullBackupOnly="false"
         android:restoreAnyVersion="true"
-        {% else %}
-        android:allowBackup="false"
-        {% endif %}
+        
+      
+        
         android:networkSecurityConfig="@xml/network_security_config"
-        {% block extra_application_attributes %}{% endblock %}>
+        >
         <!-- Samsung MultiWindow Support -->
         <meta-data android:name="com.samsung.android.sdk.multiwindow.enable"
             android:value="true" />
@@ -269,7 +271,7 @@ by a child template that "extends" this file.
             android:taskAffinity=""
             android:persistableMode="persistAcrossReboots"
             android:autoRemoveFromRecents="false"
-            {{ self.chrome_activity_common() }}>
+            >
         </activity>
         <activity-alias android:name="com.google.android.apps.chrome.document.DocumentActivity"
             android:targetActivity="org.chromium.chrome.browser.document.DocumentActivity"
@@ -281,7 +283,7 @@ by a child template that "extends" this file.
             android:taskAffinity=""
             android:persistableMode="persistNever"
             android:autoRemoveFromRecents="false"
-            {{ self.chrome_activity_common() }}>
+            >
         </activity>
         <activity-alias android:name="com.google.android.apps.chrome.document.IncognitoDocumentActivity"
             android:targetActivity="org.chromium.chrome.browser.document.IncognitoDocumentActivity"
@@ -290,8 +292,7 @@ by a child template that "extends" this file.
         <activity android:name="org.chromium.chrome.browser.customtabs.CustomTabActivity"
             android:theme="@style/MainTheme"
             android:exported="false"
-            {{ self.chrome_activity_common() }}
-            {{ self.supports_video_persistence() }} >
+             >
         </activity>
         <activity android:name="org.chromium.chrome.browser.customtabs.SeparateTaskCustomTabActivity"
             android:theme="@style/MainTheme"
@@ -299,8 +300,7 @@ by a child template that "extends" this file.
             android:taskAffinity=""
             android:persistableMode="persistNever"
             android:autoRemoveFromRecents="false"
-            {{ self.chrome_activity_common() }}
-            {{ self.supports_video_persistence() }} >
+             >
         </activity>
         {% for i in range(10) %}
         <activity android:name="org.chromium.chrome.browser.customtabs.SeparateTaskCustomTabActivity{{ i }}"
@@ -310,8 +310,7 @@ by a child template that "extends" this file.
             android:launchMode="singleTask"
             android:persistableMode="persistNever"
             android:taskAffinity=""
-            {{ self.chrome_activity_common() }}
-            {{ self.supports_video_persistence() }} >
+             >
         </activity>
         {% endfor %}
         <!-- ChromeTabbedActivity related -->
@@ -319,15 +318,11 @@ by a child template that "extends" this file.
             android:theme="@style/TabbedModeTheme"
             android:exported="false"
             android:launchMode="singleTask"
-            {# We can only use blocks once in Jinja, for future substitutions we use
-            self.supports_video_persistence(). #}
-            {% block supports_video_persistence %}
-            {% endblock %}
-            {% block chrome_activity_common %}
+            
             android:windowSoftInputMode="adjustResize"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|mcc|mnc|screenLayout|smallestScreenSize|uiMode"
             android:hardwareAccelerated="false"
-            {% endblock %}
+           
             >
         </activity>
         <activity android:name="org.chromium.chrome.browser.ChromeTabbedActivity2"
@@ -335,19 +330,17 @@ by a child template that "extends" this file.
             android:exported="false"
             android:taskAffinity="{{ manifest_package }}.ChromeTabbedActivity2"
             android:launchMode="singleTask"
-            {{ self.chrome_activity_common() }}
-            {{ self.supports_video_persistence() }}>
+           >
         </activity>
         <activity android:name="org.chromium.chrome.browser.multiwindow.MultiInstanceChromeTabbedActivity"
             android:theme="@style/TabbedModeTheme"
             android:exported="false"
-            {{ self.chrome_activity_common() }}>
+            >
         </activity>
         <activity android:name="org.chromium.chrome.browser.FullscreenWebContentsActivity"
             android:theme="@style/MainTheme"
             android:exported="false"
-            {{ self.chrome_activity_common() }}
-            {{ self.supports_video_persistence() }} >
+             >
         </activity>
         <activity android:name="org.chromium.chrome.browser.sync.ui.PassphraseActivity"
             android:theme="@style/MainTheme"
@@ -432,12 +425,9 @@ by a child template that "extends" this file.
             android:exported="false"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|mcc|mnc|screenLayout|smallestScreenSize">
         </activity>
-        <!--
+        
             Activities for webapps.
-            TODO(dfalcantara): Remove the aliases for the WebappActivities once we're pretty sure
-                               that users don't have any instances of the original Activity still
-                               running.
-        -->
+            
         <activity android:name="org.chromium.chrome.browser.webapps.WebappLauncherActivity"
             android:theme="@android:style/Theme.NoDisplay"
             android:taskAffinity=""
@@ -455,13 +445,12 @@ by a child template that "extends" this file.
             android:label="@string/webapp_activity_title"
             android:documentLaunchMode="intoExisting"
             android:persistableMode="persistNever"
-            {{ self.supports_video_persistence() }}
-            {{ self.chrome_activity_common() }}>
+          >
         </activity>
         <activity-alias android:name="com.google.android.apps.chrome.webapps.WebappActivity"
             android:targetActivity="org.chromium.chrome.browser.webapps.WebappActivity"
             android:label="@string/webapp_activity_title"
-            {{ self.supports_video_persistence() }} >
+             >
         </activity-alias>
         {% for i in range(10) %}
         <activity android:name="org.chromium.chrome.browser.webapps.WebappActivity{{ i }}"
@@ -471,8 +460,7 @@ by a child template that "extends" this file.
             android:launchMode="singleTask"
             android:persistableMode="persistNever"
             android:taskAffinity="{{ manifest_package }}.webapps.WebappActivity{{ i }}"
-            {{ self.supports_video_persistence() }}
-            {{ self.chrome_activity_common() }}>
+            >
         </activity>
         <activity-alias android:name="com.google.android.apps.chrome.webapps.WebappActivity{{ i }}"
             android:targetActivity="org.chromium.chrome.browser.webapps.WebappActivity{{ i }}"
@@ -487,8 +475,7 @@ by a child template that "extends" this file.
             android:launchMode="singleTop"
             android:documentLaunchMode="intoExisting"
             android:persistableMode="persistNever"
-            {{ self.supports_video_persistence() }}
-            {{ self.chrome_activity_common() }}>
+            >
         </activity>
         {% for i in range(10) %}
         <activity android:name="org.chromium.chrome.browser.webapps.WebApkActivity{{ i }}"
@@ -498,8 +485,7 @@ by a child template that "extends" this file.
             android:launchMode="singleTask"
             android:persistableMode="persistNever"
             android:taskAffinity="{{ manifest_package }}.webapps.WebApkActivity{{ i }}"
-            {{ self.supports_video_persistence() }}
-            {{ self.chrome_activity_common() }}>
+            >
         </activity>
         {% endfor %}
         <activity android:name="org.chromium.chrome.browser.media.remote.ExpandedControllerActivity"
@@ -777,18 +763,17 @@ by a child template that "extends" this file.
             android:permission="{{ manifest_package }}.permission.CHILD_SERVICE"
             android:isolatedProcess="true"
             android:exported="{{sandboxed_service_exported|default(false)}}"
-            {% if (sandboxed_service_exported|default(false)) == 'true' %}
+            
             android:externalService="true"
             tools:ignore="ExportedService"
-            {% endif %}
-            {{sandboxed_service_extra_flags|default('')}} />
+             />
         {% endfor %}
         {% set num_privileged_services = 3 %}
         <meta-data android:name="org.chromium.content.browser.NUM_PRIVILEGED_SERVICES"
             android:value="{{ num_privileged_services }}"/>
         {% for i in range(num_privileged_services) %}
         {% set privileged_process_name = ':privileged_process%d' % i %}
-        <!-- TODO(tedchoc): Omit this for release builds as MultiDex is debug only. -->
+        
         <meta-data android:name="{{ manifest_package }}{{ privileged_process_name }}.ignore_multidex"
 android:value="true" />
         <service android:name="org.chromium.content.app.PrivilegedProcessService{{ i }}"
@@ -848,10 +833,7 @@ android:value="true" />
             android:value="@integer/google_play_services_version" />
         <meta-data android:name="org.chromium.content.browser.SMART_CLIP_PROVIDER"
             android:value="org.chromium.content.browser.SmartClipProvider"/>
-        {% set enable_leakcanary = enable_leakcanary|default(0) %}
-        {% if enable_leakcanary == "true" %}
-        {# Entries for LeakCanary copied from (and then tweaked):
-               //third_party/leakcanary/src/leakcanary-android/src/main/AndroidManifest.xml #}
+       
           <service
               android:name="com.squareup.leakcanary.internal.HeapAnalyzerService"
               android:process=":leakcanary"
@@ -859,10 +841,10 @@ android:value="true" />
           <activity
               android:theme="@style/leak_canary_LeakCanary.Base"
               android:name="com.squareup.leakcanary.internal.DisplayLeakActivity"
-              android:process=":leakcanary2"  {# Added to avoid StrictMode violations crashing the activity #}
-              android:label="@string/app_name"  {# Changed from "string/leak_canary_display_activity_label" to help distinguaish when multiple apps include leakcanary. #}
+              android:process=":leakcanary2"  
+              android:label="@string/app_name"  
               android:icon="@drawable/leak_canary_icon"
-              android:taskAffinity=".com.squareup.leakcanary">  {# Added leading "." for multi-app case. #}
+              android:taskAffinity=".com.squareup.leakcanary">  
             <intent-filter>
               <action android:name="android.intent.action.MAIN" />
               <category android:name="android.intent.category.LAUNCHER" />
@@ -870,9 +852,9 @@ android:value="true" />
           </activity>
           <service
               android:name="com.squareup.leakcanary.DisplayLeakService"
-              android:process=":leakcanary2"  {# Added to minimize interaction with browser process. #}
+              android:process=":leakcanary2"  
               android:enabled="false" />
-          <activity  {# This is just a toast-like overlay, so leaving in browser process #}
+          <activity  
               android:theme="@style/leak_canary_Theme.Transparent"
               android:name="com.squareup.leakcanary.internal.RequestStoragePermissionActivity"
               android:taskAffinity="com.squareup.leakcanary"
