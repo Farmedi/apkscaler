@@ -56,9 +56,28 @@ users_mnf.set_is_backup_allowed(allowedBackup)                  #debuggable ve a
 
 debuggable,allowedBackup=fnc.parse_compared_debuggable_allowedbackup(toBeCompared)
 compared_mnf.set_is_debuggable(debuggable)
-compared_mnf.set_is_backup_allowed(allowedBackup)
+compared_mnf.set_is_backup_allowed(allowedBackup)               #compared manifest için debuggable ve allowedbackup attribute larını aldık
 
-print(compared_mnf.get_is_debuggable(),compared_mnf.get_is_backup_allowed())
+filteredPermissionList=fnc.filter_list(users_mnf.get_permission_list(),compared_mnf.get_permission_list())
+filteredIntentList=fnc.filter_list(users_mnf.get_intent_filter_list(),compared_mnf.get_intent_filter_list())       #test ettiğimiz apk, orijinal apk'dan farklı olarak hangi izinleri ve intentleri istiyor
+
+debuggablesus=False
+allowedBackupsus=False
+
+if users_mnf.get_is_debuggable()=="true" and compared_mnf.get_is_debuggable()!="true":
+    debuggablesus=True
+if users_mnf.get_is_backup_allowed()=="true" and compared_mnf.get_is_backup_allowed()!="true":
+    allowedBackupsus=True                                                                           #bu flagler kullanıcının APK'sında var, kıyaslanacak apk'da yok ise şüpheli bayrağı true yapıyoruz.
+
+# print(filteredPermissionList)
+# print("\n")
+# print(filteredIntentList)
+# print("\n")
+# print("debuggablesus=",debuggablesus,", allowedbackupsus=",allowedBackupsus)
+# print("\n")
+# print(fnc.parse_lists(filteredPermissionList))
+filteredPermissionList=fnc.parse_lists(filteredPermissionList)
+filteredIntentList=fnc.parse_lists(filteredIntentList)              #İzin ve intentlerin başındaki com.android. gibi kısımları filtreliyoruz
 
 
 

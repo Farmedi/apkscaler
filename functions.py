@@ -156,6 +156,7 @@ def parse_users_debuggable_allowedbackup():
 
     return isDebuggable,isAllowedBackup
 
+
 def parse_compared_debuggable_allowedbackup(toBeCompared):
     isDebuggable=""
     isAllowedBackup=""
@@ -170,3 +171,13 @@ def parse_compared_debuggable_allowedbackup(toBeCompared):
         isAllowedBackup=node.getAttribute("android:allowBackup")
 
     return isDebuggable,isAllowedBackup
+
+
+def filter_list(userList,comparedList):
+    return [x for x in userList if x not in comparedList]
+
+def parse_lists(list):
+    newlist=[]
+    for member in list:
+         newlist.append(member.rpartition('.')[-1])
+    return newlist
