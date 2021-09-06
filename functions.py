@@ -91,6 +91,35 @@ def parse_users_permissions():
     return permissionList
 
 
+def parse_users_services():
+    servicesList = []
+    with open('fake.xml', 'r') as f:
+        data = f.read()
+    dom = parseString(data)
+
+    services = dom.getElementsByTagName('service')
+    # Iterate over all the uses-permission nodes
+    for service in services:
+        servicesList.append(service.getAttribute("android:name"))
+
+    return servicesList
+
+
+def parse_services_to_compare(toBeCompared):
+    xmlPath = toBeCompared
+    serviceList = []
+    with open(xmlPath) as file:
+        data = file.read()
+    dom = parseString(data)
+    services = dom.getElementsByTagName('service')
+
+    for service in services:
+        serviceList.append(service.getAttribute("android:name"))
+
+
+    return serviceList
+
+
 def parse_permissions_to_compare(toBeCompared):
     xmlPath = toBeCompared
     permissionList = []
@@ -176,8 +205,28 @@ def parse_compared_debuggable_allowedbackup(toBeCompared):
 def filter_list(userList,comparedList):
     return [x for x in userList if x not in comparedList]
 
+
 def parse_lists(list):
     newlist=[]
     for member in list:
          newlist.append(member.rpartition('.')[-1])
     return newlist
+
+
+def get_perm_info(list):
+    dic={}
+    with open('permissioninfo.xml', 'r') as f:
+        data = f.read()
+    dom = parseString(data)
+
+    permissions = dom.getElementsByTagName('permission')
+
+    # Iterate over all the uses-permission nodes
+    for permission in list:
+        for node in permissions:
+            if node.getAttribute("android:name")==permission:
+                dic[permission]=node.getAttribute("android:protectionLevel")
+    return dic
+
+
+
