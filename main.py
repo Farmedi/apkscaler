@@ -43,6 +43,8 @@ class manifest:
         return self.isDebuggable
 
 
+
+
 users_mnf = manifest()
 compared_mnf = manifest()  # Objeler oluşturuldu
 
@@ -96,6 +98,7 @@ filteredIntentList = fnc.parse_lists(filteredIntentList)  # İzin ve intentlerin
 filteredPermissionList = fnc.get_perm_info(filteredPermissionList)
 filteredServicesList = fnc.filter_list(fnc.parse_users_services(), fnc.parse_services_to_compare(toBeCompared))
 
+fnc.create_report(compared_mnf.get_permission_list(),filteredPermissionList,users_mnf.get_permission_list(),filteredIntentList,filteredServicesList,True,True)
 
 
 
