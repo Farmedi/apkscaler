@@ -90,7 +90,7 @@ allowedBackupsus = False
 if users_mnf.get_is_debuggable() == "true" and compared_mnf.get_is_debuggable() != "true":
     debuggablesus = True
 if users_mnf.get_is_backup_allowed() == "true" and compared_mnf.get_is_backup_allowed() != "true":
-    allowedBackupsus = True  # bu flagler kullanıcının APK'sında var, kıyaslanacak apk'da yok ise şüpheli bayrağı true yapıyoruz.
+    allowedBackupsus = True  # bu flagler kullanıcının APK'sında var, kıyaslanacak apk'da yok ise şüpheli bayrağı true yapıyoruz. (KULLANILMADI.)
 
 # Skorlama için gerekli servis, intent, izin ve flag bilgilerine sahibiz.
 # ------------------------SKOR-----------------------

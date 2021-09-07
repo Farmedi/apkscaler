@@ -310,13 +310,14 @@ def create_report(permissions,intents,fbackup,fdebug,tag):
     #intro ve puanlama
     html_code = '<p style="text-align: center;"><span style="color: #0000ff;"><strong>APKScaler</strong></span></p><p style="text-align: center;"><span style="color: #0000ff;"><strong>Analysis Conclusion:'
     explanations='<p style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">Your app has been reviewed by 3 categories:</span></strong></span>'\
-                        '</p><ol><li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
+                        '</p><ol style="margin:5px;"><li style="margin:5px;text-align: justify; "><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
                         'Permissions: These are <span class="ILfuVd"><span class="hgKElc">special privileges that your app must ask for your permission to use when it needs or wants to access the data on your phone.</span></span></span></strong></span>'\
-                        ' </li><li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
-                        'Intents: You can think these as ports which the app can use to interact with itself, system or other apps. As like all everything, these can be abused as well.</span></strong></span></li><li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
+                        ' </li><li style="margin:5px;text-align: justify;"><span style=" color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
+                        'Intents: You can think these as ports which the app can use to interact with itself, system or other apps. As like all everything, these can be abused as well.</span></strong></span></li><li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
                         'Flags: We have checked 2 flags in your apps manifest file. While these flags may not be directly related to malware, setting these may jepardise your data reliability and cause data leaks and other problems. '\
-                        'If you are the author off the app you have analyzed, you may want to check these.</span></strong></span><ul><li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">isDebuggable: This states wether the app is debuggable in user mode.</span></strong></span></li>'\
-                        '<li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">allowBackup: Applications that store sensitive data should set this to false because these data might be exposed to an attacker through adb.</span></strong></span></li></ul></li></ol>'
+                        'If you are the author off the app you have analyzed, you may want to check these.</span></strong></span><ul><li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">isDebuggable: This states wether the app is debuggable in user mode.</span></strong></span></li>'\
+                        '<li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">allowBackup: Applications that store sensitive data should set this to false because these data might be exposed to an attacker through adb.</span></strong></span></li></ul></li></ol>'
+
     permissionTable = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
                       '<span style="color: #ff0000;"><strong>Excessive Permissions</strong></span>' \
                       '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
@@ -375,8 +376,22 @@ def create_report(permissions,intents,fbackup,fdebug,tag):
         fp.write(str("</tbody></table></div>"))
 
         # flagler
-
-
+        fp.write('<p style="text-align: center;"><span style="color: #ff0000;"><strong>Flags</strong></span></p>')
+        if str(fdebug)=="True" or str(fdebug)=="true":
+            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>debuggable: '
+                     '<span style="background-color: #ff0000;">ENABLED</span></strong></span></p>')
+        else:
+            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>debuggable: '
+                     '<span style="background-color: #00ff00;">DISABLED</span></strong></span></p>')
+        if str(fbackup)=="True" or str(fbackup)=="true":
+            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
+                     '<span style="background-color: #ff0000;">ENABLED</span></strong></span></p>')
+        elif str(fbackup)=="False" or str(fbackup)=="false":
+            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
+                     '<span style="background-color: #00ff00;">DISABLED</span></strong></span></p>')
+        else:
+            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
+                     '<span style="background-color: #ff0000;">ENABLED (BY DEFAULT)</span></strong></span></p>')
 
 
 
