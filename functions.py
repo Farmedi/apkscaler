@@ -1,4 +1,5 @@
 import glob
+import math
 import os
 import re
 import webbrowser
@@ -232,29 +233,54 @@ def get_perm_info(list):
 
 
 #Score
-def rate_apk(comparedPermissions,usersPermissions,usersUnfilteredPermissions,intents,services,fbackup,fdebug):
+def rate_apk(comparedPermissions,usersPermissions,usersUnfilteredPermissions,intents):
     filteredDangerRate=calculateDangerRate(usersPermissions)
+    comparedPermissions=get_perm_info(comparedPermissions)      #Database'den seçilen apk'nın izinlerinin tehlike düzeylerini almamız gerekli.
     comparedDangerRate = calculateDangerRate(comparedPermissions)
     comparedPermCount = len(comparedPermissions)
     usersPermCount= len(usersUnfilteredPermissions)
 
+
     tolerance_rate=0.05 #Tolerans değerimiz ne kadar yüksekse o kadar az toleransımız var. 0-1 aralığında değer alabilir.
-    permRisk=False
+    permRisk=True
 
-    if filteredDangerRate<comparedDangerRate and usersPermCount<comparedPermCount: #Ekstra izinlerdeki tehlikeli iiznlerin oranı orijinal apk oranından fazla ve şüpheli izin sayısı orijinal APK izin sayısından büyükse kesinlikle şüphelidir.
-        permRisk=True
+    if filteredDangerRate>comparedDangerRate and usersPermCount<comparedPermCount: #Ekstra izinlerdeki tehlikeli iiznlerin oranı orijinal apk oranından fazla ve şüpheli izin sayısı orijinal APK izin sayısından büyükse kesinlikle şüphelidir.
+        permRisk=False
 
-    elif filteredDangerRate>comparedDangerRate:       #Ekstra izinlerdeki riskli izinlerin oranı normal aplikasyondaki orandan göre daha mı fazla? Bütün izin oranlarını karşılaştır.
+    if filteredDangerRate>comparedDangerRate:       #Ekstra izinlerdeki riskli izinlerin oranı normal aplikasyondaki orandan göre daha mı fazla? Bütün izin oranlarını karşılaştır.
         differential=filteredDangerRate-comparedDangerRate      #Riskli izin oranlarının farkı 0.25-0.20 diyelim. Orijinal apk total izin sayısı 100, şüpheli apk için total izin sayısı 110 olsun
         differential=differential*100   #%5 oranını belli bir tolerans değeri ile yakalamaya çalışacağız
 
         stubRate=comparedPermCount+(comparedPermCount/differential) #100+(100/5)=120. Eğer şüpheli APK'mızın izin sayısı 120 civarı ise bu riskli izinlerdeki artışı tolere edebiliriz.
 
-        if usersPermCount/stubRate > 1-tolerance_rate and usersPermCount/stubRate > 1+tolerance_rate:
+        if not math.isclose(usersPermCount/stubRate,1,abs_tol=tolerance_rate): #Eğer şüpheli APK'nın istediği izin miktarı, güvenli APK'nın aynı izin miktarına sahi olsaydı isteyeceği riskli izin değeri ile tolere edilen değer kadar yakın değilse APK risklidir.
             permRisk=False
 
 
+    malwarePopularIntents = ["BOOT_COMPLETED","SENDTO","DIAL","SCREEN_OFF","TEXT","SEND","USER_PRESENT","PACKAGE_ADDED","SCREEN_ON","CALL",]
+    riskyIntents=[]
+    intentRisk=True
 
+    for intent in intents:
+        for riskyIntent in malwarePopularIntents:
+            if riskyIntent==intent:
+                riskyIntents.append(riskyIntent)
+
+    if len(riskyIntents)>0:
+        intentRisk=False
+
+
+    conclusion=""
+
+    if not permRisk:
+        if not intentRisk:
+            conclusion="Dangerous"
+        else:                                           # İzinler şüpheli && Intent'ler şüpheli -> Malware
+            conclusion="Moderate"                       # İzinler şüpheli && Intent'ler normal  -> Moderate
+    else:                                               # İzinler normal && Intent'ler normal -> Safe
+        conclusion="Might Be Safe"
+
+    return conclusion,riskyIntents
 
 
 def calculateDangerRate(permissions):
@@ -263,163 +289,105 @@ def calculateDangerRate(permissions):
     normal = 0
     unknown = 0
     for perm in permissions:
-        if permissions[perm] == "dangerous":
+        if str(permissions[perm]) == "dangerous":
             dangerous += 1
-        elif permissions[perm].__contains__("signature"):
+        elif str(permissions[perm]).__contains__("signature"):
             signature += 1
-        elif permissions[perm] == "normal":
+        elif str(permissions[perm]) == "normal":
             normal += 1
         else:
             unknown += 1
+    try:
+        return (dangerous / (unknown + signature + dangerous + normal))
+    except:
+        return 0
 
-    return (dangerous / (unknown + signature + dangerous + normal))
 
 #HTML Output
-def create_report(permissions,intents,services,fbackup,fdebug):
+def create_report(permissions,intents,fbackup,fdebug,tag):
 
 
     #intro ve puanlama
-    # html_code = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
-    #             '<span style="color: #ff0000;"><strong>Excessive Permissions</strong></span>' \
-    #             '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
-    #             '<tbody>' \
-    #             '<tr style="height: 18px;">' \
-    #             '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Permission</strong></td>' \
-    #             '<td id = "pl "style="width: 33.3333%; text-align: center; height: 18px;"><strong>Protection Level</strong></td>' \
-    #             '</tr>'
-    #
-    # with open("index.html") as fp:
-    #     soup = BeautifulSoup(fp, 'html.parser')
-    #
-    # soup = BeautifulSoup(html_code, 'html.parser')
-    #
-    # with open("index.html", "w") as fp:
-    #     fp.write(str(html_code))
-    #     for key in dic:
-    #         if str(dic[key]) == "dangerous":
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #eb4034">' + str(dic[key]) + '</tr>'))
-    #         elif str(dic[key]).__contains__("signature"):
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #b1eb34">' + str(dic[key]) + '</tr>'))
-    #         elif str(dic[key]) == "normal":
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #2a2a2b">' + str(dic[key]) + '</tr>'))
-    #
-    #     fp.write(str("</tbody></table></div>"))
-    # webbrowser.open("file://" + os.path.realpath("index.html"))
-
-
-
-    #permission
-    html_code = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
-                '<span style="color: #ff0000;"><strong>Excessive Permissions</strong></span>' \
-                '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
-                '<tbody>' \
-                '<tr style="height: 18px;">' \
-                '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Permission</strong></td>' \
-                '<td id = "pl "style="width: 33.3333%; text-align: center; height: 18px;"><strong>Protection Level</strong></td>' \
-                '</tr>'
+    html_code = '<p style="text-align: center;"><span style="color: #0000ff;"><strong>APKScaler</strong></span></p><p style="text-align: center;"><span style="color: #0000ff;"><strong>Analysis Conclusion:'
+    explanations='<p style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">Your app has been reviewed by 3 categories:</span></strong></span>'\
+                        '</p><ol><li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
+                        'Permissions: These are <span class="ILfuVd"><span class="hgKElc">special privileges that your app must ask for your permission to use when it needs or wants to access the data on your phone.</span></span></span></strong></span>'\
+                        ' </li><li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
+                        'Intents: You can think these as ports which the app can use to interact with itself, system or other apps. As like all everything, these can be abused as well.</span></strong></span></li><li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
+                        'Flags: We have checked 2 flags in your apps manifest file. While these flags may not be directly related to malware, setting these may jepardise your data reliability and cause data leaks and other problems. '\
+                        'If you are the author off the app you have analyzed, you may want to check these.</span></strong></span><ul><li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">isDebuggable: This states wether the app is debuggable in user mode.</span></strong></span></li>'\
+                        '<li style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">allowBackup: Applications that store sensitive data should set this to false because these data might be exposed to an attacker through adb.</span></strong></span></li></ul></li></ol>'
+    permissionTable = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
+                      '<span style="color: #ff0000;"><strong>Excessive Permissions</strong></span>' \
+                      '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
+                      '<tbody>' \
+                      '<tr style="height: 18px;">' \
+                      '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Permission</strong></td>' \
+                      '<td style="width: 33.3333%; text-align: center; height: 18px;"><strong>Protection Level</strong></td>' \
+                      '</tr>'
+    intentTable= '<div style=" text-align: center; width: 25%;  top:0;bottom: 0;left: 0;right: 0;margin-left: auto; margin-right:auto;margin-top:25px;">' \
+                      '<span style="color: #ff0000;"><strong>Intents Your App And Other Malware Uses In Common</strong></span>' \
+                      '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
+                      '<tbody>' \
+                      '<tr style="height: 18px;">' \
+                      '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Intent </strong></td>' \
+                      '</tr>'
 
     with open("index.html") as fp:
         soup = BeautifulSoup(fp, 'html.parser')
-
     soup = BeautifulSoup(html_code, 'html.parser')
-
-    dangerous=0
-    signature=0
-    normal=0
-    unknown=0
 
     with open("index.html", "w") as fp:
         fp.write(str(html_code))
+        if str(tag)=="Dangerous":
+            fp.write('<span style="background-color: #ff0000; color: #000000;">Dangerous</span></strong>&nbsp;</span></p>')
+        elif str(tag)=="Moderate":
+            fp.write('<span style="background-color: #ff6600; color: #000000;">Moderate</span></strong>&nbsp;</span></p>')
+        else:
+            fp.write('<span style="background-color: #808080; color: #000000;">Might Be Safe</span></strong>&nbsp;</span></p>')
+        fp.write(str(explanations))
+
+        #permissions
+        fp.write(str(permissionTable))
         for key in permissions:
             if str(permissions[key]) == "dangerous":
-                dangerous+=1
                 fp.write(
-                    str('<tr ><td >' + key + '</td><td style="background-color: #eb4034">' + str(permissions[key]) + '</tr>'))
+                    str('<tr ><td >' + key + '</td><td style="background-color: #eb4034">' + str(
+                        permissions[key]) + '</tr>'))
             elif str(permissions[key]).__contains__("signature"):
-                signature+=1
                 fp.write(
-                    str('<tr ><td >' + key + '</td><td style="background-color: #b1eb34">' + str(permissions[key]) + '</tr>'))
+                    str('<tr ><td >' + key + '</td><td style="background-color: #b1eb34">' + str(
+                        permissions[key]) + '</tr>'))
             elif str(permissions[key]) == "normal":
-                normal+=1
                 fp.write(
-                    str('<tr ><td >' + key + '</td><td style="background-color: #ccc6ee">' + str(permissions[key]) + '</tr>'))
+                    str('<tr ><td >' + key + '</td><td style="background-color: #ccc6ee">' + str(
+                        permissions[key]) + '</tr>'))
             else:
-                unknown+=1
                 fp.write(
-                    str('<tr><td>'+key+'</td><td >'+str(permissions[key])+'</tr>')
+                    str('<tr><td>' + key + '</td><td >' + str(permissions[key]) + '</tr>')
                 )
         fp.write(str("</tbody></table></div>"))
+
+        #intents
+        fp.write(intentTable)
+        for intent in intents:
+            fp.write(str('<tr><td>' + intent + '</td></tr>' ))
+        fp.write(str("</tbody></table></div>"))
+
+        # flagler
+
+
+
+
+
+
+
+
+
     webbrowser.open("file://" + os.path.realpath("index.html"))
 
 
-    # intent
-
-    # html_code = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
-    #             '<span style="color: #ff0000;"><strong>Excessive Permissions</strong></span>' \
-    #             '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
-    #             '<tbody>' \
-    #             '<tr style="height: 18px;">' \
-    #             '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Permission</strong></td>' \
-    #             '<td id = "pl "style="width: 33.3333%; text-align: center; height: 18px;"><strong>Protection Level</strong></td>' \
-    #             '</tr>'
-    #
-    # with open("index.html") as fp:
-    #     soup = BeautifulSoup(fp, 'html.parser')
-    #
-    # soup = BeautifulSoup(html_code, 'html.parser')
-    #
-    # with open("index.html", "w") as fp:
-    #     fp.write(str(html_code))
-    #     for key in intents:
-    #         if str(intents[key]) == "dangerous":
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #eb4034">' + str(intents[key]) + '</tr>'))
-    #         elif str(intents[key]).__contains__("signature"):
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #b1eb34">' + str(intents[key]) + '</tr>'))
-    #         elif str(intents[key]) == "normal":
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #ccc6ee">' + str(intents[key]) + '</tr>'))
-    #
-    #     fp.write(str("</tbody></table></div>"))
-    # webbrowser.open("file://" + os.path.realpath("index.html"))
 
 
-    #services
-
-    # html_code = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
-    #             '<span style="color: #ff0000;"><strong>Excessive Permissions</strong></span>' \
-    #             '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
-    #             '<tbody>' \
-    #             '<tr style="height: 18px;">' \
-    #             '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Permission</strong></td>' \
-    #             '<td id = "pl "style="width: 33.3333%; text-align: center; height: 18px;"><strong>Protection Level</strong></td>' \
-    #             '</tr>'
-    #
-    # with open("index.html") as fp:
-    #     soup = BeautifulSoup(fp, 'html.parser')
-    #
-    # soup = BeautifulSoup(html_code, 'html.parser')
-    #
-    # with open("index.html", "w") as fp:
-    #     fp.write(str(html_code))
-    #     for key in services:
-    #         if str(services[key]) == "dangerous":
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #eb4034">' + str(services[key]) + '</tr>'))
-    #         elif str(services[key]).__contains__("signature"):
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #b1eb34">' + str(services[key]) + '</tr>'))
-    #         elif str(services[key]) == "normal":
-    #             fp.write(
-    #                 str('<tr ><td >' + key + '</td><td style="background-color: #2a2a2b">' + str(services[key]) + '</tr>'))
-    #
-    #     fp.write(str("</tbody></table></div>"))
-    # webbrowser.open("file://" + os.path.realpath("index.html"))
-
-    #flagler
 
 

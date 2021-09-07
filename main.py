@@ -98,7 +98,10 @@ filteredIntentList = fnc.parse_lists(filteredIntentList)  # İzin ve intentlerin
 filteredPermissionList = fnc.get_perm_info(filteredPermissionList)
 filteredServicesList = fnc.filter_list(fnc.parse_users_services(), fnc.parse_services_to_compare(toBeCompared))
 
-fnc.create_report(compared_mnf.get_permission_list(),filteredPermissionList,users_mnf.get_permission_list(),filteredIntentList,filteredServicesList,True,True)
+
+tag,intentList=fnc.rate_apk(compared_mnf.get_permission_list(),filteredPermissionList,users_mnf.get_permission_list(),filteredIntentList)
+
+fnc.create_report(filteredPermissionList,intentList,users_mnf.get_is_backup_allowed(),users_mnf.get_is_backup_allowed(),tag)
 
 
 
