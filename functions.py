@@ -306,14 +306,14 @@ def calculateDangerRate(permissions):
 #HTML Output
 def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
 
-    username=os.path.splitext(cmpname)[0]
+    username=os.path.splitext(username)[0]
     cmpname=os.path.splitext(cmpname)[0]
 
 
     now = datetime.now()
     dateTime = str(now.strftime("%d:%m:%Y\ %H:%M\ "))
 
-    fileName=dateTime+"-"+username+"\ vs\ "+cmpname+".html"
+    fileName=dateTime+"-"+username+"\-\ "+cmpname+".html"
     print("filename:",fileName)
 
 
@@ -364,7 +364,7 @@ def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
         #permissions
         fp.write(str(permissionTable))
         for key in permissions:
-            if str(permissions[key]) == "dangerous":
+            if str(permissions[key]).__contains__("dangerous"):
                 fp.write(
                     str('<tr ><td >' + key + '</td><td style="background-color: #eb4034">' + str(
                         permissions[key]) + '</tr>'))
@@ -407,12 +407,13 @@ def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
                      '<span style="background-color: #ff0000;">ENABLED (BY DEFAULT)</span></strong></span></p>')
 
     fileName.replace(" ", "\ ")
-    cmd = 'sudo cp index.html ./reports/'+fileName
-    print("cmd --> ",cmd)
+
+    cmd = " cp index.html ./reports/"+fileName
+
 
     os.system(cmd)
-   # cmd = "mv /reports/index.html reports/"+fileName
-    print("cmd:",cmd)
+
+
     webbrowser.open("file://" + os.path.realpath("index.html"))
 
 
