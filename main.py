@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import os
 import sys
 
 import functions as fnc
@@ -11,6 +12,7 @@ class manifest:
         self.servicesList = []
         self.isBackupAllowed = ""
         self.isDebuggable = ""
+        self.name= ""
 
     def set_servicesList(self, _list):
         self.servicesList = _list
@@ -42,7 +44,11 @@ class manifest:
     def get_is_debuggable(self):
         return self.isDebuggable
 
+    def set_name(self,name):
+        self.name=name
 
+    def get_name(self):
+        return self.name
 
 
 users_mnf = manifest()
@@ -54,8 +60,10 @@ fnc.check_db_exists()  # DB klasörü var mı
 
 
 toBeCompared = fnc.select_compared_from_db()  # Kıyaslanacak dosyayı aldık.
-fnc.decompile_and_dispose()  # Parametre olarak verilen APK'nın manifest'inin elde edilip kalan dosyaların silinmesi
+compared_mnf.set_name(os.path.basename(toBeCompared))
 
+#fnc.decompile_and_dispose()  # Parametre olarak verilen APK'nın manifest'inin elde edilip kalan dosyaların silinmesi
+users_mnf.set_name(fnc.decompile_and_dispose())
 
 users_mnf.set_permission_list(fnc.parse_users_permissions())  # Elde edilen manifestteki izinler parse'landı
 compared_mnf.set_permission_list(fnc.parse_permissions_to_compare(toBeCompared))  # Kıyaslanacak manifestteki izinler parse'landı
@@ -92,6 +100,8 @@ if users_mnf.get_is_debuggable() == "true" and compared_mnf.get_is_debuggable() 
 if users_mnf.get_is_backup_allowed() == "true" and compared_mnf.get_is_backup_allowed() != "true":
     allowedBackupsus = True  # bu flagler kullanıcının APK'sında var, kıyaslanacak apk'da yok ise şüpheli bayrağı true yapıyoruz. (KULLANILMADI.)
 
+
+
 # Skorlama için gerekli servis, intent, izin ve flag bilgilerine sahibiz.
 # ------------------------SKOR-----------------------
 filteredIntentList = fnc.parse_lists(filteredIntentList)  # İzin ve intentlerin başındaki com.android. gibi kısımları filtreliyoruz
@@ -101,7 +111,7 @@ filteredServicesList = fnc.filter_list(fnc.parse_users_services(), fnc.parse_ser
 
 tag,intentList=fnc.rate_apk(compared_mnf.get_permission_list(),filteredPermissionList,users_mnf.get_permission_list(),filteredIntentList)
 
-fnc.create_report(filteredPermissionList,intentList,users_mnf.get_is_backup_allowed(),users_mnf.get_is_backup_allowed(),tag)
+fnc.create_report(filteredPermissionList,intentList,users_mnf.get_is_backup_allowed(),users_mnf.get_is_backup_allowed(),tag,users_mnf.get_name(),compared_mnf.get_name())
 
 
 

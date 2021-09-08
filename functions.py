@@ -3,11 +3,11 @@ import math
 import os
 import re
 import webbrowser
-
+from datetime import datetime
 from bs4 import BeautifulSoup
 import sys
 from xml.dom.minidom import parseString
-
+from pathlib import Path
 
 def decompile_and_dispose():
     directory = sys.argv[1]  # python main.py directory
@@ -17,7 +17,7 @@ def decompile_and_dispose():
 
     cmd = "mv temp/AndroidManifest.xml ./fake.xml && rm -r temp"  # Android manifest ayıklandı ve kalan dosyalara ihtiyaç olmadığı için silindi.
     os.system(cmd)
-
+    return os.path.basename(directory)
 
 def clean_up():
     cmd = " rm fake.xml"
@@ -74,7 +74,7 @@ def select_compared_from_db():
             print("Invalid input.")
             print("Enter the ID of the xml file you would like to compare your apk with: ")
     choice = int(
-        selectedManifest) - 1  # şartlar sağlanırsa array indise ihtiyacımız olacağı için choice değşikenine girilen değerin 1 eksiğini atıyoruz.
+        selectedManifest) - 1  # şartlar sağlanırsa array indise ihtiyacımız olacağı için choice değişkenine, girilen değerin 1 eksiğini atıyoruz.
     return list(xmlSamples.keys())[int(choice)]  # dosya adlarını bir listeye alıp, seçilen indistekini döndürüyoruz.
 
 
@@ -304,12 +304,25 @@ def calculateDangerRate(permissions):
 
 
 #HTML Output
-def create_report(permissions,intents,fbackup,fdebug,tag):
+def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
+
+    username=os.path.splitext(cmpname)[0]
+    cmpname=os.path.splitext(cmpname)[0]
+
+
+    now = datetime.now()
+    dateTime = str(now.strftime("%d:%m:%Y\ %H:%M\ "))
+
+    fileName=dateTime+"-"+username+"\ vs\ "+cmpname+".html"
+    print("filename:",fileName)
 
 
     #intro ve puanlama
-    html_code = '<p style="text-align: center;"><span style="color: #0000ff;"><strong>APKScaler</strong></span></p><p style="text-align: center;"><span style="color: #0000ff;"><strong>Analysis Conclusion:'
-    explanations='<p style="text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">Your app has been reviewed by 3 categories:</span></strong></span>'\
+
+    titles = '<p style="text-align: center;"><span style="color: #0000ff;"><strong>APKScaler</strong></span></p><p style="text-align: center;"><span style="color: #0000ff;"><strong>Analysis Conclusion:'
+    explanations='<p style="text-align: justify;"><p style="text-align: center;"><span style="color: #00ff00;"><strong><span style="color: #0000ff;">Report Date: </span> <span style="color: #0000ff;">'+dateTime+'</span></strong></span></p>' \
+                 '<p style="text-align: center;"><span style="color: #0000ff;"><strong>'+cmpname+' </strong></span><strong> - </strong><span style="color: #0000ff;"><strong>'+username+' </strong></span></p><p style="text-align: center;">&nbsp;</p>' \
+                 '<span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">Your app has been reviewed by 3 categories:</span></strong></span>'\
                         '</p><ol style="margin:5px;"><li style="margin:5px;text-align: justify; "><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
                         'Permissions: These are <span class="ILfuVd"><span class="hgKElc">special privileges that your app must ask for your permission to use when it needs or wants to access the data on your phone.</span></span></span></strong></span>'\
                         ' </li><li style="margin:5px;text-align: justify;"><span style=" color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
@@ -336,10 +349,10 @@ def create_report(permissions,intents,fbackup,fdebug,tag):
 
     with open("index.html") as fp:
         soup = BeautifulSoup(fp, 'html.parser')
-    soup = BeautifulSoup(html_code, 'html.parser')
+    soup = BeautifulSoup(titles, 'html.parser')
 
     with open("index.html", "w") as fp:
-        fp.write(str(html_code))
+        fp.write(str(titles))
         if str(tag)=="Dangerous":
             fp.write('<span style="background-color: #ff0000; color: #000000;">Dangerous</span></strong>&nbsp;</span></p>')
         elif str(tag)=="Moderate":
@@ -393,12 +406,13 @@ def create_report(permissions,intents,fbackup,fdebug,tag):
             fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
                      '<span style="background-color: #ff0000;">ENABLED (BY DEFAULT)</span></strong></span></p>')
 
+    fileName.replace(" ", "\ ")
+    cmd = 'sudo cp index.html ./reports/'+fileName
+    print("cmd --> ",cmd)
 
-
-
-
-
-
+    os.system(cmd)
+   # cmd = "mv /reports/index.html reports/"+fileName
+    print("cmd:",cmd)
     webbrowser.open("file://" + os.path.realpath("index.html"))
 
 
