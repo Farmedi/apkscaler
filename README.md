@@ -6,14 +6,10 @@ with one of these 7 samples and APKScaler will analyze its androidmanifest and t
 Dependencies:
 
 
--Python 3.6+ (2.9+ might also work but its not tested therefore not recommended.)
-
-
-  -BeautifulSoup4
-  -webbrowser
-  
-  
--APKtool
+    -Python 3.6+ (2.9+ might also work but its not tested therefore not recommended.)
+      -BeautifulSoup4
+      -webbrowser
+    -APKtool
 
 Usage:
 python main.py [Directory of the APK you would like to compare]
