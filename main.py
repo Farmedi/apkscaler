@@ -51,6 +51,10 @@ class manifest:
         return self.name
 
 
+
+
+fnc.analyze_addresses()
+sys.exit()
 users_mnf = manifest()
 compared_mnf = manifest()  # Objeler oluşturuldu
 

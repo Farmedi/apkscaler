@@ -1,13 +1,19 @@
+import base64
 import glob
+import json
 import math
 import os
 import re
+import time
 import webbrowser
 from datetime import datetime
 from bs4 import BeautifulSoup
 import sys
 from xml.dom.minidom import parseString
 from pathlib import Path
+from zipfile import ZipFile
+import requests
+from vtapi3 import VirusTotalAPIIPAddresses, VirusTotalAPIError, VirusTotalAPIUrls
 
 def decompile_and_dispose():
     directory = sys.argv[1]  # python main.py directory
@@ -17,7 +23,110 @@ def decompile_and_dispose():
 
     cmd = "mv temp/AndroidManifest.xml ./fake.xml && rm -r temp"  # Android manifest ayıklandı ve kalan dosyalara ihtiyaç olmadığı için silindi.
     os.system(cmd)
+
+
+
     return os.path.basename(directory)
+
+
+def analyze_addresses():
+
+
+    #decompile
+    directory = sys.argv[1]
+    cmd = "d2j-dex2jar "+directory
+    os.system(cmd)
+
+    apkName= Path(directory).stem
+    jarpath=os.getcwd()+"/"+apkName+"-dex2jar.jar"
+
+    print(jarpath)
+
+    cmd = "jadx " +  jarpath
+    os.system(cmd)
+
+
+    ipAddresses = []
+    webAddresses = []
+
+    #detect ip and web addresses
+    patternIp = re.compile('''((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)''')
+    patternWeb = re.compile(
+        r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))")
+
+
+    os.system(cmd)
+    rootdir = os.getcwd()
+    for folder, dirs, files in os.walk(rootdir):
+        for file in files:
+            if file.endswith('.java'):
+                fullpath = os.path.join(folder, file)
+                with open(fullpath, 'r') as f:
+                    for line in f:
+                        line = line.rstrip()
+                        ip = patternIp.search(line)
+                        web = patternWeb.search(line)
+                        if ip:
+                            ipAddresses.append(line)
+                        if web:
+                            webAddresses.append(line)
+    temp = []
+    for adr in webAddresses:
+        temp.append(patternWeb.search(adr).group(1))
+    webAddresses=temp
+
+
+
+
+
+    vt_api_ip = VirusTotalAPIIPAddresses("ce982fc75e3417a47ad5a6aa9e95afcc4a1207d07f8144e0a3004e019d61efe6")
+
+    for ip in ipAddresses:
+        try:
+            result = vt_api_ip.get_report(ip)
+            result=json.loads(result)
+
+        except VirusTotalAPIError as err:
+            print(err)
+        else:
+            if vt_api_ip.get_last_http_error() == vt_api_ip.HTTP_OK:
+                print("harmless:" + str(result["data"]["attributes"]["last_analysis_stats"]["harmless"]))
+                print("malicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["malicious"]))
+                print("suspicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["suspicious"]))
+
+
+
+
+
+    vt_urls = VirusTotalAPIUrls('ce982fc75e3417a47ad5a6aa9e95afcc4a1207d07f8144e0a3004e019d61efe6')
+    for address in webAddresses:
+        print(address)
+        try:
+            urlId = base64.urlsafe_b64encode(address.encode()).decode().strip("=")
+            #urlId = VirusTotalAPIUrls.get_url_id_base64('address')
+            result = vt_urls.get_report(urlId)
+            result = json.loads(result)
+
+        except VirusTotalAPIError as err:
+            print(err)
+
+        else:
+            if vt_urls.get_last_http_error() == vt_urls.HTTP_OK:
+                    print("harmless:" + str(result["data"]["attributes"]["last_analysis_stats"]["harmless"]))
+                    print("malicious:"+str(result["data"]["attributes"]["last_analysis_stats"]["malicious"]))
+                    print("suspicious:"+str(result["data"]["attributes"]["last_analysis_stats"]["suspicious"]))
+
+
+
+
+            else:
+                print("HTTP error")
+
+
+
+
+
+
 
 def clean_up():
     cmd = " rm fake.xml"
@@ -415,9 +524,5 @@ def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
 
 
     webbrowser.open("file://" + os.path.realpath("index.html"))
-
-
-
-
 
 
