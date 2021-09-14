@@ -10,6 +10,8 @@ Dependencies:
       -BeautifulSoup4
       -webbrowser
     -APKtool
+    -Jadx
+    -Dex2Jar
 
 Usage:
 python main.py [Directory of the APK you would like to compare]
