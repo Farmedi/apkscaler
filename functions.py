@@ -4,16 +4,15 @@ import json
 import math
 import os
 import re
-import time
 import webbrowser
 from datetime import datetime
 from bs4 import BeautifulSoup
 import sys
 from xml.dom.minidom import parseString
 from pathlib import Path
-from zipfile import ZipFile
-import requests
+
 from vtapi3 import VirusTotalAPIIPAddresses, VirusTotalAPIError, VirusTotalAPIUrls
+
 
 def decompile_and_dispose():
     directory = sys.argv[1]  # python main.py directory
@@ -24,36 +23,36 @@ def decompile_and_dispose():
     cmd = "mv temp/AndroidManifest.xml ./fake.xml && rm -r temp"  # Android manifest ayıklandı ve kalan dosyalara ihtiyaç olmadığı için silindi.
     os.system(cmd)
 
-
-
     return os.path.basename(directory)
 
 
 def analyze_addresses():
-
-
-    #decompile
+    # decompile
     directory = sys.argv[1]
-    cmd = "d2j-dex2jar "+directory
-    os.system(cmd)
+    cmd = "d2j-dex2jar " + directory
+    try:
+        os.system(cmd)
+    except:
+        print("Dex2jar was unable to decompile your app.")
+        sys.exit()
 
-    apkName= Path(directory).stem
-    jarpath=os.getcwd()+"/"+apkName+"-dex2jar.jar"
 
-    print(jarpath)
-
-    cmd = "jadx " +  jarpath
-    os.system(cmd)
-
+    apkName = Path(directory).stem
+    jarpath = os.getcwd() + "/" + apkName + "-dex2jar.jar"
+    cmd = "jadx " + jarpath                                                                                             #Tool'lar için exception
+    try:
+        os.system(cmd)
+    except:
+        print("Jadx was unable to decompile your app to source code.")
+        sys.exit()
 
     ipAddresses = []
     webAddresses = []
 
-    #detect ip and web addresses
+    # detect ip and web addresses
     patternIp = re.compile('''((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)''')
     patternWeb = re.compile(
         r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))")
-
 
     os.system(cmd)
     rootdir = os.getcwd()
@@ -64,38 +63,41 @@ def analyze_addresses():
                 with open(fullpath, 'r') as f:
                     for line in f:
                         line = line.rstrip()
-                        ip = patternIp.search(line)
+                        ip = patternIp.search(line)                                                                     #Bu işlemi daha kısa sürede nasıl yaparız ?
                         web = patternWeb.search(line)
                         if ip:
-                            ipAddresses.append(line)
+                            ipAddresses.append(patternIp.search(line).group(1))
                         if web:
-                            webAddresses.append(line)
-    temp = []
-    for adr in webAddresses:
-        temp.append(patternWeb.search(adr).group(1))
-    webAddresses=temp
+                            webAddresses.append(patternWeb.search(line).group(1))
 
-
-
-
+    # temp = []
+    # for adr in webAddresses:
+    #     temp.append(patternWeb.search(adr).group(1))
+    # webAddresses = temp
+    #
+    # temp = []                                                                                                           #IP ve Web için case oluşturulacak
+    # for adr in ipAddresses:
+    #     temp.append(patternIp.search(adr).group(1))
+    # ipAddresses = temp
 
     vt_api_ip = VirusTotalAPIIPAddresses("ce982fc75e3417a47ad5a6aa9e95afcc4a1207d07f8144e0a3004e019d61efe6")
-
+    fileName=apkName+".txt"
     for ip in ipAddresses:
         try:
             result = vt_api_ip.get_report(ip)
-            result=json.loads(result)
+            result = json.loads(result)
 
         except VirusTotalAPIError as err:
             print(err)
         else:
             if vt_api_ip.get_last_http_error() == vt_api_ip.HTTP_OK:
-                print("harmless:" + str(result["data"]["attributes"]["last_analysis_stats"]["harmless"]))
-                print("malicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["malicious"]))
-                print("suspicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["suspicious"]))
-
-
-
+                # print("harmless:" + str(result["data"]["attributes"]["last_analysis_stats"]["harmless"]))               # JSON deserialization olacak
+                # print("malicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["malicious"]))
+                # print("suspicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["suspicious"]))
+                result=json.dump(result,skipkeys=False,indent=4)
+                with open(fileName,'w') as file:
+                    file.write(result)
+                    file.close()
 
 
     vt_urls = VirusTotalAPIUrls('ce982fc75e3417a47ad5a6aa9e95afcc4a1207d07f8144e0a3004e019d61efe6')
@@ -103,33 +105,29 @@ def analyze_addresses():
         print(address)
         try:
             urlId = base64.urlsafe_b64encode(address.encode()).decode().strip("=")
-            #urlId = VirusTotalAPIUrls.get_url_id_base64('address')
+            # urlId = VirusTotalAPIUrls.get_url_id_base64('address')
             result = vt_urls.get_report(urlId)
             result = json.loads(result)
+            result = json.dumps(result,skipkeys=False,indent=4)
 
         except VirusTotalAPIError as err:
             print(err)
 
         else:
             if vt_urls.get_last_http_error() == vt_urls.HTTP_OK:
-                    print("harmless:" + str(result["data"]["attributes"]["last_analysis_stats"]["harmless"]))
-                    print("malicious:"+str(result["data"]["attributes"]["last_analysis_stats"]["malicious"]))
-                    print("suspicious:"+str(result["data"]["attributes"]["last_analysis_stats"]["suspicious"]))
-
-
-
-
+                # print("harmless:" + str(result["data"]["attributes"]["last_analysis_stats"]["harmless"]))
+                # print("malicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["malicious"]))
+                # print("suspicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["suspicious"]))
+                with open(fileName,'w') as file:
+                    file.write(result)
+                    file.close()
             else:
                 print("HTTP error")
 
 
-
-
-
-
-
 def clean_up():
-    cmd = " rm fake.xml"
+    cmd = " rm fake.xml && rm *.jar && rm -r *-dex2jar*"
+
     os.system(cmd)
 
 
@@ -195,7 +193,7 @@ def parse_users_permissions():
 
     permissions = dom.getElementsByTagName('uses-permission')
     permissions += dom.getElementsByTagName('android:uses-permission')
-    # Iterate over all the uses-permission nodes
+
     for node in permissions:
         permissionList.append(node.getAttribute("android:name"))
         permissionList.append(node.getAttribute("name"))
@@ -228,7 +226,6 @@ def parse_services_to_compare(toBeCompared):
     for service in services:
         serviceList.append(service.getAttribute("android:name"))
 
-
     return serviceList
 
 
@@ -260,13 +257,12 @@ def parse_users_intent_filters():
         intentList.append(node.getAttribute("android:name"))
         intentList.append(node.getAttribute("name"))
     intentList = list(filter(None, intentList))
-    intentList = list(set(intentList)) #duplicate'leri eledik
+    intentList = list(set(intentList))  # duplicate'leri eledik
 
     return intentList
 
 
 def parse_intents_to_compare(toBeCompared):
-
     intentList = []
     with open(toBeCompared) as file:
         data = file.read()
@@ -278,13 +274,13 @@ def parse_intents_to_compare(toBeCompared):
         intentList.append(node.getAttribute("android:name"))
         intentList.append(node.getAttribute("name"))
     intentList = list(filter(None, intentList))
-    intentList = list(set(intentList)) #duplicate'leri eledik
+    intentList = list(set(intentList))  # duplicate'leri eledik
     return intentList
 
 
 def parse_users_debuggable_allowedbackup():
-    isDebuggable=""
-    isAllowedBackup=""
+    isDebuggable = ""
+    isAllowedBackup = ""
     with open('fake.xml', 'r') as f:
         data = f.read()
     dom = parseString(data)
@@ -292,15 +288,15 @@ def parse_users_debuggable_allowedbackup():
     application = dom.getElementsByTagName('application')
 
     for node in application:
-        isDebuggable=node.getAttribute("android:debuggable")
-        isAllowedBackup=node.getAttribute("android:allowBackup")
+        isDebuggable = node.getAttribute("android:debuggable")
+        isAllowedBackup = node.getAttribute("android:allowBackup")
 
-    return isDebuggable,isAllowedBackup
+    return isDebuggable, isAllowedBackup
 
 
 def parse_compared_debuggable_allowedbackup(toBeCompared):
-    isDebuggable=""
-    isAllowedBackup=""
+    isDebuggable = ""
+    isAllowedBackup = ""
     with open(toBeCompared) as f:
         data = f.read()
     dom = parseString(data)
@@ -308,25 +304,25 @@ def parse_compared_debuggable_allowedbackup(toBeCompared):
     application = dom.getElementsByTagName('application')
 
     for node in application:
-        isDebuggable=node.getAttribute("android:debuggable")
-        isAllowedBackup=node.getAttribute("android:allowBackup")
+        isDebuggable = node.getAttribute("android:debuggable")
+        isAllowedBackup = node.getAttribute("android:allowBackup")
 
-    return isDebuggable,isAllowedBackup
+    return isDebuggable, isAllowedBackup
 
 
-def filter_list(userList,comparedList):
+def filter_list(userList, comparedList):
     return [x for x in userList if x not in comparedList]
 
 
 def parse_lists(list):
-    newlist=[]
+    newlist = []
     for member in list:
-         newlist.append(member.rpartition('.')[-1])
+        newlist.append(member.rpartition('.')[-1])
     return newlist
 
 
 def get_perm_info(list):
-    dic={}
+    dic = {}
     with open('permissioninfo.xml', 'r') as f:
         data = f.read()
     dom = parseString(data)
@@ -336,60 +332,62 @@ def get_perm_info(list):
     # Iterate over all the uses-permission nodes
     for permission in list:
         for node in permissions:
-            if node.getAttribute("android:name")==permission:
-                dic[permission]=node.getAttribute("android:protectionLevel")
+            if node.getAttribute("android:name") == permission:
+                dic[permission] = node.getAttribute("android:protectionLevel")
     return dic
 
 
-#Score
-def rate_apk(comparedPermissions,usersPermissions,usersUnfilteredPermissions,intents):
-    filteredDangerRate=calculateDangerRate(usersPermissions)
-    comparedPermissions=get_perm_info(comparedPermissions)      #Database'den seçilen apk'nın izinlerinin tehlike düzeylerini almamız gerekli.
+# Score
+def rate_apk(comparedPermissions, usersPermissions, usersUnfilteredPermissions, intents):
+
+    filteredDangerRate = calculateDangerRate(usersPermissions)
+    comparedPermissions = get_perm_info( comparedPermissions)                                                           # Database'den seçilen apk'nın izinlerinin tehlike düzeylerini almamız gerekli.
+
     comparedDangerRate = calculateDangerRate(comparedPermissions)
     comparedPermCount = len(comparedPermissions)
-    usersPermCount= len(usersUnfilteredPermissions)
+    usersPermCount = len(usersUnfilteredPermissions)
 
+    tolerance_rate = 0.05                                                                                               # Tolerans değerimiz ne kadar yüksekse o kadar az toleransımız var. 0-1 aralığında değer alabilir.
+    permRisk = True
 
-    tolerance_rate=0.05 #Tolerans değerimiz ne kadar yüksekse o kadar az toleransımız var. 0-1 aralığında değer alabilir.
-    permRisk=True
+    if filteredDangerRate > comparedDangerRate and usersPermCount < comparedPermCount:                                  # Ekstra izinlerdeki tehlikeli iiznlerin oranı orijinal apk oranından fazla ve şüpheli izin sayısı orijinal APK izin sayısından büyükse kesinlikle şüphelidir.
+        permRisk = False
 
-    if filteredDangerRate>comparedDangerRate and usersPermCount<comparedPermCount: #Ekstra izinlerdeki tehlikeli iiznlerin oranı orijinal apk oranından fazla ve şüpheli izin sayısı orijinal APK izin sayısından büyükse kesinlikle şüphelidir.
-        permRisk=False
+    if filteredDangerRate > comparedDangerRate:                                                                         # Ekstra izinlerdeki riskli izinlerin oranı normal aplikasyondaki orandan göre daha mı fazla? Bütün izin oranlarını karşılaştır.
+        differential = filteredDangerRate - comparedDangerRate                                                          # Riskli izin oranlarının farkı 0.25-0.20 diyelim. Orijinal apk total izin sayısı 100, şüpheli apk için total izin sayısı 110 olsun
+        differential = differential * 100                                                                               # %5 oranını belli bir tolerans değeri ile yakalamaya çalışacağız
 
-    if filteredDangerRate>comparedDangerRate:       #Ekstra izinlerdeki riskli izinlerin oranı normal aplikasyondaki orandan göre daha mı fazla? Bütün izin oranlarını karşılaştır.
-        differential=filteredDangerRate-comparedDangerRate      #Riskli izin oranlarının farkı 0.25-0.20 diyelim. Orijinal apk total izin sayısı 100, şüpheli apk için total izin sayısı 110 olsun
-        differential=differential*100   #%5 oranını belli bir tolerans değeri ile yakalamaya çalışacağız
+        stubRate = comparedPermCount + (
+                    comparedPermCount / differential)                                                                   # 100+(100/5)=120. Eğer şüpheli APK'mızın izin sayısı 120 civarı ise bu riskli izinlerdeki artışı tolere edebiliriz.
 
-        stubRate=comparedPermCount+(comparedPermCount/differential) #100+(100/5)=120. Eğer şüpheli APK'mızın izin sayısı 120 civarı ise bu riskli izinlerdeki artışı tolere edebiliriz.
+        if not math.isclose(usersPermCount / stubRate, 1,
+                            abs_tol=tolerance_rate):                                                                    # Eğer şüpheli APK'nın istediği izin miktarı, güvenli APK'nın aynı izin miktarına sahi olsaydı isteyeceği riskli izin değeri ile tolere edilen değer kadar yakın değilse APK risklidir.
+            permRisk = False
 
-        if not math.isclose(usersPermCount/stubRate,1,abs_tol=tolerance_rate): #Eğer şüpheli APK'nın istediği izin miktarı, güvenli APK'nın aynı izin miktarına sahi olsaydı isteyeceği riskli izin değeri ile tolere edilen değer kadar yakın değilse APK risklidir.
-            permRisk=False
-
-
-    malwarePopularIntents = ["BOOT_COMPLETED","SENDTO","DIAL","SCREEN_OFF","TEXT","SEND","USER_PRESENT","PACKAGE_ADDED","SCREEN_ON","CALL",]
-    riskyIntents=[]
-    intentRisk=True
+    malwarePopularIntents = ["BOOT_COMPLETED", "SENDTO", "DIAL", "SCREEN_OFF", "TEXT", "SEND", "USER_PRESENT",
+                             "PACKAGE_ADDED", "SCREEN_ON", "CALL", ]
+    riskyIntents = []
+    intentRisk = True
 
     for intent in intents:
         for riskyIntent in malwarePopularIntents:
-            if riskyIntent==intent:
+            if riskyIntent == intent:
                 riskyIntents.append(riskyIntent)
 
-    if len(riskyIntents)>0:
-        intentRisk=False
+    if len(riskyIntents) > 0:
+        intentRisk = False
 
-
-    conclusion=""
+    conclusion = ""
 
     if not permRisk:
         if not intentRisk:
-            conclusion="Dangerous"
-        else:                                           # İzinler şüpheli && Intent'ler şüpheli -> Malware
-            conclusion="Moderate"                       # İzinler şüpheli && Intent'ler normal  -> Moderate
-    else:                                               # İzinler normal && Intent'ler normal -> Safe
-        conclusion="Might Be Safe"
+            conclusion = "Dangerous"
+        else:                                                                                                           # İzinler şüpheli && Intent'ler şüpheli -> Malware
+            conclusion = "Moderate"                                                                                     # İzinler şüpheli && Intent'ler normal  -> Moderate
+    else:                                                                                                               # İzinler normal && Intent'ler normal -> Safe
+        conclusion = "Might Be Safe"
 
-    return conclusion,riskyIntents
+    return conclusion, riskyIntents
 
 
 def calculateDangerRate(permissions):
@@ -412,33 +410,30 @@ def calculateDangerRate(permissions):
         return 0
 
 
-#HTML Output
-def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
-
-    username=os.path.splitext(username)[0]
-    cmpname=os.path.splitext(cmpname)[0]
-
+# HTML Output
+def create_report(permissions, intents, fbackup, fdebug, tag, username, cmpname):
+    username = os.path.splitext(username)[0]
+    cmpname = os.path.splitext(cmpname)[0]
 
     now = datetime.now()
     dateTime = str(now.strftime("%d:%m:%Y\ %H:%M\ "))
 
-    fileName=dateTime+"-"+username+"\-\ "+cmpname+".html"
-    print("filename:",fileName)
+    fileName = dateTime + "-" + username + "\-\ " + cmpname + ".html"
+    print("filename:", fileName)
 
-
-    #intro ve puanlama
+    # intro ve puanlama
 
     titles = '<p style="text-align: center;"><span style="color: #0000ff;"><strong>APKScaler</strong></span></p><p style="text-align: center;"><span style="color: #0000ff;"><strong>Analysis Conclusion:'
-    explanations='<p style="text-align: justify;"><p style="text-align: center;"><span style="color: #00ff00;"><strong><span style="color: #0000ff;">Report Date: </span> <span style="color: #0000ff;">'+dateTime+'</span></strong></span></p>' \
-                 '<p style="text-align: center;"><span style="color: #0000ff;"><strong>'+cmpname+' </strong></span><strong> - </strong><span style="color: #0000ff;"><strong>'+username+' </strong></span></p><p style="text-align: center;">&nbsp;</p>' \
-                 '<span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">Your app has been reviewed by 3 categories:</span></strong></span>'\
-                        '</p><ol style="margin:5px;"><li style="margin:5px;text-align: justify; "><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
-                        'Permissions: These are <span class="ILfuVd"><span class="hgKElc">special privileges that your app must ask for your permission to use when it needs or wants to access the data on your phone.</span></span></span></strong></span>'\
-                        ' </li><li style="margin:5px;text-align: justify;"><span style=" color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
-                        'Intents: You can think these as ports which the app can use to interact with itself, system or other apps. As like all everything, these can be abused as well.</span></strong></span></li><li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">'\
-                        'Flags: We have checked 2 flags in your apps manifest file. While these flags may not be directly related to malware, setting these may jepardise your data reliability and cause data leaks and other problems. '\
-                        'If you are the author off the app you have analyzed, you may want to check these.</span></strong></span><ul><li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">isDebuggable: This states wether the app is debuggable in user mode.</span></strong></span></li>'\
-                        '<li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">allowBackup: Applications that store sensitive data should set this to false because these data might be exposed to an attacker through adb.</span></strong></span></li></ul></li></ol>'
+    explanations = '<p style="text-align: justify;"><p style="text-align: center;"><span style="color: #00ff00;"><strong><span style="color: #0000ff;">Report Date: </span> <span style="color: #0000ff;">' + dateTime + '</span></strong></span></p>' \
+                                                                                                                                                                                                                         '<p style="text-align: center;"><span style="color: #0000ff;"><strong>' + cmpname + ' </strong></span><strong> - </strong><span style="color: #0000ff;"><strong>' + username + ' </strong></span></p><p style="text-align: center;">&nbsp;</p>' \
+                                                                                                                                                                                                                                                                                                                                                                                                        '<span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">Your app has been reviewed by 3 categories:</span></strong></span>' \
+                                                                                                                                                                                                                                                                                                                                                                                                        '</p><ol style="margin:5px;"><li style="margin:5px;text-align: justify; "><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">' \
+                                                                                                                                                                                                                                                                                                                                                                                                        'Permissions: These are <span class="ILfuVd"><span class="hgKElc">special privileges that your app must ask for your permission to use when it needs or wants to access the data on your phone.</span></span></span></strong></span>' \
+                                                                                                                                                                                                                                                                                                                                                                                                        ' </li><li style="margin:5px;text-align: justify;"><span style=" color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">' \
+                                                                                                                                                                                                                                                                                                                                                                                                        'Intents: You can think these as ports which the app can use to interact with itself, system or other apps. As like all everything, these can be abused as well.</span></strong></span></li><li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">' \
+                                                                                                                                                                                                                                                                                                                                                                                                        'Flags: We have checked 2 flags in your apps manifest file. While these flags may not be directly related to malware, setting these may jepardise your data reliability and cause data leaks and other problems. ' \
+                                                                                                                                                                                                                                                                                                                                                                                                        'If you are the author off the app you have analyzed, you may want to check these.</span></strong></span><ul><li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">isDebuggable: This states wether the app is debuggable in user mode.</span></strong></span></li>' \
+                                                                                                                                                                                                                                                                                                                                                                                                        '<li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">allowBackup: Applications that store sensitive data should set this to false because these data might be exposed to an attacker through adb.</span></strong></span></li></ul></li></ol>'
 
     permissionTable = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
                       '<span style="color: #ff0000;"><strong>Excessive Permissions</strong></span>' \
@@ -448,13 +443,13 @@ def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
                       '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Permission</strong></td>' \
                       '<td style="width: 33.3333%; text-align: center; height: 18px;"><strong>Protection Level</strong></td>' \
                       '</tr>'
-    intentTable= '<div style=" text-align: center; width: 25%;  top:0;bottom: 0;left: 0;right: 0;margin-left: auto; margin-right:auto;margin-top:25px;">' \
-                      '<span style="color: #ff0000;"><strong>Intents Your App And Other Malware Uses In Common</strong></span>' \
-                      '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
-                      '<tbody>' \
-                      '<tr style="height: 18px;">' \
-                      '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Intent </strong></td>' \
-                      '</tr>'
+    intentTable = '<div style=" text-align: center; width: 25%;  top:0;bottom: 0;left: 0;right: 0;margin-left: auto; margin-right:auto;margin-top:25px;">' \
+                  '<span style="color: #ff0000;"><strong>Intents Your App And Other Malware Uses In Common</strong></span>' \
+                  '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
+                  '<tbody>' \
+                  '<tr style="height: 18px;">' \
+                  '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Intent </strong></td>' \
+                  '</tr>'
 
     with open("index.html") as fp:
         soup = BeautifulSoup(fp, 'html.parser')
@@ -462,15 +457,18 @@ def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
 
     with open("index.html", "w") as fp:
         fp.write(str(titles))
-        if str(tag)=="Dangerous":
-            fp.write('<span style="background-color: #ff0000; color: #000000;">Dangerous</span></strong>&nbsp;</span></p>')
-        elif str(tag)=="Moderate":
-            fp.write('<span style="background-color: #ff6600; color: #000000;">Moderate</span></strong>&nbsp;</span></p>')
+        if str(tag) == "Dangerous":
+            fp.write(
+                '<span style="background-color: #ff0000; color: #000000;">Dangerous</span></strong>&nbsp;</span></p>')
+        elif str(tag) == "Moderate":
+            fp.write(
+                '<span style="background-color: #ff6600; color: #000000;">Moderate</span></strong>&nbsp;</span></p>')
         else:
-            fp.write('<span style="background-color: #808080; color: #000000;">Might Be Safe</span></strong>&nbsp;</span></p>')
+            fp.write(
+                '<span style="background-color: #808080; color: #000000;">Might Be Safe</span></strong>&nbsp;</span></p>')
         fp.write(str(explanations))
 
-        #permissions
+        # permissions
         fp.write(str(permissionTable))
         for key in permissions:
             if str(permissions[key]).__contains__("dangerous"):
@@ -491,24 +489,24 @@ def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
                 )
         fp.write(str("</tbody></table></div>"))
 
-        #intents
+        # intents
         fp.write(intentTable)
         for intent in intents:
-            fp.write(str('<tr><td>' + intent + '</td></tr>' ))
+            fp.write(str('<tr><td>' + intent + '</td></tr>'))
         fp.write(str("</tbody></table></div>"))
 
         # flagler
         fp.write('<p style="text-align: center;"><span style="color: #ff0000;"><strong>Flags</strong></span></p>')
-        if str(fdebug)=="True" or str(fdebug)=="true":
+        if str(fdebug) == "True" or str(fdebug) == "true":
             fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>debuggable: '
                      '<span style="background-color: #ff0000;">ENABLED</span></strong></span></p>')
         else:
             fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>debuggable: '
                      '<span style="background-color: #00ff00;">DISABLED</span></strong></span></p>')
-        if str(fbackup)=="True" or str(fbackup)=="true":
+        if str(fbackup) == "True" or str(fbackup) == "true":
             fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
                      '<span style="background-color: #ff0000;">ENABLED</span></strong></span></p>')
-        elif str(fbackup)=="False" or str(fbackup)=="false":
+        elif str(fbackup) == "False" or str(fbackup) == "false":
             fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
                      '<span style="background-color: #00ff00;">DISABLED</span></strong></span></p>')
         else:
@@ -517,12 +515,8 @@ def create_report(permissions,intents,fbackup,fdebug,tag,username,cmpname):
 
     fileName.replace(" ", "\ ")
 
-    cmd = " cp index.html ./reports/"+fileName
-
+    cmd = " cp index.html ./reports/" + fileName
 
     os.system(cmd)
 
-
     webbrowser.open("file://" + os.path.realpath("index.html"))
-
-

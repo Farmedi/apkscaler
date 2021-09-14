@@ -3,8 +3,6 @@ import os
 import sys
 
 import functions as fnc
-
-
 class manifest:
     def __init__(self):
         self.permissionList = []
@@ -52,7 +50,6 @@ class manifest:
 
 
 
-
 fnc.analyze_addresses()
 sys.exit()
 users_mnf = manifest()
@@ -66,7 +63,6 @@ fnc.check_db_exists()  # DB klasörü var mı
 toBeCompared = fnc.select_compared_from_db()  # Kıyaslanacak dosyayı aldık.
 compared_mnf.set_name(os.path.basename(toBeCompared))
 
-#fnc.decompile_and_dispose()  # Parametre olarak verilen APK'nın manifest'inin elde edilip kalan dosyaların silinmesi
 users_mnf.set_name(fnc.decompile_and_dispose())
 
 users_mnf.set_permission_list(fnc.parse_users_permissions())  # Elde edilen manifestteki izinler parse'landı
@@ -77,11 +73,11 @@ users_mnf.set_intent_filter_list(fnc.parse_users_intent_filters())  # Elde edile
 compared_mnf.set_intent_filter_list(fnc.parse_intents_to_compare(toBeCompared))  # Kıyaslanacak olan manifestteki intent'ler parse'landı
 
 
-users_mnf.set_servicesList(fnc.parse_users_services())
-compared_mnf.set_servicesList(fnc.parse_services_to_compare(toBeCompared))
+# users_mnf.set_servicesList(fnc.parse_users_services())
+# compared_mnf.set_servicesList(fnc.parse_services_to_compare(toBeCompared))
 
 
-filteredServicesList = fnc.filter_list(users_mnf.get_services_list(), compared_mnf.get_services_list())
+# filteredServicesList = fnc.filter_list(users_mnf.get_services_list(), compared_mnf.get_services_list())
 filteredPermissionList = fnc.filter_list(users_mnf.get_permission_list(), compared_mnf.get_permission_list()) # test ettiğimiz apk, orijinal apk'dan farklı olarak hangi izinleri ve intentleri istiyor
 filteredIntentList = fnc.filter_list(users_mnf.get_intent_filter_list(),compared_mnf.get_intent_filter_list())
 
@@ -97,12 +93,12 @@ compared_mnf.set_is_backup_allowed(
     allowedBackup)  # compared manifest için debuggable ve allowedbackup attribute larını aldık
 
 
-debuggablesus = False
-allowedBackupsus = False
-if users_mnf.get_is_debuggable() == "true" and compared_mnf.get_is_debuggable() != "true":
-    debuggablesus = True
-if users_mnf.get_is_backup_allowed() == "true" and compared_mnf.get_is_backup_allowed() != "true":
-    allowedBackupsus = True  # bu flagler kullanıcının APK'sında var, kıyaslanacak apk'da yok ise şüpheli bayrağı true yapıyoruz. (KULLANILMADI.)
+# debuggablesus = False
+# allowedBackupsus = False
+# if users_mnf.get_is_debuggable() == "true" and compared_mnf.get_is_debuggable() != "true":
+#     debuggablesus = True
+# if users_mnf.get_is_backup_allowed() == "true" and compared_mnf.get_is_backup_allowed() != "true":
+#     allowedBackupsus = True  # bu flagler kullanıcının APK'sında var, kıyaslanacak apk'da yok ise şüpheli bayrağı true yapıyoruz. (KULLANILMADI.)
 
 
 
@@ -117,7 +113,7 @@ tag,intentList=fnc.rate_apk(compared_mnf.get_permission_list(),filteredPermissio
 
 fnc.create_report(filteredPermissionList,intentList,users_mnf.get_is_backup_allowed(),users_mnf.get_is_backup_allowed(),tag,users_mnf.get_name(),compared_mnf.get_name())
 
-
+fnc.analyze_addresses()
 
 
 
