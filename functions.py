@@ -4,22 +4,98 @@ import json
 import math
 import os
 import re
+import time
+import types
 import webbrowser
 from datetime import datetime
 from bs4 import BeautifulSoup
 import sys
 from xml.dom.minidom import parseString
 from pathlib import Path
-
+from types import SimpleNamespace
 from vtapi3 import VirusTotalAPIIPAddresses, VirusTotalAPIError, VirusTotalAPIUrls
+import fpdf
+from multipledispatch import dispatch
+
+
+class allResponses:
+    allResponses = []
+
+    def pushToList(self, response):
+        self.allResponses.append(response)
+
+    def getList(self):
+        return self.allResponses
+
+
+class response:
+
+    def __init__(self, last_analysis_stats, url, message):
+        self.last_analysis_stats = last_analysis_stats
+        self.url = url
+        self.message = message
+
+
+class request:
+
+    @dispatch(VirusTotalAPIUrls, str)
+    def request_and_parse(vt_urls, address):
+
+        vt_urls = vt_urls
+
+        try:
+
+            result = vt_urls.get_report(base64.urlsafe_b64encode(address.encode()).decode().strip("="))
+            result = json.loads(result, object_hook=lambda d: SimpleNamespace(**d))
+
+
+        except VirusTotalAPIError as err:
+            push = response(None, address, "API Error. Message:" + str(err))
+            return push
+        else:
+            if vt_urls.get_last_http_error() == vt_urls.HTTP_OK:
+
+                push = response(result.data.attributes.last_analysis_stats, result.data.attributes.url,
+                                "Request fulfilled.")
+                return push
+            else:
+
+                push = response(None, address, "Request failed. Code: " + str(vt_urls.get_last_http_error()))
+                return push
+
+    @dispatch(VirusTotalAPIIPAddresses, str)
+    def request_and_parse(vt_api_ip, address):
+
+
+        vt_api_ip = vt_api_ip
+
+        try:
+
+            result = vt_api_ip.get_report("address")
+            result = json.loads(result, object_hook=lambda d: SimpleNamespace(**d))
+
+        except VirusTotalAPIError as err:
+            push = response(None, address, "API Error. Error: " + str(err))
+            return push
+        else:
+            if vt_api_ip.get_last_http_error() == vt_api_ip.HTTP_OK:
+
+                push = response(result.data.attributes.last_analysis_stats, address, "Request fulfilled.")
+                return push
+            else:
+
+                push = response(None, address, "Request failed. Code:" + str(vt_api_ip.get_last_http_error()))
+                return push
 
 
 def decompile_and_dispose():
     directory = sys.argv[1]  # python main.py directory
 
     cmd = "apktool d -f  " + directory + " -o temp"
-    os.system(cmd)  # temp içerisine decompile edildi
-
+    try:
+        os.system(cmd)  # temp içerisine decompile edildi
+    except:
+        print("apktool was unable to decompile your app.")
     cmd = "mv temp/AndroidManifest.xml ./fake.xml && rm -r temp"  # Android manifest ayıklandı ve kalan dosyalara ihtiyaç olmadığı için silindi.
     os.system(cmd)
 
@@ -28,18 +104,14 @@ def decompile_and_dispose():
 
 def analyze_addresses():
     # decompile
-    directory = sys.argv[1]
-    cmd = "d2j-dex2jar " + directory
-    try:
-        os.system(cmd)
-    except:
-        print("Dex2jar was unable to decompile your app.")
-        sys.exit()
 
+    apiFT = "ce982fc75e3417a47ad5a6aa9e95afcc4a1207d07f8144e0a3004e019d61efe6"
+    api19 = "3a0d01adbef89c562cd3d341309f9af15104ed9bb4cde8c7c1ca9a6735098425"
+    directory = sys.argv[1]
 
     apkName = Path(directory).stem
-    jarpath = os.getcwd() + "/" + apkName + "-dex2jar.jar"
-    cmd = "jadx " + jarpath                                                                                             #Tool'lar için exception
+
+    cmd = "jadx -r " + directory  # Tool'lar için exception
     try:
         os.system(cmd)
     except:
@@ -51,78 +123,57 @@ def analyze_addresses():
 
     # detect ip and web addresses
     patternIp = re.compile('''((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)''')
-    patternWeb = re.compile(
-        r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))")
+    patternWeb = re.compile("http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+")
 
-    os.system(cmd)
     rootdir = os.getcwd()
+    print("Parsing web and IP adresses from .xml and .java files...")
     for folder, dirs, files in os.walk(rootdir):
         for file in files:
-            if file.endswith('.java'):
+            if file.endswith('.java') or file.endswith('.xml'):
                 fullpath = os.path.join(folder, file)
                 with open(fullpath, 'r') as f:
                     for line in f:
                         line = line.rstrip()
-                        ip = patternIp.search(line)                                                                     #Bu işlemi daha kısa sürede nasıl yaparız ?
+                        ip = patternIp.search(line)  # Bu işlemi daha kısa sürede nasıl yaparız ?
                         web = patternWeb.search(line)
                         if ip:
-                            ipAddresses.append(patternIp.search(line).group(1))
+                            ipAddresses.append(patternIp.search(line).group(0))
                         if web:
-                            webAddresses.append(patternWeb.search(line).group(1))
+                            webAddresses.append(patternWeb.search(line).group(0))
 
-    # temp = []
-    # for adr in webAddresses:
-    #     temp.append(patternWeb.search(adr).group(1))
-    # webAddresses = temp
-    #
-    # temp = []                                                                                                           #IP ve Web için case oluşturulacak
-    # for adr in ipAddresses:
-    #     temp.append(patternIp.search(adr).group(1))
-    # ipAddresses = temp
-
-    vt_api_ip = VirusTotalAPIIPAddresses("ce982fc75e3417a47ad5a6aa9e95afcc4a1207d07f8144e0a3004e019d61efe6")
-    fileName=apkName+".txt"
-    for ip in ipAddresses:
-        try:
-            result = vt_api_ip.get_report(ip)
-            result = json.loads(result)
-
-        except VirusTotalAPIError as err:
-            print(err)
-        else:
-            if vt_api_ip.get_last_http_error() == vt_api_ip.HTTP_OK:
-                # print("harmless:" + str(result["data"]["attributes"]["last_analysis_stats"]["harmless"]))               # JSON deserialization olacak
-                # print("malicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["malicious"]))
-                # print("suspicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["suspicious"]))
-                result=json.dump(result,skipkeys=False,indent=4)
-                with open(fileName,'w') as file:
-                    file.write(result)
-                    file.close()
+    webAddresses = list(set(webAddresses))
+    ipAddresses = list(set(ipAddresses))
 
 
-    vt_urls = VirusTotalAPIUrls('ce982fc75e3417a47ad5a6aa9e95afcc4a1207d07f8144e0a3004e019d61efe6')
+    responseList = allResponses()
+    fileName = apkName + ".txt"
+    print("\n Analyzing IP addresses...\n")
+    # for ip in ipAddresses:
+    #     responseList.pushToList(request.request_and_parse(VirusTotalAPIIPAddresses(apiFT), ip))
+
+    print("\n Analyzing Web addresses...\n")
     for address in webAddresses:
-        print(address)
-        try:
-            urlId = base64.urlsafe_b64encode(address.encode()).decode().strip("=")
-            # urlId = VirusTotalAPIUrls.get_url_id_base64('address')
-            result = vt_urls.get_report(urlId)
-            result = json.loads(result)
-            result = json.dumps(result,skipkeys=False,indent=4)
+        responseList.pushToList(request.request_and_parse(VirusTotalAPIUrls(apiFT), address))
 
-        except VirusTotalAPIError as err:
-            print(err)
 
-        else:
-            if vt_urls.get_last_http_error() == vt_urls.HTTP_OK:
-                # print("harmless:" + str(result["data"]["attributes"]["last_analysis_stats"]["harmless"]))
-                # print("malicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["malicious"]))
-                # print("suspicious:" + str(result["data"]["attributes"]["last_analysis_stats"]["suspicious"]))
-                with open(fileName,'w') as file:
-                    file.write(result)
-                    file.close()
+    print_to_text_file(fileName,responseList.getList())
+
+def print_to_text_file(filename,list):
+    with open(filename,'w') as txt:
+        for resp in list:
+
+            if resp.message == "Request fulfilled.":
+                txt.write("Address: "+str(resp.url))
+                txt.write("\n\t Harmless: "+str(resp.last_analysis_stats.harmless))
+                txt.write("\n\t Malicious: "+str(resp.last_analysis_stats.malicious))
+                txt.write("\n\t Suspicious: "+str(resp.last_analysis_stats.suspicious))
+                txt.write("\n\t Undetected: "+str(resp.last_analysis_stats.undetected))
             else:
-                print("HTTP error")
+                txt.write("Address: "+str(resp.url))
+                txt.write("\n\t Couldnt fetch address stats.")
+                txt.write("\n\t Error: "+str(resp.message))
+            txt.write("\n--------------------\n")
+
 
 
 def clean_up():
@@ -339,29 +390,29 @@ def get_perm_info(list):
 
 # Score
 def rate_apk(comparedPermissions, usersPermissions, usersUnfilteredPermissions, intents):
-
     filteredDangerRate = calculateDangerRate(usersPermissions)
-    comparedPermissions = get_perm_info( comparedPermissions)                                                           # Database'den seçilen apk'nın izinlerinin tehlike düzeylerini almamız gerekli.
+    comparedPermissions = get_perm_info(
+        comparedPermissions)  # Database'den seçilen apk'nın izinlerinin tehlike düzeylerini almamız gerekli.
 
     comparedDangerRate = calculateDangerRate(comparedPermissions)
     comparedPermCount = len(comparedPermissions)
     usersPermCount = len(usersUnfilteredPermissions)
 
-    tolerance_rate = 0.05                                                                                               # Tolerans değerimiz ne kadar yüksekse o kadar az toleransımız var. 0-1 aralığında değer alabilir.
+    tolerance_rate = 0.05  # Tolerans değerimiz ne kadar yüksekse o kadar az toleransımız var. 0-1 aralığında değer alabilir.
     permRisk = True
 
-    if filteredDangerRate > comparedDangerRate and usersPermCount < comparedPermCount:                                  # Ekstra izinlerdeki tehlikeli iiznlerin oranı orijinal apk oranından fazla ve şüpheli izin sayısı orijinal APK izin sayısından büyükse kesinlikle şüphelidir.
+    if filteredDangerRate > comparedDangerRate and usersPermCount < comparedPermCount:  # Ekstra izinlerdeki tehlikeli iiznlerin oranı orijinal apk oranından fazla ve şüpheli izin sayısı orijinal APK izin sayısından büyükse kesinlikle şüphelidir.
         permRisk = False
 
-    if filteredDangerRate > comparedDangerRate:                                                                         # Ekstra izinlerdeki riskli izinlerin oranı normal aplikasyondaki orandan göre daha mı fazla? Bütün izin oranlarını karşılaştır.
-        differential = filteredDangerRate - comparedDangerRate                                                          # Riskli izin oranlarının farkı 0.25-0.20 diyelim. Orijinal apk total izin sayısı 100, şüpheli apk için total izin sayısı 110 olsun
-        differential = differential * 100                                                                               # %5 oranını belli bir tolerans değeri ile yakalamaya çalışacağız
+    if filteredDangerRate > comparedDangerRate:  # Ekstra izinlerdeki riskli izinlerin oranı normal aplikasyondaki orandan göre daha mı fazla? Bütün izin oranlarını karşılaştır.
+        differential = filteredDangerRate - comparedDangerRate  # Riskli izin oranlarının farkı 0.25-0.20 diyelim. Orijinal apk total izin sayısı 100, şüpheli apk için total izin sayısı 110 olsun
+        differential = differential * 100  # %5 oranını belli bir tolerans değeri ile yakalamaya çalışacağız
 
         stubRate = comparedPermCount + (
-                    comparedPermCount / differential)                                                                   # 100+(100/5)=120. Eğer şüpheli APK'mızın izin sayısı 120 civarı ise bu riskli izinlerdeki artışı tolere edebiliriz.
+                comparedPermCount / differential)  # 100+(100/5)=120. Eğer şüpheli APK'mızın izin sayısı 120 civarı ise bu riskli izinlerdeki artışı tolere edebiliriz.
 
         if not math.isclose(usersPermCount / stubRate, 1,
-                            abs_tol=tolerance_rate):                                                                    # Eğer şüpheli APK'nın istediği izin miktarı, güvenli APK'nın aynı izin miktarına sahi olsaydı isteyeceği riskli izin değeri ile tolere edilen değer kadar yakın değilse APK risklidir.
+                            abs_tol=tolerance_rate):  # Eğer şüpheli APK'nın istediği izin miktarı, güvenli APK'nın aynı izin miktarına sahi olsaydı isteyeceği riskli izin değeri ile tolere edilen değer kadar yakın değilse APK risklidir.
             permRisk = False
 
     malwarePopularIntents = ["BOOT_COMPLETED", "SENDTO", "DIAL", "SCREEN_OFF", "TEXT", "SEND", "USER_PRESENT",
@@ -382,9 +433,9 @@ def rate_apk(comparedPermissions, usersPermissions, usersUnfilteredPermissions, 
     if not permRisk:
         if not intentRisk:
             conclusion = "Dangerous"
-        else:                                                                                                           # İzinler şüpheli && Intent'ler şüpheli -> Malware
-            conclusion = "Moderate"                                                                                     # İzinler şüpheli && Intent'ler normal  -> Moderate
-    else:                                                                                                               # İzinler normal && Intent'ler normal -> Safe
+        else:  # İzinler şüpheli && Intent'ler şüpheli -> Malware
+            conclusion = "Moderate"  # İzinler şüpheli && Intent'ler normal  -> Moderate
+    else:  # İzinler normal && Intent'ler normal -> Safe
         conclusion = "Might Be Safe"
 
     return conclusion, riskyIntents
