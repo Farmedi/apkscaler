@@ -9,9 +9,11 @@ Dependencies:
     -Python 3.6+ (2.9+ might also work but its not tested therefore not recommended.)
       -BeautifulSoup4
       -webbrowser
+      -requests
+      -multipledispatcher
     -APKtool
     -Jadx
-    -Dex2Jar
+    
 
 Usage:
 python main.py [Directory of the APK you would like to compare]
