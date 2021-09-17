@@ -11,6 +11,7 @@ Dependencies:
       -webbrowser
       -requests
       -multipledispatcher
+      -fpdf
     -APKtool
     -Jadx
     
