@@ -1,0 +1,358 @@
+boyd{
+    background:#8a98c2;
+}
+#subview_container, #activator_container {
+    display: block;
+    /*height: 700px; min-height: 700px; max-height: 700px;*/
+    height: 100%;
+    background:#8a98c2;
+}
+
+#activator_container {
+    font-family: open-sans, sans-serif;
+    font-size: 108%;
+}
+
+#activator_sidebar {
+
+    
+
+}
+
+/* SEARCH BOX */
+
+#activator_search_container {
+    width: 100%; 
+   
+    margin: 0 8px 1em 8px;
+    padding-top: 1em;
+}
+
+#activator_search_container form.search_box {
+    display: block;
+    position: relative;
+}
+
+#activator_search_container form.search_box .search_input {
+
+    border: 1px solid #888;
+    border-right: none;
+    font-size: smaller;
+    font-weight: normal;
+    color: #000;
+    top: 0; left: 0;
+    width: 185px;
+    height: 15px; line-height: 15px;
+    padding: 4px;
+
+}
+
+#activator_search_container form.search_box .search_button {
+    border: 1px solid #888;
+    color: #fff;
+    font-weight: bold;
+    position: absolute;
+    top: 0; 
+    width: 30px;
+    height: 25px;
+    padding: 3px 0 6px 0;
+    background: #cbcaca;
+}
+
+.search_button_pressed { background: #888; }
+
+/* WORDLIST SELECT (RADIO BUTTONS) */
+
+#activator_wordlist_select_container {
+    display: block;
+    padding-bottom: 1ex;
+}
+
+#activator_wordlist_select_container form {
+    text-align: center;
+}
+
+/* WORDLIST SELECT (TABS) */
+
+#activator_wordlist_select_tabs_container {
+    display:block;
+    width: 226px;
+    position: relative;
+    top: 1px;
+}
+
+.wordlist_tab {
+    width:109px;
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    font-size: 110%;
+    font-weight: bold;
+    padding: 5px 0;
+    border-radius: 4px 4px 0 0;
+    cursor: pointer
+}
+
+.wordlist_tab.active {
+    background-color: white;
+    color: #666666;
+    border-bottom: 1px solid white;
+    cursor: normal
+}
+
+
+/* ALPHA LIST */
+
+#activator_wordlist_container {
+    display: block;
+
+    margin: 0 8px;
+    position: relative;
+}
+
+#activator_wordlist {
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 0 0 5px 5px;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    height: 100%;
+    width:100%
+}
+
+#activator_wordlist_container ul {
+    padding: 0;
+    margin: 1ex 1ex 0 1ex;
+}
+
+#activator_wordlist_container li {
+    color: #444;
+    border: 2px solid transparent;
+    list-style: none;
+    margin-bottom: 1px;
+}
+
+#activator_wordlist_container li.selected {
+    border: 2px solid #ffdd55;
+    list-style: none;
+}
+
+
+#activator_wordlist_container li a {
+    display: block;
+    text-indent: -1ex;
+    margin-left: 1ex;
+}
+
+#activator_wordlist_container li a, 
+#activator_wordlist_container li a:link, 
+#activator_wordlist_container li a:visited {
+    text-decoration: none;
+    color: blue;
+}
+
+/* ALPHA LIST - CONCEPTS */
+
+#activator_wordlist_container a.concept, #activator_wordlist_container span.concept {
+    font-weight: bold;
+}
+
+/* ALPHA LIST - INDEX */
+
+#activator_wordlist_container span.keyword {
+    font-weight: bold;
+}
+
+
+/* SECTION MENU */
+
+#activator_section_menu {
+    display: block;
+    background-color: #8a98c2;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 240px;
+    width: 248px;
+    padding-left: 7px;
+    padding-right: 6px;
+    /*height: 100%;*/
+}
+
+#activator_section_menu h1 {
+    margin-left: 0;
+}
+
+#activator_section_menu h2 {
+    font-size: 138.5%;
+    text-decoration: underline
+}
+
+#activator_section_menu h3 {
+    margin-bottom: 4px;
+}
+
+#activator_section_menu li a, 
+#activator_section_menu li a:link, 
+#activator_section_menu li a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+
+#activator_section_menu ul {
+    padding: 0;
+    /*margin: 0 1ex;*/
+    margin:0;
+}
+
+
+#activator_section_menu ol li {
+    /*color: #444;*/
+    border: 2px solid transparent;
+}
+
+#activator_section_menu ol li {
+    list-style-position: inside;
+    padding: 6px 0;
+    padding-left: 2px;
+}
+
+#activator_section_menu ol {
+    margin: 0 0 0 0;
+}
+
+
+#activator_section_menu ul li {
+    list-style: none;
+    margin-bottom: 1ex;
+}
+
+
+#activator_section_menu ol li.selected {
+    border: 2px solid #f8faff;
+    color: #1e3a85;
+    background-color: #f8faff;
+    border-radius: 2px;
+
+}
+
+#activator_section_menu li.selected a, 
+#activator_section_menu li.selected a:link, 
+#activator_section_menu li.selected a:visited {
+    color: #1e3a85;
+}
+
+.suggestions {
+    margin-top: 1em
+}
+
+.suggestions a {
+    font-weight: bold
+}
+
+
+/* SECTION CONTENT */
+
+#activator_section {
+    position: absolute;
+    display: block;
+    padding-right: 3px;
+}
+
+#activator_section span.selected {
+
+    background-color: yellow;
+}
+
+
+span.def + span.pc {
+     margin-top: 1ex;
+}
+ .pron {
+    font-family: 'voces';
+     font-size: 110%
+}
+ .pron sup {
+    top:0
+}
+ .example{
+    font-style:italic;
+    display:block;
+    color:#009145;
+}
+ .exp{
+    color:blue;
+    font-weight:bold;
+    font-size:110%;
+    color:blue;
+}
+.section .exponent{
+    display:block;
+    margin: 8px 0 10px 10px
+}
+.hintexa{
+    font-style:italic;
+}
+.hintit{
+    font-style:italic;
+}
+.reglabel{
+    color:purple;
+    font-style:italic;
+}
+.pc{
+    display:block;
+    margin-top:.25ex;
+    margin-left:1ex
+}
+.propform{
+    font-weight:bold
+}
+.repeat{
+    font-weight:600
+}
+.section{
+    display:block;
+    margin-top:8px;
+    line-height:150%;
+}
+.vari{
+    font-weight:bold;
+}
+.varitype{
+    font-style:italic;
+}
+span.neutral{
+    font-style:normal;
+    font-weight:normal;
+    font-variant:normal;
+}
+span.italic{
+    font-style:italic;
+    font-weight:normal;
+}
+span.bold{
+    font-style:normal;
+    font-weight:bold;
+}
+ .gram{
+    color:green;
+}
+ul.exa{
+    margin-top:0;
+    margin-bottom:0;
+    font-style:italic;
+}
+.runon{
+    margin-top:.5ex;
+    display:block;
+    margin-left:1.5ex;
+}
+.spelling{
+    font-weight:bold;
+    color:blue;
+}
+ 

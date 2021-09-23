@@ -1,0 +1,31 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+ul{
+    margin:8px 0px 8px 30px;
+}
+ul {
+
+}
+
+ul li a{
+    display:inline-block;
+    padding:8px 0px 8px 0px;
+}
+
+ul li{
+    clear:both;
+}
+
+ul li a.one{
+    text-decoration: none;
+    font-size:18px;
+    color:#000;
+}
+
+ul li a.two{
+    text-decoration: none;
+    font-size:16px;
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="websites">
+        <item>www.goldenspy.com</item>
+        <item>www.copy9.com</item>
+        <item>www.spytic.com</item>
+        <item>www.spytic.fr</item>
+        <item>www.spyzing.com</item>
+    </array>
+    <array name="itemsettings">
+        <item>General</item>
+        <item>GPS</item>
+        <item>Auto Answer</item>
+        <item>Call</item>
+        <item>SMS</item>
+        <item>URL</item>
+    </array>
+    <array name="descriptionitemsettings">
+        <item>Activate/Deactivate Copy9 ...</item>
+        <item>Enable save position, set filters ...</item>
+        <item>Environment listening</item>
+        <item>Capture incoming/outgoing call</item>
+        <item>Capture incoming/outgoing sms</item>
+        <item>History websites visited</item>
+    </array>
+</resources>

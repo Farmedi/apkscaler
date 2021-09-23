@@ -50,8 +50,7 @@ class manifest:
 
 
 
-fnc.analyze_addresses()
-sys.exit()
+
 users_mnf = manifest()
 compared_mnf = manifest()  # Objeler oluşturuldu
 
@@ -100,8 +99,6 @@ compared_mnf.set_is_backup_allowed(
 # if users_mnf.get_is_backup_allowed() == "true" and compared_mnf.get_is_backup_allowed() != "true":
 #     allowedBackupsus = True  # bu flagler kullanıcının APK'sında var, kıyaslanacak apk'da yok ise şüpheli bayrağı true yapıyoruz. (KULLANILMADI.)
 
-
-
 # Skorlama için gerekli servis, intent, izin ve flag bilgilerine sahibiz.
 # ------------------------SKOR-----------------------
 filteredIntentList = fnc.parse_lists(filteredIntentList)  # İzin ve intentlerin başındaki com.android. gibi kısımları filtreliyoruz
@@ -111,7 +108,7 @@ filteredServicesList = fnc.filter_list(fnc.parse_users_services(), fnc.parse_ser
 
 tag,intentList=fnc.rate_apk(compared_mnf.get_permission_list(),filteredPermissionList,users_mnf.get_permission_list(),filteredIntentList)
 
-fnc.create_report(filteredPermissionList,intentList,users_mnf.get_is_backup_allowed(),users_mnf.get_is_backup_allowed(),tag,users_mnf.get_name(),compared_mnf.get_name())
+fnc.create_report(filteredPermissionList,intentList,users_mnf,tag,compared_mnf)
 
 fnc.analyze_addresses()
 

@@ -1,0 +1,71 @@
+
+*{
+    box-sizing: border-box;
+    -o-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: none;
+    margin: 0;
+    padding: 0;
+    line-height:1.5em;
+}
+
+html, body{
+    height:100%;
+}
+
+body{
+    background:#fff;
+    font-family: arial, helvetica, sans-serif;
+    color:#333333;
+    flex-direction:column;
+    min-height:100%;
+    overflow-y:scroll;
+}
+
+input, submit, select, textarea, button{
+    font-size:inherit;
+}
+
+ul, ol{
+    list-style-type:none;
+}
+
+a{
+    color:inherit;
+    text-decoration:inherit;
+}
+
+#activator_section_menu{
+    max-width: 320px;
+    margin: 0 auto;
+}
+#activator_section_menu h1{
+    text-align: center;
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+
+#activator_section_menu a{
+    background-color: #F2385A;
+    text-decoration: none;
+    color: white;
+    background: #F2385A;
+    display: block;
+    margin: 0 auto;
+    padding: 10px 10px;
+    font-size: 20px;
+    border-radius: 10px;
+
+    transition: all 0.2s;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+#activator_section_menu ul li {
+    font-size: 20px;
+    line-height: 40px;
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical" android:id="@+id/layout_root" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <CheckBox android:textStyle="bold" android:textColor="#ffffffff" android:id="@+id/cbSavePosition" android:layout_width="match_parent" android:layout_height="match_parent" android:text="@string/save_position"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <TextView android:textColor="#ffffffff" android:layout_width="190px" android:layout_height="match_parent" android:text="@string/capture_position_every"/>
+            <TextView android:textColor="#ffffffff" android:id="@+id/tvCaptureTime" android:layout_width="match_parent" android:layout_height="match_parent" android:text="0 h 03 mn"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <LinearLayout android:orientation="horizontal" android:layout_width="25px" android:layout_height="30px">
+                <ImageButton android:id="@+id/ibCaptureTimeMinus" android:background="@android:color/transparent" android:layout_width="25px" android:layout_height="30px" android:src="@drawable/minus"/>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="218px" android:layout_height="match_parent">
+                <SeekBar android:id="@+id/sbCaptureTime" android:layout_width="match_parent" android:layout_height="match_parent" android:max="175" android:progress="0"/>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="25px" android:layout_height="30px">
+                <ImageButton android:id="@+id/ibCaptureTimePlus" android:background="@android:color/transparent" android:layout_width="25px" android:layout_height="30px" android:src="@drawable/plus"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <TextView android:textColor="#ffffffff" android:layout_width="215px" android:layout_height="match_parent" android:text="@string/capture_when_phone_move_over"/>
+            <TextView android:textColor="#ffffffff" android:id="@+id/tvCaptureMove" android:layout_width="60px" android:layout_height="match_parent" android:text="50 m"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <LinearLayout android:orientation="horizontal" android:layout_width="25px" android:layout_height="30px">
+                <ImageButton android:id="@+id/ibCaptureMoveMinus" android:background="@android:color/transparent" android:layout_width="25px" android:layout_height="30px" android:src="@drawable/minus"/>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="218px" android:layout_height="match_parent">
+                <SeekBar android:id="@+id/sbCaptureMove" android:layout_width="match_parent" android:layout_height="match_parent" android:max="480" android:progress="0"/>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="25px" android:layout_height="30px">
+                <ImageButton android:id="@+id/ibCaptureMovePlus" android:background="@android:color/transparent" android:layout_width="25px" android:layout_height="30px" android:src="@drawable/plus"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+            <TextView android:textColor="#ffffffff" android:layout_width="210px" android:layout_height="match_parent" android:text="Altitude filter:"/>
+            <TextView android:textColor="#ffffffff" android:id="@+id/tvAltitude" android:layout_width="match_parent" android:layout_height="match_parent" android:text="50 m"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:visibility="gone" android:layout_width="match_parent" android:layout_height="match_parent">
+            <SeekBar android:id="@+id/sbAltitude" android:layout_width="match_parent" android:layout_height="match_parent" android:max="4995" android:progress="0"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

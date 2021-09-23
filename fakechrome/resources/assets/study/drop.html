@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+     <link rel="stylesheet" href="css/style.css" type="text/css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+</head>
+<body>
+
+    <exercise>
+        <part>
+            <activity>
+                <activitySection id="1" class="gapfill-drop" type="gapfill-drop">
+                    <div class="sectionHeader">
+                        <h2>Adjectives not used before nouns</h2>
+                        <rubric>Some adjectives cannot be used before nouns. In the <i>Longman Dictionary of Contemporary English</i> they are labelled [not before noun]. Click on <b>incorrect</b> if the adjective is used incorrectly before a noun. Click on <b>correct</b> if it is used correctly.</rubric>
+                    </div>
+                    <question id="1-1">1. She went upstairs to check on the asleep children. <select id="1-1-1"><option/><option id="1-1-1-1">correct</option><option id="1-1-1-2" data-is-correct="1">incorrect</option></select><span style="display:none"></span><br/>2. Did you have a nice trip? <select id="1-1-1"><option/><option id="1-1-1-3" data-is-correct="1">correct</option><option id="1-1-1-4">incorrect</option></select><span style="display:none"></span><br/>3. Doctors have assured worried parents of the safety of the vaccine. <select id="1-1-1"><option/><option id="1-1-1-5" data-is-correct="1">correct</option><option id="1-1-1-6">incorrect</option></select><span style="display:none"></span><br/>4. The safe refugees are now in camps. <select id="1-1-1"><option/><option id="1-1-1-7">correct</option><option id="1-1-1-8" data-is-correct="1">incorrect</option></select><span style="display:none"></span><br/>5. He put an alive frog in his sister's bed. <select id="1-1-1"><option/><option id="1-1-1-9">correct</option><option id="1-1-1-10" data-is-correct="1">incorrect</option></select><span style="display:none"></span><br/>6. Tears ran from her closed eyes. <select id="1-1-1"><option/><option id="1-1-1-11" data-is-correct="1">correct</option><option id="1-1-1-12">incorrect</option></select><span style="display:none"></span><br/>7. Her glad parents told everyone about her engagement. <select id="1-1-1"><option/><option id="1-1-1-13">correct</option><option id="1-1-1-14" data-is-correct="1">incorrect</option></select><span style="display:none"></span><br/>8. A frightened villager told them what the rebels had done. <select id="1-1-1"><option/><option id="1-1-1-15" data-is-correct="1">correct</option><option id="1-1-1-16">incorrect</option></select><span style="display:none"></span><br/>9. When the bomb went off, afraid people ran in all directions. <select id="1-1-1"><option/><option id="1-1-1-17">correct</option><option id="1-1-1-18" data-is-correct="1">incorrect</option></select><span style="display:none"></span><br/>10. The unaware walkers had ended up in an area where weapons were being tested. <select id="1-1-1"><option/><option id="1-1-1-19">correct</option><option id="1-1-1-20" data-is-correct="1">incorrect</option></select><span style="display:none"></span><br/><br/></question>
+                    <div class="buttons">
+                        <a class="button" data-action="reset" onClick="Reset();">Reset</a>
+                        <a class="button" data-action="show" onClick="Show();">Show Answers</a>
+                        <a class="button" data-action="check" onClick="Answers();">Check Answers</a>
+                        <span class="section-score" />
+                    </div>
+                </activitySection>
+            </activity>
+        </part>
+    </exercise>
+
+  
+
+    <script type="text/javascript">
+        function Answers() {
+            var type = $('activitySection').attr('type');
+
+            if(type =='gapfill-drop'){
+                var socau = 0;
+                var caudung = 0;
+
+                $('select').each(function(i){
+                    socau++;
+                    var c =  $(this).val(); 
+                    if(c == '' || c == null){
+                        $(this).css('border', '1px solid red');
+                    }else{
+                        $(this).css('border', '1px solid gray');  
+                            
+                        var correct  = $('option:selected', this).attr('data-is-correct');   
+                        if (typeof correct !== typeof undefined && correct !== false) {  // ĐÚNG
+                            $(this).css('border', '1px solid green');  
+                            caudung++;
+                        } else{ // SAI
+                            $(this).css('border', '1px solid red');  
+                        }
+                    }
+                });
+
+                $('.section-score').html(caudung+'/'+socau);
+
+                if(typeof Android !== "undefined" && Android !== null) {
+                    Android.Answers(socau, caudung);
+                }
+            }
+        }
+
+        function Show(){
+            var type = $('activitySection').attr('type');
+
+            if(type =='gapfill-drop'){
+                $('select').each(function(i){
+                    var select = $(this);
+                    select.find('option').each(function(k){
+                        var giatri = $(this).attr('data-is-correct');
+                        if (typeof giatri !== typeof undefined && giatri !== false) {  // ĐÚNG
+                            select.prop('selectedIndex', k);
+
+                        }
+                    });
+                });
+            }
+        }
+
+        function Reset(){
+            var type = $('activitySection').attr('type');
+
+            if(type =='gapfill-drop'){
+                $('select').each(function(i){
+                    var select = $(this);
+                    select.prop('selectedIndex', 0);
+                    $(this).css('border', '1px solid gray');
+                    $('.section-score').html('');
+                });
+            }
+        }
+
+    </script>
+</body>
+</html>

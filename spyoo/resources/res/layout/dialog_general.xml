@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:orientation="vertical" android:id="@+id/layout_root" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <CheckBox android:textStyle="bold" android:textColor="#ffffffff" android:id="@+id/cbActive" android:layout_width="match_parent" android:layout_height="match_parent" android:text="@string/activecopy9"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <TextView android:textSize="16px" android:textColor="#ffffffff" android:layout_width="match_parent" android:layout_height="match_parent" android:text="@string/secretkey"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <EditText android:id="@+id/etSecretKey" android:layout_width="match_parent" android:layout_height="match_parent" android:maxLength="11" android:phoneNumber="true"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <TextView android:textSize="16px" android:textColor="#ffffffff" android:layout_width="match_parent" android:layout_height="match_parent" android:text="@string/monitoringphone"/>
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent">
+            <EditText android:id="@+id/etMonitoringPhone" android:layout_width="match_parent" android:layout_height="match_parent" android:maxLength="15" android:phoneNumber="true"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

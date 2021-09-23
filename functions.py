@@ -5,18 +5,31 @@ import math
 import os
 import re
 import time
-import types
 import webbrowser
 from datetime import datetime
-from bs4 import BeautifulSoup
+
 import sys
 from xml.dom.minidom import parseString
 from pathlib import Path
 from types import SimpleNamespace
 from vtapi3 import VirusTotalAPIIPAddresses, VirusTotalAPIError, VirusTotalAPIUrls
-import fpdf
+from fpdf import FPDF
 from multipledispatch import dispatch
 
+class pdfColors:
+    currindex=-1
+    colors={'red':[220,20,60],
+            'blue':[0,191,255],
+            'black':[0,0,0]}
+    def getColor(self,color):
+        self.currindex+=1
+        return self.colors.get(color)[self.currindex%3]
+
+class PDF(FPDF):
+    def footer(self):
+        self.set_y(-15)
+        self.set_font('Arial', 'I', 12)
+        self.cell(0, 10, '%s' % self.page_no(), 0, 0, 'C')
 
 class allResponses:
     allResponses = []
@@ -44,17 +57,14 @@ class request:
         vt_urls = vt_urls
 
         try:
-
             result = vt_urls.get_report(base64.urlsafe_b64encode(address.encode()).decode().strip("="))
             result = json.loads(result, object_hook=lambda d: SimpleNamespace(**d))
-
 
         except VirusTotalAPIError as err:
             push = response(None, address, "API Error. Message:" + str(err))
             return push
         else:
             if vt_urls.get_last_http_error() == vt_urls.HTTP_OK:
-
                 push = response(result.data.attributes.last_analysis_stats, result.data.attributes.url,
                                 "Request fulfilled.")
                 return push
@@ -111,7 +121,7 @@ def analyze_addresses():
 
     apkName = Path(directory).stem
 
-    cmd = "jadx -r " + directory  # Tool'lar için exception
+    cmd = "jadx  " + directory  # Tool'lar için exception
     try:
         os.system(cmd)
     except:
@@ -144,22 +154,73 @@ def analyze_addresses():
     webAddresses = list(set(webAddresses))
     ipAddresses = list(set(ipAddresses))
 
+    fileName = apkName + ".txt"
 
     responseList = allResponses()
-    fileName = apkName + ".txt"
-    print("\n Analyzing IP addresses...\n")
-    # for ip in ipAddresses:
-    #     responseList.pushToList(request.request_and_parse(VirusTotalAPIIPAddresses(apiFT), ip))
 
+    print("\n Analyzing IP addresses...\n")
+    for ip in ipAddresses:
+        responseList.pushToList(request.request_and_parse(VirusTotalAPIIPAddresses(api19), ip))
+        time.sleep(15)
     print("\n Analyzing Web addresses...\n")
     for address in webAddresses:
-        responseList.pushToList(request.request_and_parse(VirusTotalAPIUrls(apiFT), address))
-
+        responseList.pushToList(request.request_and_parse(VirusTotalAPIUrls(api19), address))
+        time.sleep(15)
 
     print_to_text_file(fileName,responseList.getList())
+    generate_pdf_report(apkName,responseList.getList())
+
+
+def generate_pdf_report(apkName,responses):
+
+    report=PDF()
+    getClr = pdfColors()
+    report.add_page()
+    report.set_font("Arial", size=15)
+    report.alias_nb_pages()
+    report.set_text_color(getClr.getColor("blue"), getClr.getColor("blue"), getClr.getColor("blue"))
+    report.cell(200, 10, txt="Web And IP Address Analysis Results", ln=1, align='C')
+    report.set_text_color(0, 0, 0)
+    for resp in responses:
+        if resp.message=="Request fulfilled.":
+            report.set_text_color(getClr.getColor("black"),getClr.getColor("black"),getClr.getColor("black"))
+            report.set_x(10)
+            report.cell(200, 10, txt="Address: "+resp.url,ln=11, align='left')
+            report.set_x(20)
+            report.cell(200, 10, txt="Harmless: "+str(resp.last_analysis_stats.harmless), ln=12, align='left')
+            if resp.last_analysis_stats.malicious > 0:
+                report.set_font("Arial","B",size=15)
+                report.set_text_color(getClr.getColor("red"),getClr.getColor("red"),getClr.getColor("red"))
+                report.cell(200, 10, txt="Malicious: "+str(resp.last_analysis_stats.malicious), ln=13, align='left')
+                report.set_text_color(0, 0, 0)
+                report.set_font("Arial",size=15)
+            else:
+                report.cell(200, 10, txt="Malicious: "+str(resp.last_analysis_stats.malicious), ln=13, align='left')
+            report.cell(200, 10, txt="Suspicious: "+str(resp.last_analysis_stats.suspicious), ln=14, align='left')
+            report.cell(200, 10, txt="Undetected: "+str(resp.last_analysis_stats.undetected), ln=15, align='left')
+            report.set_x(10)
+
+        else:
+            report.set_text_color(getClr.getColor("red"),getClr.getColor("red"),getClr.getColor("red"))
+            report.set_x(10)
+            report.cell(200, 10, txt="Address: " + resp.url, ln=11, align='left')
+            report.set_x(20)
+            report.cell(200, 10, txt="Couldn't fetch adress stats. ", ln=12, align='left')
+            report.cell(200, 10, txt="Error: " + resp.message, ln=13, align='left')
+            report.set_x(10)
+            report.set_text_color(0, 0, 0)
+        report.set_text_color(getClr.getColor("blue"),getClr.getColor("blue"),getClr.getColor("blue"),)
+        report.cell(200, 10, txt="---------------------------------------------------------------------------",
+                        ln=9,
+                        align='left')
+
+
+    dir=os.getcwd()+"/AddressAnalysis/"+apkName+".pdf"
+    report.output(dir)
+
 
 def print_to_text_file(filename,list):
-    with open(filename,'w') as txt:
+    with open(filename+"JSON",'w') as txt:
         for resp in list:
 
             if resp.message == "Request fulfilled.":
@@ -175,9 +236,8 @@ def print_to_text_file(filename,list):
             txt.write("\n--------------------\n")
 
 
-
 def clean_up():
-    cmd = " rm fake.xml && rm *.jar && rm -r *-dex2jar*"
+    cmd = " rm fake.xml && rm -r *-dex2jar*"
 
     os.system(cmd)
 
@@ -391,14 +451,14 @@ def get_perm_info(list):
 # Score
 def rate_apk(comparedPermissions, usersPermissions, usersUnfilteredPermissions, intents):
     filteredDangerRate = calculateDangerRate(usersPermissions)
-    comparedPermissions = get_perm_info(
-        comparedPermissions)  # Database'den seçilen apk'nın izinlerinin tehlike düzeylerini almamız gerekli.
+    comparedPermissions = get_perm_info(comparedPermissions)  # Database'den seçilen apk'nın izinlerinin tehlike düzeylerini almamız gerekli.
 
     comparedDangerRate = calculateDangerRate(comparedPermissions)
+
     comparedPermCount = len(comparedPermissions)
     usersPermCount = len(usersUnfilteredPermissions)
 
-    tolerance_rate = 0.05  # Tolerans değerimiz ne kadar yüksekse o kadar az toleransımız var. 0-1 aralığında değer alabilir.
+    tolerance_rate = 0.05  # Tolerans değerimiz ne kadar düşükse o kadar az toleransımız var. 0-1 aralığında değer alabilir.
     permRisk = True
 
     if filteredDangerRate > comparedDangerRate and usersPermCount < comparedPermCount:  # Ekstra izinlerdeki tehlikeli iiznlerin oranı orijinal apk oranından fazla ve şüpheli izin sayısı orijinal APK izin sayısından büyükse kesinlikle şüphelidir.
@@ -428,7 +488,7 @@ def rate_apk(comparedPermissions, usersPermissions, usersUnfilteredPermissions, 
     if len(riskyIntents) > 0:
         intentRisk = False
 
-    conclusion = ""
+
 
     if not permRisk:
         if not intentRisk:
@@ -448,9 +508,9 @@ def calculateDangerRate(permissions):
     unknown = 0
     for perm in permissions:
         if str(permissions[perm]) == "dangerous":
-            dangerous += 1
-        elif str(permissions[perm]).__contains__("signature"):
-            signature += 1
+            dangerous += 3
+        elif str(permissions[perm]).__contains__("signature"):                                                          # KAtsayılı-Ağırlıklı puanlama.
+            signature += 2
         elif str(permissions[perm]) == "normal":
             normal += 1
         else:
@@ -462,15 +522,15 @@ def calculateDangerRate(permissions):
 
 
 # HTML Output
-def create_report(permissions, intents, fbackup, fdebug, tag, username, cmpname):
-    username = os.path.splitext(username)[0]
-    cmpname = os.path.splitext(cmpname)[0]
+def create_report(permissions, intents, usermnf, tag, comparedmnf):
+    username = os.path.splitext(usermnf.get_name())[0]
+    cmpname = os.path.splitext(comparedmnf.get_name())[0]
 
     now = datetime.now()
     dateTime = str(now.strftime("%d:%m:%Y\ %H:%M\ "))
 
     fileName = dateTime + "-" + username + "\-\ " + cmpname + ".html"
-    print("filename:", fileName)
+
 
     # intro ve puanlama
 
@@ -485,7 +545,6 @@ def create_report(permissions, intents, fbackup, fdebug, tag, username, cmpname)
                                                                                                                                                                                                                                                                                                                                                                                                         'Flags: We have checked 2 flags in your apps manifest file. While these flags may not be directly related to malware, setting these may jepardise your data reliability and cause data leaks and other problems. ' \
                                                                                                                                                                                                                                                                                                                                                                                                         'If you are the author off the app you have analyzed, you may want to check these.</span></strong></span><ul><li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">isDebuggable: This states wether the app is debuggable in user mode.</span></strong></span></li>' \
                                                                                                                                                                                                                                                                                                                                                                                                         '<li style="margin:5px;text-align: justify;"><span style="color: #0000ff; background-color: #ffffff;"><strong><span style="color: #000000;">allowBackup: Applications that store sensitive data should set this to false because these data might be exposed to an attacker through adb.</span></strong></span></li></ul></li></ol>'
-
     permissionTable = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
                       '<span style="color: #ff0000;"><strong>Excessive Permissions</strong></span>' \
                       '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
@@ -502,9 +561,7 @@ def create_report(permissions, intents, fbackup, fdebug, tag, username, cmpname)
                   '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>Intent </strong></td>' \
                   '</tr>'
 
-    with open("index.html") as fp:
-        soup = BeautifulSoup(fp, 'html.parser')
-    soup = BeautifulSoup(titles, 'html.parser')
+
 
     with open("index.html", "w") as fp:
         fp.write(str(titles))
@@ -547,22 +604,36 @@ def create_report(permissions, intents, fbackup, fdebug, tag, username, cmpname)
         fp.write(str("</tbody></table></div>"))
 
         # flagler
-        fp.write('<p style="text-align: center;"><span style="color: #ff0000;"><strong>Flags</strong></span></p>')
-        if str(fdebug) == "True" or str(fdebug) == "true":
-            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>debuggable: '
-                     '<span style="background-color: #ff0000;">ENABLED</span></strong></span></p>')
-        else:
-            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>debuggable: '
-                     '<span style="background-color: #00ff00;">DISABLED</span></strong></span></p>')
-        if str(fbackup) == "True" or str(fbackup) == "true":
-            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
-                     '<span style="background-color: #ff0000;">ENABLED</span></strong></span></p>')
-        elif str(fbackup) == "False" or str(fbackup) == "false":
-            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
-                     '<span style="background-color: #00ff00;">DISABLED</span></strong></span></p>')
-        else:
-            fp.write('<p style="text-align: center;"><span style="color: #000000;"><strong>allowBackup: '
-                     '<span style="background-color: #ff0000;">ENABLED (BY DEFAULT)</span></strong></span></p>')
+        flagTable = '<div style="text-align: center; width: 50%;  top:0;bottom: 0;left: 0;right: 0;margin: auto;">' \
+                          '<span style="color: #ff0000;"><strong>Flag Status</strong></span>' \
+                          '<table style="text-align:center;width: 100%; border-collapse: collapse; border-style: solid; border-color: blue; ' 'height: 36px;" border="1" cellspacing="2" cellpadding="2">' \
+                          '<tbody>' \
+                          '<tr style="height: 18px;">' \
+                          '<td style="width: 33.3333%; text-align: center; height: 18px;"><strong>Flag Name</strong></td>' \
+                          '<td  id="name" style="width: 33.3333%; text-align: center; height: 18px;"><strong>'+comparedmnf.get_name()+'</strong></td>' \
+                          '<td style="width: 33.3333%; text-align: center; height: 18px;"><strong>'+usermnf.get_name()+'</strong></td>' \
+                          '</tr>'
+
+        fp.write(flagTable)
+        #fp.write('<p style="text-align: center;"><span style="color: #ff0000;"><strong>Flags</strong></span></p>')
+
+        if comparedmnf.get_is_debuggable()=="" or comparedmnf.get_is_debuggable()==None:
+            comparedmnf.set_is_debuggable("false")
+        if comparedmnf.get_is_backup_allowed() == "" or comparedmnf.get_is_backup_allowed == None:
+            comparedmnf.set_is_backup_allowed("false")
+
+        if usermnf.get_is_debuggable() == "" or usermnf.get_is_debuggable() == None:
+            usermnf.set_is_debuggable("true")
+        if usermnf.get_is_backup_allowed() == "" or usermnf.get_is_backup_allowed == None:
+            usermnf.set_is_backup_allowed("true")
+
+        fp.write(
+            str('<tr ><td>Debuggable:</td><td ><strong>' + str(
+                comparedmnf.get_is_debuggable()).upper() + '</strong></td><td><strong>' + str(
+                usermnf.get_is_debuggable()).upper() + '</strong></tr>') +
+            str('<tr ><td>Backup Allowed:</td><td><strong>' + str(
+                comparedmnf.get_is_backup_allowed()).upper() + '</strong></td><td><strong>' + str(
+                usermnf.get_is_backup_allowed()).upper() + '</strong></tr>'))
 
     fileName.replace(" ", "\ ")
 

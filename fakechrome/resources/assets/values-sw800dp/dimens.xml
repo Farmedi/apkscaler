@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pr_bottom_nav_drawer_width">700.0dip</dimen>
+    <dimen name="pr_game_help_panel_bottom_margin">50.0dip</dimen>
+    <dimen name="pr_game_navigation_panel_left_margin_portm">72.0dip</dimen>
+    <dimen name="pr_game_navigation_panel_right_margin_portm">72.0dip</dimen>
+    <dimen name="pr_game_navigation_panel_top_margin_portm">40.0dip</dimen>
+    <dimen name="pr_game_question_body_bottom_margin">50.0dip</dimen>
+    <dimen name="pr_game_question_body_right_left_margin_portm">102.0dip</dimen>
+    <dimen name="pr_game_question_body_top_margin">80.0dip</dimen>
+    <dimen name="pr_game_question_level_panel_top_bottom_space_portm">54.0dip</dimen>
+    <dimen name="pr_sm_answer_btn_space_between">20.0dip</dimen>
+    <dimen name="pr_sm_help_bar_tob_botom_margin">30.0dip</dimen>
+</resources>
+

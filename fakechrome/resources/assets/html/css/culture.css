@@ -1,0 +1,30 @@
+.jp-play{
+	color: #fa6360;
+    font-size: 130%;
+    padding-left: 5px;
+
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    width: 27px;
+    height: 18px;
+
+
+}
+
+.entry_content {
+    margin: 0px 10px;
+}
+
+a[variant=bre] { 
+    background: url(../images/bre-icon.png) no-repeat center center;
+    background-size: 80% 100%;
+}
+a[variant=ame] { 
+    background: url(../images/ame-icon.png) no-repeat center center;
+    background-size: 80% 100%;
+}
+.hwd {
+    /*display: none;*/
+}

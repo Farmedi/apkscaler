@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@drawable/setdefault" android:id="@+id/miSetDefault" android:title="@string/setdefault"/>
+    <item android:icon="@drawable/back" android:id="@+id/miBack" android:title="@string/save_and_back"/>
+</menu>

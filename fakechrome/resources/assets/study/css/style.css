@@ -1,0 +1,67 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+div.sectionHeader {
+    /* padding-bottom: 1em; */
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+h2 {
+
+}
+exercise{
+    display: block;
+}
+
+rubric{
+    display: block;
+    font-size: 14px;
+}
+
+activity h2, activitySection h3 {
+    margin-top: 0;
+    color: #0053a0;
+}
+
+activitySection.gapfill-drop question {
+    line-height: 2.2em;
+}
+
+div.buttons {
+    margin: 1em 0 0 0;
+}
+
+div.buttons a.button {
+    background-color: #2ba6cb;
+    color: #eee;
+    border-color: #2284a1;
+    cursor: pointer;
+}
+
+div.buttons .button {
+    display: inline-block;
+    margin: 0 1ex;
+    background-color: #f0f2fc;
+    border: 1px solid #7e92c7;
+    color: #7e92c7;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.section-score {
+    display: block;
+    text-align: center;
+    padding-top: 8px;
+    font-size: 14px;
+    color: green;
+    padding-bottom: 0px;
+}

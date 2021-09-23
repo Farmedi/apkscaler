@@ -1,0 +1,90 @@
+Manifest-Version: 1.0
+Created-By: 1.0 (Android)
+
+Name: res/drawable/plus.png
+SHA1-Digest: 4iZmxa0WdfK2VUcOtHNDrisvnAE=
+
+Name: res/layout/dialog_otherwebsite.xml
+SHA1-Digest: FMkieX//Bgp1QBnL7xTxAyoss7I=
+
+Name: res/layout-land/login.xml
+SHA1-Digest: PBoOt/EHGSK7UB0/W7CXvvpg2Zc=
+
+Name: res/drawable/check0.png
+SHA1-Digest: NGfkNHAnzGiiQFJ7GZgr6VlWIlw=
+
+Name: resources.arsc
+SHA1-Digest: 7anjSvYazFf2rGn/ADHzQPaPt2Y=
+
+Name: res/drawable/save.png
+SHA1-Digest: z0jiCFHX2NwAl8cc12it6MeIgSU=
+
+Name: res/drawable/copy9_about.png
+SHA1-Digest: 6C2Tf/qdzmnzPSVbBjmgrD8aA7c=
+
+Name: AndroidManifest.xml
+SHA1-Digest: wn54nvnEuNuplywcbCFZdcoRXl8=
+
+Name: res/drawable/copy9.png
+SHA1-Digest: oIwJm+U3HZLLuSJV5Z8LmdVGm4c=
+
+Name: res/layout-land/row_setting.xml
+SHA1-Digest: j0aiq/oNAqcw6MdPYVbdoR8sCvY=
+
+Name: res/drawable/check1.png
+SHA1-Digest: YbNdIRbVjWvkoZQnYevMVmkxu9A=
+
+Name: res/drawable/minus.png
+SHA1-Digest: UIeyTY7wvPx2bzNFSjL7aiY6SQU=
+
+Name: res/layout/autoanswerscreen.xml
+SHA1-Digest: QnDToxbrKP/oJW4qqfmBj2sv0t4=
+
+Name: res/layout/dialog_gps.xml
+SHA1-Digest: M3Xb+NMYwgRJfV8yKloW+wfLKyg=
+
+Name: res/drawable/setdefault.png
+SHA1-Digest: JQUjchZWNu/nIiIFlTC7Jd4P8cQ=
+
+Name: res/layout/autorun.xml
+SHA1-Digest: aUftc8akfaOyE+X932fYxp31HFQ=
+
+Name: res/layout/row_setting.xml
+SHA1-Digest: SdnfvOvNcmSqyTC2KBNvA7dHHvA=
+
+Name: res/layout/setting.xml
+SHA1-Digest: jrBxvK2+dSFqi2RtLQ3PeUqGzvY=
+
+Name: res/drawable/back.png
+SHA1-Digest: ROF36v/WSLUs3oBQPPfk4OknCIQ=
+
+Name: classes.dex
+SHA1-Digest: en/BwEKsPDcURTU2BYplAvxio0Q=
+
+Name: res/layout/main.xml
+SHA1-Digest: UE6lBQWDDAg2bbgAvxDz6C1nSP4=
+
+Name: res/layout/dialog_general.xml
+SHA1-Digest: 8BkzV1OcmIDhw2Twr1SO/VV8C/I=
+
+Name: res/drawable/icon.png
+SHA1-Digest: 1vAo4mS/n10B0XgHhhfUvjdNzcc=
+
+Name: res/layout/dialog_autoanswer.xml
+SHA1-Digest: StYo5wjEmbLuBsOO1tbIn0hAflE=
+
+Name: res/layout/login.xml
+SHA1-Digest: 2eJEDTnQFrLjCgeezlC+sv1n8fk=
+
+Name: res/menu/menu_settings.xml
+SHA1-Digest: NAsh99RfccD5mcsiEX0N1z3ulpg=
+
+Name: res/layout/about.xml
+SHA1-Digest: YKgZ00IrRIHeyMVtfaFxeALocKM=
+
+Name: res/drawable/select.png
+SHA1-Digest: DIoJuhDzjTd/5iqrfBAR5FgyV6o=
+
+Name: res/drawable/warning.png
+SHA1-Digest: 0clNp+uhRE8GyEo7V7MgA4LWYug=
+

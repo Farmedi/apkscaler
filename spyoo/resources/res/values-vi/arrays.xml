@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="websites">
+        <item>www.copy9.com</item>
+        <item>www.goldenspy.com</item>
+        <item>www.spytic.com</item>
+        <item>www.spytic.fr</item>
+        <item>www.spyzing.com</item>
+    </array>
+    <array name="itemsettings">
+        <item>Tổng quát</item>
+        <item>Định vị toàn cầu</item>
+        <item>Tự động bắt máy</item>
+        <item>Lịch sử cuộc gọi</item>
+        <item>Lịch sử tin nhắn</item>
+        <item>Lịch sử trang web</item>
+    </array>
+    <array name="descriptionitemsettings">
+        <item>Bật/tắt Copy9...</item>
+        <item>Bật/tắt định vị toàn cầu ...</item>
+        <item>Lắng nghe âm thanh xung quanh</item>
+        <item>Lưu các cuộc gọi</item>
+        <item>Lưu các tin nhắn</item>
+        <item>Lưu các trang web đã truy cập</item>
+    </array>
+</resources>
